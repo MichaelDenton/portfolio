@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Log In</title>
+
+<!-- PAGE SPECIFIC CSS -->
+<style type="text/css">
+<!--
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+h1 {
+	font-size: 30px;
+}
+
+
+#login_wrapper {
+	position: relative;
+	width: 350px;
+	height: 400px;
+	background-color: #FFF;
+	margin: 0px;
+	padding: 0px;
+}
+
+.smalltext {
+	font-size: 11px;
+}
+label {
+	font-weight: bold;
+	display: block;
+}
+#nologintext {
+	position: absolute;
+	left: 50px;
+	top: 90px;
+}
+#email_feild {
+	position: absolute;
+	left: 50px;
+	top: 190px;
+	width: 250px;
+}
+#password_feild {
+	position: absolute;
+	left: 50px;
+	top: 264px;
+	width: 250px;
+}
+#login_button {
+	position: absolute;
+	left: 50px;
+	top: 336px;
+	width: 80px;
+}
+
+#login_title {
+	position: absolute;
+	left: 50px;
+	top: 29px;
+	width: 220px;
+	height: 37px;
+}
+
+input{
+	height: 30px;
+	width: 100%;
+}
+#name_feild {
+	position: absolute;
+	left: 50px;
+	top: 117px;
+	width: 250px;
+}
+
+-->
+</style>
+
+</head>
+
+<body>
+
+<div id="login_wrapper">
+
+<h1 id="login_title">Sign Up</h1>
+<span id="nologintext" class="smalltext">Already have an account? <a href="login.html">Log In</a></span>
+
+<form id="frmLogin" name="frmLogin" method="post" action="" onsubmit="window.parent.Shadowbox.close();">
+
+<div id="name_feild">  <label for="email">Your name</label>    <input name="email" type="text" id="email" /> </div>
+
+ <div id="email_feild">  <label for="email">Your email</label>    <input name="email" type="text" id="email" /> </div>
+
+ <div id="password_feild"> <label for="password">Create a password</label>  <input name="password" type="password" id="password" /> </div>
+
+ <div id="login_button">  <input type="submit" name="signup" id="signup" value="Sign Up" /> </div>
+ 
+  
+</form>
+</div>
+
+</body>
+</html>

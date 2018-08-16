@@ -1,0 +1,382 @@
+/* GENERAL CSS */
+
+#body {
+	font-family: Arial, Helvetica, sans-serif;  /* (this sets the sitewide base fonts) */
+	line-height: 150%;
+	font-size: 12px;
+	color: #222;
+	margin: 0px;
+	padding: 0px;
+	background-image: url(images/wood_bg.png);
+	background-repeat: repeat;
+	background-position: center top;
+	background-attachment: scroll;
+}
+
+a {
+	text-decoration: none;
+	color: #06F;
+}
+
+h1{
+	font-family: Helvetica;
+	font-size: 30px;
+	line-height: 110%;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+h3{
+	font-size: 16px;
+	font-family: Rockwell, Arial, Helvetica;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: block;
+	line-height: 150%;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333;
+	line-height: 20px;
+}
+
+a img {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+.date{
+	font-weight: normal;
+	color: #900;
+	font-size: 11px;
+}
+
+/* MENU BAR CSS */
+
+#menubar_container {
+	margin: 0px;
+	padding: 0px;
+	background-color: #000;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	float: left;
+}
+
+#menubar {
+	width: 920px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	height: 40px;
+	padding-top: 0px;
+	padding-right: 10px;
+	padding-bottom: 0px;
+	padding-left: 10px;
+	background-color: #000;
+	position: relative;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	color: #CCC;
+}
+
+#global_nav {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+#global_nav ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+ 
+#global_nav ul li {
+	float: left;
+	margin: 0;
+}
+ 
+#global_nav ul li a {
+	display: block;
+	color: #CCC;
+	text-decoration: none;
+	text-align: center;
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #333;
+	}
+
+.firstlink {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #333;
+}
+ 
+ 
+#global_nav ul li a:hover, #global_nav ul li .current_page {   /* this applyies the same stlye to links on hover and links with the class of "current_page"  */
+	background-color: #222;
+	color: #CCC;
+	text-decoration: none;
+	}
+
+
+#logo {
+	background-image: url(images/atlarge_logo.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+ 
+#user_nav {
+	float: right;
+	margin: 0px;
+	padding: 0px
+}
+
+#user_nav ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#user_nav ul li {
+	float: left;
+	margin: 0;
+}
+ 
+#user_nav ul li a {
+	display: block;
+	color: #CCC;
+	text-decoration: none;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+	}
+ 
+#user_nav ul li a:hover {
+	color: #CCC;
+	text-decoration: underline;
+	}
+
+/* WRAPPER FOR THE TOP BACKGROUND (this is the bits of paper and other decoration at the top of each page) */
+
+#wrapper_top_bg {
+	background-image: url(images/paper_top_bg.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+	width:100%;
+	height:100%;
+	min-width:940px;
+	min-height:400px;
+	padding-top: 100px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+/* WRAPPER FOR THE BOTTOM BACKGROUND (this is the bits of paper and other decoration at the bottom of each page) */
+
+#wrapper_bottom_bg {
+	background-image: url(images/paper_bottom_bg.png);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	width:100%;
+	height:100%;
+	min-width:940px;
+	min-height:600px;
+	padding-right: 0px;
+	padding-bottom: 100px;
+	padding-left: 0px;
+}
+	
+/* PROJECT HEADER */
+
+#project_header {
+	position: relative;
+	width: 920px;
+	height:100px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	z-index: 10;
+	padding: 0px;
+	
+	-moz-border-radius-topleft:5px; 
+	-webkit-border-top-left-radius:5px;
+	
+	-moz-border-radius-topright:5px; 
+	-webkit-border-top-right-radius:5px;
+
+}
+
+
+
+/* PROJECT NAVIGATION */
+
+#project_nav_wrapper {
+	width: 920px;
+	height: 40px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	background-color: #AAA;
+	background-image: url(images/projectmenu_bg.png);
+	background-repeat: repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	position: relative;
+	}
+	
+#project_nav ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+ 
+#project_nav ul li {
+	float: left;
+	margin: 0;
+}
+ 
+#project_nav ul li a {
+	display: block;
+	color: #333;
+	text-decoration: none;
+	text-align: center;
+	height: 40px;
+	width: 130px;
+	line-height: 40px;
+	background-image: url(images/projectmenu_divider.png);
+	background-repeat: no-repeat;
+	background-position: right;
+	}
+
+#project_nav ul li a:hover {
+	background-color: #9A9A9A;
+	text-decoration: none;
+	}
+	
+#project_nav ul li .current_page  {
+	background-color: #d7d7d7;
+	text-decoration: none;
+	}
+	
+/* DROP DOWN MINI MENU (The rest of the CSS for this is in SpryMenuBarHorizontal.css) */
+
+#minimenu {
+	float: right;
+}
+
+
+/* ACTION BUTTON */
+
+.action_button {
+	float: right;
+	}
+
+
+/* MAIN CONTENT */
+
+#content {
+	width: 880px;
+	min-height:600px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	z-index: 10;
+	position: relative;
+	background-color: #FFF;
+	background-image: url(images/paper_bg.png);
+	background-repeat: repeat;
+	clear: both;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	padding-left: 20px;
+}
+
+
+/* FEEDBACK TAB */
+#feedback_tab{
+	z-index: 50;
+	position:fixed;
+	height: 120px;
+	width: 50px;
+	margin: 0px;
+	right: -10px;
+	bottom: 20px;
+	background-image: url(images/feedbacktab.png);
+	background-repeat: no-repeat;
+	}
+
+#feedback_tab:hover {
+	right: 0px;
+	}
+
+/* ALERT BOX */
+
+#alert_div {
+	visibility: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	background-color: #000;
+	color: #FFF;
+	padding: 20px;
+	position: fixed;
+	left: 30px;
+	bottom: 30px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	z-index: 9999;
+}
+#author_info {
+	background-color: #CCC;
+	height: 50px;
+}
+.person {
+	font-weight: bold;
+}
+
+h3 a {
+		color: #009;
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+h3 a:hover {
+	color: #06F;
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: bold;
+}
+#project_header .header_status_ribbon {
+	position: absolute;
+	height: 109px;
+	width: 193px;
+	top: -6px;
+	right: -19px;
+}
+
+

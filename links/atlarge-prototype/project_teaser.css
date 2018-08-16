@@ -1,0 +1,311 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/***************************
+*  CSS FOR PROJECT TEASER  *
+****************************/
+
+.project_teaser{ /* this div wraps each teaser*/
+	width: 672px;
+	position: relative;
+	font-family: Helvetica, Arial, sans-serif;
+	background-color: #FCFCFC;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-box-shadow: 1px 1px 5px #BBB;
+	-webkit-box-shadow:	1px 1px 5px #BBB;
+	color: #333;
+	height: 290px;
+	margin-right: 40px;
+	margin-left: auto;
+	margin-top: 60px;
+	margin-bottom: 30px;
+	background-repeat: no-repeat;
+}
+
+.project_teaser a {
+	text-decoration: none;
+}
+
+.project_teaser:hover {
+	background-color: #F8F8F8;
+	-moz-box-shadow: 1px 1px 8px #777;
+	-webkit-box-shadow:	1px 1px 8px #777;
+}
+
+
+
+/* PROJECT PHOTO */
+
+.project_photo {
+	height: 175px;
+	width: 230px;
+	position: absolute;
+	top: 105px;
+	left: 6px;
+	background-image: url(images/photo_background.png);
+	background-repeat: no-repeat;
+}
+
+.project_photo img {
+	height: 120px;
+	width: 180px;
+	position: absolute;
+	left: 24px;
+	top: 28px;
+	background-color: #CCC;
+}
+	
+/* PROJECT DETAILS */
+
+.the_challange {
+	position: absolute;
+	left: 253px;
+	top: 120px;
+	width: 171px;
+	height: 52px;
+	background-image: url(images/thechallenge.png);
+	background-repeat: no-repeat;
+}
+
+.project_details {
+	width: 390px;
+	left: 254px;
+	top: 150px;
+	line-height: 20px;
+	font-size: 13px;
+	text-decoration: none;
+	height: 100px;
+	color: #999;
+	position: absolute;
+}
+
+.project_statement {
+	font-size: 26px;
+	line-height: 40px;
+	font-weight: bold;
+	color: #06F;
+	padding-bottom: 10px;
+}
+
+.extra_info {
+	color: #666;
+}
+
+/* PROJECT STAUS */
+
+.status_image {
+	height: 74px;
+	width: 270px;
+	position: absolute;
+	left: 546px;
+	top: 9px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	
+	background-color: #CCC;
+}
+
+.status_image span {
+	font-style: italic;
+	color: #FFF;
+	position: absolute;
+	top: 40px;
+	left: 16px;
+	font-size: 14px;
+	width: 230px;
+}
+
+/* PROJECT ACTIVITY */
+
+.project_activity {
+	width: 270px;
+	position: absolute;
+	left: 548px;
+	top: 88px;
+	}
+	
+.activity_label {
+	font-size: 12px;
+	line-height: 20px;
+	color: #333;
+	margin-top: 5px;
+	display: block;
+	padding-left: 5px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+.activity_label:hover {
+	color: #06F;
+}
+
+/* RECENT DESIGNS */
+
+.recent_designs a .thumb {
+	background-color: #FFF;
+	-webkit-box-shadow:	1px 1px 5px #BBB;
+	-moz-box-shadow: 1px 1px 5px #BBB;
+	border: 1px solid #DDD;
+	padding: 5px;
+	margin: 1px;
+	}
+
+.recent_designs a .thumb:hover {
+	-webkit-box-shadow:	1px 1px 5px #777;
+	-moz-box-shadow: 1px 1px 5px #777;
+}
+
+/* NEXT EVENT */
+
+.next_event {
+	position: relative;
+	margin-top: 10px;
+	height: 60px;
+}
+
+.upcomming_event_label {
+	position: absolute;
+	left: 50px;
+	top: -3px;
+	width: 200px;
+}
+
+.event_date {
+	background-image: url(images/date_bg.png);
+	background-repeat: no-repeat;
+	height: 54px;
+	width: 50px;
+	position: absolute;
+	left: 1px;
+	top: 1px;
+}
+.event_date .month {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	display: block;
+	text-align: center;
+	line-height: 20px;
+	color: #FFF;
+	font-weight: bold;
+}
+.event_date .day {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #666;
+	display: block;
+	text-align: center;
+	line-height: 26px;
+}
+
+.event_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	position: absolute;
+	left: 56px;
+	top: 23px;
+	width: 200px;
+	line-height: 18px;
+	color: #666;
+}
+
+/* PAPER CLIP */
+
+.paper_clip{
+	background-image: url(images/paper_clip.png);
+	background-repeat: no-repeat;
+	position: absolute;
+	height: 100px;
+	width: 100px;
+	left: -15px;
+	top: 95px;
+}
+.status_ribbon {
+	background-repeat: no-repeat;
+	position: absolute;
+	height: 148px;
+	width: 176px;
+	left: 499px;
+	top: -8px;
+}
+.project_teaser .project_link {
+	display: block;
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+}
+.project_details div .divider {
+	color: #CCC;
+}
+.project_teaser .tape_1 {
+	background-image: url(images/tape_1.png);
+	background-repeat: no-repeat;
+	height: 73px;
+	width: 80px;
+	position: absolute;
+	left: -25px;
+	top: -25px;
+}
+
+.project_teaser .tape_2 {
+	background-image: url(images/tape_2.png);
+	background-repeat: no-repeat;
+	height: 63px;
+	width: 73px;
+	position: absolute;
+	left: -19px;
+	top: 259px;
+}
+
+.project_teaser .tape_3 {
+	background-image: url(images/tape_3.png);
+	background-repeat: no-repeat;
+	height: 68px;
+	width: 64px;
+	position: absolute;
+	left: 643px;
+	top: 251px;
+}
+
+.project_teaser .tape_4 {
+	background-image: url(images/tape_4.png);
+	background-repeat: no-repeat;
+	height: 75px;
+	width: 86px;
+	position: absolute;
+	left: 632px;
+	top: -18px;
+}
+
+.pager {
+	margin-top: 0px;
+	margin-right: 300px;
+	margin-bottom: 30px;
+	width: 100px;
+	margin-left: auto;
+}
+
+.button {
+	display: block;
+	text-align: center;
+	height: 25px;
+	line-height: 25px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	float: left;
+	font-weight: bold;
+}
+.button a {
+	font-weight: normal;	
+}
+.button a:hover {
+	font-weight: normal;
+	text-decoration: underline;
+}
+	

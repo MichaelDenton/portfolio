@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Art Gallery on the Street //  Designs</title>
+
+<!-----------------------------------------------
+THE FOLLOWING CODE IS REQUIRED ON EVERY PAGE
+------------------------------------------------->
+
+<!-- SITE WIDE CSS (this css file contains almost all the css for the entire site, other css is page specific)-->
+<link href="mainlayout.css" rel="stylesheet" type="text/css" />
+
+<!-- SHADOW BOX CODE (Shadowbox is used for the Log In and Sign Up as well as the feedback form on every page)-->
+<link href="shadowbox/shadowbox.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="shadowbox/shadowbox.js"></script>
+
+<!-- STYLE OVERRIDES FOR SHADOW BOX (moves the close button of the shadow box to the top right rather than the bottom)-->
+<link href="shadowbox/shadowbox_skin2.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="shadowbox/shadowbox_skin2.js"></script>
+
+<!-- TELL SHADOW BOX WHAT TO ENABLE-->
+<script type="text/javascript"> Shadowbox.init({ players:    ["img", "html", "iframe"] }); </script> 
+
+<!-- SPRY MENU BAR CODE (used for the mini menu on project pages) -->
+<script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+
+<!-- SPRY EFFECTS (used to show the alert box when mising links are clicked) -->
+<script src="SpryAssets/SpryEffects.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+function MM_effectAppearFade(targetElement, duration, from, to, toggle) { Spry.Effect.DoFade(targetElement, {duration: duration, from: from, to: to, toggle: toggle}); }
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+
+<style type="text/css">
+<!--
+#filter_designs_menu {
+	float: right;
+	width: 350px;
+	margin-top: 5px;
+}
+.button {
+	display: block;
+	text-align: center;
+	height: 25px;
+	line-height: 25px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	float: left;
+	font-weight: bold;
+}
+.button a {
+	font-weight: normal;	
+}
+.button a:hover {
+	font-weight: normal;
+	text-decoration: underline;
+}
+#sortby_menu {
+	float: left;
+	width: 170px;
+}
+#limit_designs_jumpMenu {
+	float: left;
+	margin-right: 20px;
+}
+#display_results {
+	clear: both;
+	padding-top: 20px;
+}
+.design_teaser {
+	float: left;
+	width: 180px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.design_teaser .design_thumbnail_wapper {
+	height: 170px;
+	width: 170px;
+	position: relative;
+	background-repeat: no-repeat;
+}
+.design_thumbnail_wapper a img {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+}
+
+.design_teaser .name_of_design {
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.number_of_comments, .number_of_versions, .number_of_attachments {
+	font-size: 10px;
+	color: #666;
+	float: left;
+	padding-right: 5px;
+}
+
+
+
+.design_teaser .name_of_design a {
+	color: #000;
+}
+
+
+.hover_wrapper:hover .name_of_design a {
+	color: #06F;
+}
+
+.design_thumbnail_wapper a img {
+	padding: 8px;
+	border: 1px solid #CCC;
+	background-color: #FFF;
+	-moz-box-shadow: 1px 1px 5px #BBB;
+	-webkit-box-shadow:	1px 1px 5px #BBB;
+	margin-bottom: 10px;
+}
+
+.hover_wrapper:hover .design_thumbnail_wapper a img {
+	padding: 8px;
+	border: 1px solid #AAA;
+	background-color: #FFF;
+	-moz-box-shadow: 1px 1px 5px #999;
+	-webkit-box-shadow:	1px 1px 5px #999;
+	margin-bottom: 10px;
+}
+
+
+.design_teaser .date_of_design {
+	font-style: italic;
+	font-size: 11px;
+}
+.design_teaser .author_info {
+	font-size: 12px;
+}
+.pager {
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 30px;
+	margin-left: auto;
+	width: 100px;
+}
+.out_in_public {
+	background-image: url(images/out_in_public.png);
+	background-repeat: no-repeat;
+	display: block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-position: 0px 94px;
+}
+
+-->
+</style>
+</head>
+
+<body id="body" onload="MM_preloadImages('images/button-upload_2.png')">
+
+<!-- SITE WIDE MENU BAR (floated independantly on top)-->
+<div id="menubar_container"> <div id="menubar"> 
+
+  	<div id="global_nav"> <ul >
+  			<li><a id="logo" class="firstlink" href="index.html">&nbsp;</a></li>  
+ 			<li><a href="projects.html">Browse Projects</a></li>   
+	</ul> </div>
+    
+ <div id="user_nav"><ul > 
+    	<li><a href="about.html" rel="shadowbox;height=640;width=900">About</a></li>
+    	<li><a href="signup.html" rel="shadowbox;height=400;width=350">Sign Up</a></li> 
+        <li><a href="login.html" rel="shadowbox;height=400;width=350">Log In</a> </li>
+    </ul></div>
+       
+</div> </div>
+
+<!-- THE PAGE -->
+<div id="wrapper_top_bg">
+<div id="wrapper_bottom_bg">
+
+<!----------------------------------
+PROJECT HEADER AND NAVIGATION BAR
+------------------------------------>
+
+<!-- PROJECT HEADER (Update this for each project)-->
+<div id="project_header" style="background-image: url(images/banner_920x100_artgallery.png);"> </div>
+    
+    
+    
+<!-- PROJECT NAVIGATION BAR (Same for each project except the links) -->
+<div id="project_nav_wrapper"> <!-- this wraps the entire project navigation including the action button and mini dropdown menu -->
+
+ <div id="left_overhang"></div>
+ <div id="right_overhang"></div>
+ 
+	<!-- PROJECT NAVIGATION  --> 
+	<div id="project_nav"> <ul >
+      <li><a href="overview.html">Overview</a></li>  
+       	    <li><a class="current_page" href="designs.html">Designs</a></li> 
+         	<li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Forum</a></li>  
+            <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Events</a></li> 
+         	<li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Blog</a></li> 
+	</ul> </div> 
+        
+	<!-- MINI DROPDOWN MENU (using spry) -->
+<ul id="minimenu" class="MenuBarHorizontal">
+	  <li><a class="MenuBarItemSubmenu" href="#">&nbsp;</a>
+	    <ul>
+	     <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Upload a design</a></li>
+          <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Start a discussion</a><!-- << NO LINK << --></li>
+          <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">List an event</a><!-- << NO LINK << --></li>
+          <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Write a blog entry</a><!-- << NO LINK << --></li>
+	      <li><a href="" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Administer Project</a><!-- << NO LINK << --></li>
+	    </ul>
+	  </li>
+  </ul>
+    <!-- javascript for the mini dropdown menu -->
+  <script type="text/javascript"><!-- 
+	var MenuBar1 = new Spry.Widget.MenuBar("minimenu", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif"});
+	//--></script>
+
+		<!-- ACTION BUTTON  (EG: Upload design) (this floats right along with the minidropdown menu so it needs to come after it)-->
+    
+    <a class="action_button" href="#" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('upload_button','','images/button-upload_2.png',1)"><img src="images/button-upload_1.png" alt="Upload Design" name="upload_button" width="155" height="40" border="0" id="upload_button" /></a></div><!-- end of navigation bar -->
+
+
+<!------------------
+    PAGE CONTENT
+-------------------->
+<div id="content">
+
+  <h1 style"float:left"> Designs</h1>
+    
+	<!-- FILTER DESIGN MENU -->    
+  <div id="filter_designs_menu">
+    	
+    <select name="limit_designs_jumpMenu" id="limit_designs_jumpMenu" onchange="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">
+   		    <option value="#" selected="selected">Show all designs</option>
+   		    <option value="#">Work in progress</option>
+   		    <option value="#">Finished</option>
+   		    <option value="#">Out in public</option>
+   	  </select>        
+        
+	<div id="sortby_menu">
+       <div class="button">sort by date</div>
+       <div class="button"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">sort by rating </a></div>
+    </div><!-- sortby_menu div ends -->
+            
+  </div><!-- filter_designs_menu div ends -->
+    
+
+	<!-- START DISPLAY RESULTS -->
+	<div id="display_results">
+    
+    
+          <!-- INDIVIDUAL DESIGN TEASER  5 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+   		      <div class="design_thumbnail_wapper"> 
+<a href="design5_thealex_v2.html"><img src="images/design5_within150px_the_alex_v2.png" width="125" height="150" /> 
+                <span class="out_in_public"></span></a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design5_thealex_v2.html">The Alex</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Ian Meredith</a> </div>     
+	    <div class="date_of_design">updated 3 days ago</div>
+         
+          
+      <div class="number_of_comments"> 14 comments</div>         
+	  </div> <!-- end of individual design teaser -->
+	    
+        
+         <!-- INDIVIDUAL DESIGN TEASER  6 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="design6_bort_v1.html"><img src="images/design6_within150px_bort_v1.png" width="147" height="150" />
+                    <span class="out_in_public"></span> </a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design6_bort_v1.html">Bort</a></div>
+                
+          </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Shan</a> </div>     
+	    <div class="date_of_design">added 5 days ago</div>
+          
+      <div class="number_of_comments"> 3 comments</div>
+                    
+	  </div> <!-- end of individual design teaser -->  
+       
+    
+
+  <!-- INDIVIDUAL DESIGN TEASER  * -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink"><img src="images/designs_within150px_Rusty_Robot_by_genkisudo.jpg" width="118" height="150" /></a> 
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink">Rusty Robot</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Genkisudo</a> </div>     
+	    <div class="date_of_design">added 1 week ago</div>
+          
+      <div class="number_of_comments"> 8 comments</div>         
+	  </div> 
+   	  <!-- end of individual design teaser -->
+      
+ 
+     <!-- INDIVIDUAL DESIGN TEASER  8 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink"><img src="images/design8_within150px_warstencil.jpg" width="120" height="150" />
+                    <span class="out_in_public"></span> </a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink">War Stencil</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Ben</a> </div>     
+	    <div class="date_of_design">added 2 weeks ago</div>
+          
+      <div class="number_of_comments"> 2 comments</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      
+   <!-- START NEW ROW  -->  <div style="clear:both;"> </div>      
+          
+ 
+           
+
+
+     
+           
+        <!-- INDIVIDUAL DESIGN TEASER  4 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="Drag to a file to make a link."><img src="images/design4_within150px_saynototoast_v1.png" width="150" height="121" />
+                    <span class="out_in_public"></span> </a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design4_saynototoast_v1.html">Say NO to Toast</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Giles</a> </div>     
+	    <div class="date_of_design">added 2 weeks ago</div>
+          
+      <div class="number_of_comments"> 11 comments</div>          
+	  </div> <!-- end of individual design teaser -->
+      
+      
+      
+      <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/designs_within150px_floating_longhands_sketch.png" width="150" height="99" /></a> 
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Floating  with Long Hands</a> <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Sketch</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Dlanham</a> </div>     
+	    <div class="date_of_design">added 2 weeks ago</div>
+          
+      <div class="number_of_comments"> 5 comments,</div>       
+	  </div> <!-- end of individual design teaser -->
+      
+      
+      
+        <!-- INDIVIDUAL DESIGN TEASER  3 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="design3_ifwecantbefree_v1.html"><img src="images/design3_within150px_ifwecantbecheap_v1.png" width="150" height="121" /> 
+                    <span class="out_in_public"></span></a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design3_ifwecantbefree_v1.html">If we can't be free at least we can be cheap</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Ian Meredith</a> </div>     
+	    <div class="date_of_design">added 1 month ago</div>
+          
+      <div class="number_of_comments"> 4 comments</div>
+      <div class="number_of_attachments"> 1 attached file</div>   
+               
+	  </div> <!-- end of individual design teaser -->
+      
+      
+       <!-- INDIVIDUAL DESIGN TEASER  2 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="design2_sheild_pattern_v2.html"><img src="images/design2_within150px_sheild_pattern_v2.png" width="150" height="121" />
+                    <span class="out_in_public"></span> </a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design2_sheild_pattern_v2.html">Sheild Pattern</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Toby</a> </div>     
+	    <div class="date_of_design">updated 1 month ago</div>
+          
+      <div class="number_of_comments"> 6 comments,</div>
+          <div class="number_of_attachments"> 1 attached file</div>          
+	  </div> <!-- end of individual design teaser -->
+ 
+ 
+ <!-- START NEW ROW  -->  <div style="clear:both;"> </div>        
+
+<!-- INDIVIDUAL DESIGN TEASER  1 -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="design1_wallpaper_pattern_v3.html"><img src="images/design1_within150px_wallpaper_pattern_v3.png" width="150" height="87" /></a> 
+                    <span class="out_in_public"></span></a>
+        		</div> <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="design1_wallpaper_pattern_v3.html">Wallpaper Pattern</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Michael Denton</a> </div>     
+	    <div class="date_of_design">updated 1 month ago</div>
+          
+      <div class="number_of_comments"> 4 comments,</div>
+      <div class="number_of_attachments"> 2 attached files</div>          
+	  </div> <!-- end of individual design teaser -->
+      
+
+
+
+   <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design9_within150px_robotstencil.png" width="122" height="150" /> 
+                    <span class="out_in_public"></span></a>
+        		</div> 
+                
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Robot Stencil</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+            
+      
+     
+        <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_a_within150px.png" width="135" height="150" /> 
+                    <span class="out_in_public"></span></a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Pixel Cat</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      
+      
+         <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_b_within150px.png" width="111" height="150" /> 
+         <span class="out_in_public"></span>   </a>        
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Paper Bag</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      <!-- START NEW ROW  -->  <div style="clear:both;"> </div>      
+      
+         <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_c_within150px.png" width="120" height="150" /> 
+                    <span class="out_in_public"></span></a>
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Name of Design</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      
+ 
+    
+     <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_d_within150px.png" width="118" height="150" />
+                    <span class="out_in_public"></span></a> 
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Johnny Depp</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+            
+      
+     
+        <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_e_within150px.png" width="100" height="150" /></a> 
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Sketch</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      
+      
+         <!-- INDIVIDUAL DESIGN TEASER  (NO LINK) -->
+   	  <div class="design_teaser">       
+  			<div class="hover_wrapper">
+            
+    		    <div class="design_thumbnail_wapper"> 
+        			<a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"><img src="images/design_f_within150px.png" width="125" height="150" /></a> 
+        		</div> 
+    		    <!-- end of design thumbnail wrapper -->
+                          
+          		<div class="name_of_design"><a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"> Sketchy Aliens</a></div>
+                
+           </div><!-- end of hover wrapper -->
+               
+        <div class="author_info"> By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">User Name</a> </div>     
+	    <div class="date_of_design">added # time ago</div>
+          
+      <div class="number_of_comments"> # comments,</div> 
+      <div class="number_of_attachments"> # attached files</div>         
+	  </div> <!-- end of individual design teaser -->
+      
+      
+      
+      
+      
+    <!-- START NEW ROW  -->  <div style="clear:both;"> </div>   
+      
+</div> 	
+	<!-- END DISPLAY RESULTS -->
+    
+   <div class="pager"> 
+    <div class="button">1</div>
+    <div class="button"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">2 </a></div>
+    <div class="button"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">3 </a></div>
+    <div class="button"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">next </a></div>
+    <div style="clear:both;"> </div>
+   </div> 
+    
+</div>
+
+
+<!------------------------------------------------------
+THE FOLLOWING CODE IS REQUIRED AT THE END OF EVERY PAGE
+-------------------------------------------------------->
+
+</div> 
+<!-- wrapper_bottom_bg ends -->
+</div> <!-- wrapper_top_bg ends -->
+
+<!-- FEEDBACK TAB -->
+<a id="feedback_tab" href="feedback_form.html" rel="shadowbox;height=600;width=600" ></a>
+
+<!-- ALERT BOX -->
+<div id="alert_div">Page not included in this mock up</div>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Design: The Mighty Alex (version 1)</title>
+
+<!-----------------------------------------------
+THE FOLLOWING CODE IS REQUIRED ON EVERY PAGE
+------------------------------------------------->
+
+<!-- SITE WIDE CSS (this css file contains almost all the css for the entire site, other css is page specific)-->
+<link href="mainlayout.css" rel="stylesheet" type="text/css" />
+
+<!-- SHADOW BOX CODE (Shadowbox is used for the Log In and Sign Up as well as the feedback form on every page)-->
+<link href="shadowbox/shadowbox.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="shadowbox/shadowbox.js"></script>
+
+<!-- STYLE OVERRIDES FOR SHADOW BOX (moves the close button of the shadow box to the top right rather than the bottom)-->
+<link href="shadowbox/shadowbox_skin2.css" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="shadowbox/shadowbox_skin2.js"></script>
+
+<!-- TELL SHADOW BOX WHAT TO ENABLE-->
+<script type="text/javascript"> Shadowbox.init({ players:    ["img", "html", "iframe"] }); </script> 
+
+<!-- SPRY MENU BAR CODE (used for the mini menu on project pages) -->
+<script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
+<link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css" />
+
+<!-- SPRY EFFECTS (used to show the alert box when mising links are clicked) -->
+<script src="SpryAssets/SpryEffects.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+function MM_effectAppearFade(targetElement, duration, from, to, toggle) { Spry.Effect.DoFade(targetElement, {duration: duration, from: from, to: to, toggle: toggle}); }
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+
+<!-- DESIGN PAGES CSS (this file is required to style and design pages)-->
+<link href="designpages.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body id="body" onload="MM_preloadImages('images/button-upload_2.png')">
+
+<!-- SITE WIDE MENU BAR (floated independantly on top)-->
+<div id="menubar_container"> <div id="menubar"> 
+
+  	<div id="global_nav"> <ul >
+  			<li><a id="logo" class="firstlink" href="index.html">&nbsp;</a></li>  
+ 			<li><a href="projects.html">Browse Projects</a></li>   
+	</ul> </div>
+    
+ <div id="user_nav"><ul > 
+    	<li><a href="about.html" rel="shadowbox;height=640;width=900">About</a></li>
+    	<li><a href="signup.html" rel="shadowbox;height=400;width=350">Sign Up</a></li> 
+        <li><a href="login.html" rel="shadowbox;height=400;width=350">Log In</a> </li>
+    </ul></div>
+       
+</div> </div>
+
+<!-- THE PAGE -->
+<div id="wrapper_top_bg">
+<div id="wrapper_bottom_bg">
+
+<!----------------------------------
+PROJECT HEADER AND NAVIGATION BAR
+------------------------------------>
+
+<!-- PROJECT HEADER (Update this for each project)-->
+<div id="project_header" style="background-image: url(images/banner_920x100_artgallery.png);"></div>
+    
+    
+    
+<!-- PROJECT NAVIGATION BAR (Same for each project except the links) -->
+<div id="project_nav_wrapper"> <!-- this wraps the entire project navigation including the action button and mini dropdown menu -->
+ 
+	<!-- PROJECT NAVIGATION  --> 
+	<div id="project_nav"> <ul >
+           	<li><a href="overview.html">Overview</a></li>  
+       	    <li><a class="current_page" href="designs.html">Designs</a></li> 
+         	<li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Forum</a></li>  
+            <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Events</a></li> 
+         	<li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Blog</a></li>  
+	</ul> </div> 
+        
+	<!-- MINI DROPDOWN MENU (using spry) -->
+	<ul id="minimenu" class="MenuBarHorizontal">
+	  <li><a class="MenuBarItemSubmenu" href="#">&nbsp;</a>
+	    <ul>
+	      <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Upload a design</a></li>
+          <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Start a discussion</a><!-- << NO LINK << --></li>
+          <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">List an event</a><!-- << NO LINK << --></li>
+          <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Write a blog entry</a><!-- << NO LINK << --></li>
+	      <li><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Administer Project</a><!-- << NO LINK << --></li>
+	    </ul>
+	  </li>
+	</ul>
+    <!-- javascript for the mini dropdown menu -->
+	<script type="text/javascript"><!-- 
+	var MenuBar1 = new Spry.Widget.MenuBar("minimenu", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif"});
+	//--></script>
+
+	<!-- ACTION BUTTON  (EG: Upload design) (this floats right along with the minidropdown menu so it needs to come after it)-->
+	<a class="action_button" href="nolink"       onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)"              onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('upload_button','','images/button-upload_2.png',1)"><img src="images/button-upload_1.png" alt="Upload Design" name="upload_button" width="155" height="40" border="0" id="upload_button" /></a></div><!-- end of navigation bar -->
+
+
+
+<!------------------
+    PAGE CONTENT
+-------------------->
+<div id="content">
+	
+ <!-- MAIN AREA -->
+ <div id="main_area">
+   
+   <!-- the design (wrapper div) -->
+    <div id="the_design">
+    
+		<!-- PROFILE PIC -->  
+        <a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">
+        	<img class="profile_pic" src="images/profile_thumb_48x48_iammere.png" width="48" height="48" />
+        </a>
+
+		<!-- DESIGN HEADER -->
+		<div id="design_header">
+        
+        	<!-- Page Header -->
+			<h1>The Mighty Alex</h1>
+    
+			<!-- author info (added by) --> 
+			<div class="by_username">By <a href="nolink" class="person" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Ian Mere</a>   <span class="date">Nov 17th 2009</span> </div>
+			<div class="clear_floats"></div>
+                        
+		</div><!-- design header ends --><div class="clear_floats"></div>
+		
+        <!-- VERSIONS TABS (these are removed when there is only one version) -->
+    	<div id="versions_border">
+			<div id="version_tabs_wrapper"> 
+            	<ul >   
+           			<li><a class="current_page">Version 1</a></li>  
+       	    		<li><a href="design5_thealex_v2.html">Version 2</a></li>
+ 				</ul><div class="clear_floats"></div>
+            </div>
+        </div>
+       	           
+            
+        <!-- THE DESIGN (content)-->
+         <div id="the_design_content">
+    		<p id="design_description" >I did a drawing of a mate of mine a while back. I think I might  turn it into a stencil or something for the wall.</p>
+    		
+            
+            <div class="clear_floats"></div><!-- clear floats -->
+		
+		<!-- the main image -->
+		<img id="main_image" src="images/design5_the_alex_v1.jpg" width="302" height="422" />
+      
+      
+    </div><!-- THE DESIGN (ends)--><div class="clear_floats"></div>
+            
+ </div><!-- the design wrapper div ENDS -->
+      
+    <!-- COMMENTS AREA -->
+    <div id="comments">
+    	<h3>Comments</h3>
+    
+    	<!-- SINGLE COMMENT -->
+    	<div id="comment_wrapper"> 
+        <!-- profile pic -->
+        	<a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">
+            	<img class="profile_pic" src="images/profile_thumb_48x48_giles.png" width="48" height="48" /></a>
+        <!-- commenter info --> 
+    		<div class="commenter"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Giles</a> <span class="date"> 3 weeks ago</span></div>
+    	<!-- actual comment --> 
+            <div class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit,  dolore magna aliqua. </div>
+        <!-- clear floats -->
+            <div class="clear_floats"></div>
+    	</div>
+        
+            	<!-- SINGLE COMMENT -->
+    	<div id="comment_wrapper"> 
+        <!-- profile pic -->
+        	<a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">
+           	<img class="profile_pic" src="images/profile_thumb_48x48_jess.png" width="48" height="48" /></a>
+        <!-- commenter info --> 
+    		<div class="commenter"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Jess</a> <span class="date">2 weeks ago</span></div>
+    	<!-- actual comment --> 
+            <div class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+        <!-- clear floats -->
+            <div class="clear_floats"></div>
+    	</div>
+        
+
+            	<!-- SINGLE COMMENT -->
+    	<div id="comment_wrapper"> 
+        <!-- profile pic -->
+        	<a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">
+           	<img class="profile_pic" src="images/profile_thumb_48x48_ben.png" width="48" height="48" /></a>
+        <!-- commenter info --> 
+    		<div class="commenter"><a href="nolink" onclick="return false" onmouseup="MM_effectAppearFade('alert_div', 3000, 100, 0, false)">Ben</a> <span class="date">5 days ago</span></div>
+    	<!-- actual comment --> 
+            <div class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </div>
+        <!-- clear floats -->
+            <div class="clear_floats"></div>
+    	</div>
+    
+    </div>
+    
+    <!-- Add Your Comments Area -->
+    <form id="add_comment" action="" method="get">
+        <h3>What do you think?</h3>
+        <textarea class="comment_text_area" name="addcommentfeild" ></textarea>
+    	<input class="post_comment_button" name="addcommentfeild" type="reset" value="Post Comment" />
+     </form>
+    
+    
+</div>  <!-- MAIN AREA ends -->
+    
+    <!-- SIDE AREA -->
+    <div id="side_area">
+     
+  <!-- OTHER DESIGNS (sidewways navagation for other projects) -->
+    <div id="other_designs" class="side_box">    
+    	<a href="design4_saynototoast_v1.html"><div class="prev_next" id="prev"><img class="thumb" src="images/design4_80x80_saynototoast_v1.png" width="80" height="80" /> </div> </a>
+    	<a href="design6_bort_v1.html"> <div class="prev_next" id="next"> <img class="thumb" src="images/design6_80x80_bort_v1.png" width="80" height="80" /> </div> </a  
+    ><div class="clear_floats"></div>
+    </div>
+    
+    <!-- RATING WIDGET -->
+     <div id="rating_wrapper" class="side_box">
+     <h3>Rate this Design</h3>
+      <img src="images/rating_5stars.png" width="200" height="35" />
+      <p >23 ratings</p>
+     </div>
+     
+      
+    
+   <!-- COPYRIGHT -->
+     <div id="copyright_wrapper" class="side_box"> 
+     	<h3>Copyright</h3> 
+        <p></a><a href="http://en.wikipedia.org/wiki/All_rights_reserved" rel="shadowbox">All Rights Reserved</a><br />
+          Do not copy or modify this design without talking to the artist.</p>
+     </div>
+     
+     
+     <div class="clear_floats"></div>
+     
+</div> <!-- SIDE AREA ends -->
+    
+    
+    <!-- POINTLESS CLEARING ELEMENT (can't be bother fixing this properly) -->
+    <div class="clear_floats"></div>
+    <p style="clear:both">&nbsp;</p>
+    
+</div>
+
+
+
+<!------------------------------------------------------
+THE FOLLOWING CODE IS REQUIRED AT THE END OF EVERY PAGE
+-------------------------------------------------------->
+
+</div> <!-- wrapper_bottom_bg ends -->
+</div> <!-- wrapper_top_bg ends -->
+
+<!-- FEEDBACK TAB -->
+<a id="feedback_tab" href="feedback_form.html" rel="shadowbox;height=600;width=600" ></a>
+
+<!-- ALERT BOX -->
+<div id="alert_div">Page not included in this mock up</div>
+
+</body>
+</html>

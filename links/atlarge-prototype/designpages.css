@@ -1,0 +1,228 @@
+@charset "UTF-8";
+/*********************************
+  CSS TO STLYE THE DESIGN PAGES 
+*********************************/
+
+/* MAIN AREA */
+
+#main_area {
+	width: 660px;
+	float: left;
+	position: relative;
+	margin-top: 20px;
+}
+
+#the_design{
+	background-color: #FFF;
+	border: 1px solid #DDD;
+
+	overflow: auto;
+	clear: both;
+	padding: 20px;
+	}
+
+
+#version_tabs_wrapper{
+	padding: 0px;
+	clear: both;
+	margin: 0px;
+	position: absolute;
+	left: 0px;
+	top: -24px;
+	width: 659px;
+	height: 37px;
+}
+
+#version_tabs_wrapper ul {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+ 
+#version_tabs_wrapper ul li {
+	float: left;
+	margin: 0;
+}
+ 
+#version_tabs_wrapper ul li a {
+	display: block;
+	text-decoration: none;
+	text-align: center;
+	height: 24px;
+	line-height: 24px;
+	padding-right: 12px;
+	padding-left: 12px;
+	margin-right: 6px;
+	-moz-border-radius-topleft:5px;
+	-webkit-border-top-left-radius:5px;
+	-moz-border-radius-topright:5px;
+	-webkit-border-top-right-radius:5px;
+	background-color: #EBEBEB;
+	color: #06F;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #DDD;
+	border-right-color: #DDD;
+	border-left-color: #DDD;
+	}
+	
+#version_tabs_wrapper ul li a:hover {
+	color: #333;
+	background-color: #CCC;
+}	
+
+
+#version_tabs_wrapper ul li .current_page, #version_tabs_wrapper ul li .current_page:hover { /* the current page and the cuirrent page when hovered */
+	color: #333;
+	background-color: #FFF;
+}
+
+
+
+
+#main_image {
+	display:block; /* Images are inline elements so they need to be converted to a block in order to center them */
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	clear: both;
+	}
+	
+#comment_wrapper {
+	overflow: auto;
+	margin-bottom: 20px;
+}
+
+
+.commenter {
+	width: 550px;
+	float: left;
+	margin-left: 10px;
+	font-weight: bold;
+}
+
+.person {
+	font-weight: bold;
+}
+
+
+.comment{
+	float: left;
+	margin-left: 10px;
+	overflow: auto;
+	width: 550px;
+	}
+	
+.profile_pic{
+	display: block;
+	float: left;
+}
+
+.comment_text_area{
+	width:500px; 
+	max-width:500px;
+	height: 80px
+	}
+
+.post_comment_button{
+	display: block;
+	margin-top: 20px;
+}
+
+
+.clear_floats{
+	clear: both;
+}
+
+#comments {
+	padding-left: 20px;
+	padding-top: 20px;	
+}
+#add_comment {
+	padding-left: 20px;
+}
+
+
+
+/* SIDE AREA */
+
+#side_area {
+	width: 200px;
+	float: right;
+	margin-top: 20px;
+}
+
+.prev_next {
+	background-color: #FFF;
+	width: 96px;
+	height: 120px;
+	border: 1px solid #DDD;
+	}
+
+.prev_next:hover {
+	-webkit-box-shadow:	1px 1px 5px #777;
+	-moz-box-shadow: 1px 1px 5px #777;
+}
+
+.prev_next img {
+	display:block; /* Images are inline elements so they need to be converted to a block in order to center them */
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 6px;
+	}
+	
+#prev {
+	float: left;
+	background-image: url(images/prev.png);
+	background-repeat: no-repeat;
+	background-position: 0px 90px;
+}
+
+#next {
+	float: right;
+	background-image: url(images/next.png);
+	background-repeat: no-repeat;
+	background-position: 40px 91px;
+}
+
+.side_box { /* applies the same rules to all the side boxes */
+	clear: both;
+	margin-bottom: 10px;
+	}
+
+.file{
+	padding-left: 30px;
+	background-image: url(images/download.png);
+	background-repeat: no-repeat;
+	background-position: 5px 5px;
+	padding-top: 2px;
+	padding-bottom: 8px;
+}
+.by_username {
+	float: left;
+	clear: left;
+}
+#design_header {
+	float: left;
+	width: 500px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+#design_header h1 {
+	position: relative;
+	top: -3px;
+}
+#the_design_content {
+	padding-top: 10px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+	border-right-color: #CCC;
+	border-bottom-color: #CCC;
+	border-left-color: #CCC;
+}
