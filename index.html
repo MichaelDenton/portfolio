@@ -23,49 +23,6 @@
     <!-- Style Sheets -->
     <link rel="stylesheet" type="text/css" href="css/common.css">
 
-    <!-- Google Analytics -->
-    <script>
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-96119718-1', 'auto');
-    ga('send', 'pageview');
-    </script>
-
-    <!-- Woopra Analytics -->
-    <script>
-    (function() {
-        var t, i, e, n = window,
-            o = document,
-            a = arguments,
-            s = "script",
-            r = ["config", "track", "identify", "visit", "push", "call", "trackForm", "trackClick"],
-            c = function() {
-                var t, i = this;
-                for (i._e = [], t = 0; r.length > t; t++)(function(t) {
-                    i[t] = function() {
-                        return i._e.push([t].concat(Array.prototype.slice.call(arguments, 0))), i
-                    }
-                })(r[t])
-            };
-        for (n._w = n._w || {}, t = 0; a.length > t; t++) n._w[a[t]] = n[a[t]] = n[a[t]] || new c;
-        i = o.createElement(s), i.async = 1, i.src = "//static.woopra.com/js/w.js", e = o.getElementsByTagName(s)[0], e.parentNode.insertBefore(i, e)
-    })("woopra");
-
-    woopra.config({
-        domain: 'mikedenton.design'
-    });
-    woopra.track();
-    </script>
 
 </head>
 
@@ -91,6 +48,21 @@
     </div>
 
     <div class='container portfolio'>
+
+        <a class='article odd' href='geckoboard.html'>
+            <div class='description-wrapper'>
+                <img class="logo" alt="Geckoboard" src="images/logo-geckoboard.svg">
+                <p class='project'>Data Visualisation Software</p>
+                <h3 class='title'>Easily set up and share your data.</h3>
+                <p class='description'>Geckoboard helps teams focus on vital business metrics. Such as how their sales are performing, or how busy their customer support team are. A key project was improving the set up experience for first time users. Rethinking difficult workflows and crafting useful templates.</p>
+            </div>
+            <div class='image-wrapper'>
+                <img class='screenshot' src="images/teaser-geckoboard.jpg">
+            </div>
+        </a>
+
+        <div class='divider'></div>
+
 
         <a class='article' href='xero.html'>
             <div class='description-wrapper'>
@@ -137,7 +109,7 @@
     </div>
 
 
-    <div id='footer-section'>
+    <div id="footer-section">
         <h3>Get in touch</h3>
         <p>I’m currently working in London.</p>
         <div id="buttons">

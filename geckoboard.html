@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mike Denton - Geckoboard</title>
+
+    <!-- Meta Info -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="author" content="Michael Denton">
+
+    <!-- Open Graph Properties -->
+    <meta property="og:image" content="http://mikedenton.design/fb-link-preview.jpg" />
+
+    <!-- Style Sheets -->
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon-152.png">
+
+ 
+</head>
+
+<body>
+
+    <div id='nav-section'>
+        <div class='container'>
+            <a id="site-logo" href="index.html"><img src="images/mike-logo.svg" />
+            </a>
+            <a class="nav" href="index.html">Portfolio</a>
+            <a class="nav" href="about.html">About Me</a>
+        </div>
+    </div>
+
+    <div id='hero-section' style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url(images/hero-xero.jpg)">
+        <div class='container'>
+                <h1 id='hero-title'>Live TV Dashboards</h1>
+                <p id='hero-subtitle'>Optimizing for first time users.</p>
+        </div>
+    </div>
+
+    <div id='article'>
+        <div class='container'>
+
+            <h2>Background</h2>
+            <p>As a product designer at Xero I was asked to redesign their financial reporting tools. With over 50 financial reports across a multitude of countries this was no simple task. The old reports didn’t allow much customisation and many customers found them too inflexible for their needs. The challenge was to allow greater flexibility while also improving ease of use. </p>
+
+            <figure>
+                <img src="images/xero-reporting-intro.png" alt="Reporting Goal">
+                <figcaption>Our goal was to make it easy to produce a range of financial reports.</figcaption>
+            </figure>
+
+            <h2>A Common Framework</h2>
+            <p>Rather than building countless one-off solutions, the new reports were built using a common framework. This approach helped enforce consistency. A single improvement could be updated across all reports, making ongoing development much easier. This also helped reports to look and behave in the same way. Actions such as changing the date, or editing text were the same regardless of the report. This consistency made things much easier for customers to learn and use.</p>
+
+            <figure>
+                <img src="images/xero-reporting-example-reports.png" alt="Example Reports">
+                <figcaption>An example of the various reports we needed to support.</figcaption>
+            </figure>
+
+
+            <h2>Content and Actions</h2>
+            <p>Given the document centric nature of the problem, the approach that proved the most productive was to firstly focus on the content required, and then the actions that could be performed it. For example, a grid is a type of content and the ability to position it relative to other content is just one way in which it can be manipulated. Before exploring specific interface solutions (such as dragging columns to reorder them) it helped to first clarify what content we should include and what actions users should be able to perform on it.</p>
+
+            <img src="images/xero-reporting-content-and-actions.png" alt="Content and Actions">
+            <figcaption>Documentation showing actions that can be performed on different types of content.</figcaption>
+            </figure>
+
+            <h2>Guiding Principles</h2>
+            <p>As the project developed I found myself referring to a common set of design principles to shape the framework and explain my design choices to the development team.</p>
+
+            <div class="principles-wrapper">
+
+                <div class="principle">
+                    <h3>WYSIWYG </h3>
+                    <p>What You See Is What You Get. The editing interface should resemble the final output as closely as possible. The interface should always make allowances to achieve this goal, making a clear distinction between what is the document and what is the interface.</p>
+                </div>
+
+                <div class="principle">
+                    <h3>Direct Manipulation </h3>
+                    <p>In context / without needing to navigate to a different screen. V1 has far too much loss of context, and needless navigation to different screens.</p>
+                </div>
+
+                <div class="principle">
+                    <h3>Flexible Workflow </h3>
+                    <p>Natural / non-linear. Authoring a template should feel the same as editing a report. Same interface for the same actions.</p>
+                </div>
+
+                <div class="principle">
+                    <h3>Reduce Effort</h3>
+                    <p>Don’t make people repeat themselves. Content should be reusable, preferences should be remembered, and information should not be forgotten.</p>
+                </div>
+
+                <div class="principle">
+                    <h3>Consistency </h3>
+                    <p>The framework should be universal… No hacks where possible. If a report has special needs we should consider how to holistically meet these needs across the framework.</p>
+                </div>
+
+                <div class="principle">
+                    <h3>In Control</h3>
+                    <p>Our customers know best.</p>
+                </div>
+
+            </div>
+
+            <h2>Prototyping</h2>
+            <p>To quickly explore ideas I created a range of prototypes. From basic wireframes to highly interactive mockups, and HTML prototypes. </p>
+
+            <figure>
+                <img src="images/xero-reporting-dates-wireframe.png" alt="Date selector wireframe">
+                <figcaption>An early wireframe for selecting dates.</figcaption>
+            </figure>
+
+
+            <img src="images/xero-reporting-concept-text-block.png" alt="Textblock concept">
+            <img src="images/xero-reporting-concept-text-bar.png" alt="Dropdowns concept">
+            <img src="images/xero-reporting-concept-footer.png" alt="Footer concept">
+            <figcaption>Early static mockups of how to edit content.</figcaption>
+
+            <figure>
+                <video width="100%" height="auto" autoplay loop>
+                    <source src="images/xero-reporting-sidebar.mp4" type="video/mp4">
+                </video>
+                <figcaption>An early prototype for editing report content.</figcaption>
+            </figure>
+
+            <h2>Selection Based Interface</h2>
+            <p>The most complicated bit of functionality was the ability to completely customise the layout of any financial statement. Every row and every column could be customised. This gave accountants unparalleled flexibility. After much experimentation we managed to radically simplify the editing interface by only showing editing options when content is selected. This allowed a greater amount of functionality to be surfaced without overwhelming users.</p>
+
+            <figure>
+                <img src="images/xero-reporting-selection-based-ui.png" alt="Selection based interface">
+                <figcaption>Editing options change depending what is selected</figcaption>
+            </figure>
+
+
+            <h2>User Testing</h2>
+
+            <p>Prototypes and incomplete software were regularly tested with customers. Regular user testing helped to uncover issues early in the process and focus development efforts on the important stuff. Users were asked to complete high level goals such as preparing annual accounts, as well as smaller interactions like moving columns, editing text, or saving a report.</p>
+
+
+            <figure>
+                <img src="images/xero-reporting-user-testing.png" alt="User Testing">
+                <figcaption>Regular testing with customers helped to quickly identify areas to improve.</figcaption>
+            </figure>
+
+            <p>As well as testing on customers I also asked programmers developing the software to perform the same tasks as our customers. This gave them a much better understanding of how it would be used, often changing their views of what should be the primary focus. After experiencing the pain of inadvertently losing work, or performing tedious tasks, developers often put in extra effort to fix issues they might have previously blamed on user error.</p>
+
+            <figure>
+                <img src="images/xero-reporting-staff-testing.jpg" alt="User Testing">
+                <figcaption>Asking developers to perform user tasks helped them to develop a greater empathy for customers.</figcaption>
+            </figure>
+
+            <h2>Final Designs</h2>
+            <p>After months of testing and development a major release went public in late 2016. This included a brand new editing interface that allowed users to customize nearly any aspect of a financial report.</p>
+
+            <figure>
+                <img class="drop-shadow" src="images/xero-reporting-report-center.png" alt="Report Center Screenshot">
+                <figcaption>Reports were made easier to find by putting them into logical groups.</figcaption>
+            </figure>
+
+            <figure>
+                <img class="drop-shadow" src="images/xero-reporting-final-screenshot-1.png" alt="Editing Screenshot">
+                <figcaption>Editing options are quick to access via a dynamic context panel. </figcaption>
+            </figure>
+
+
+
+        </div>
+    </div>
+
+<div id="footer-section">
+        <h3>Get in touch</h3>
+        <p>I’m currently working in London.</p>
+        <div id="buttons">
+            <a class="button" href="mailto:contact@mikedenton.design?Subject=Please%20get%20in%20touch"><span id="icon-email">Email Me<span></span></span></a>
+            <a class="button" href="https://www.linkedin.com/in/mike-denton/"><span id="icon-linkedin">LinkedIn<span></span></span></a>
+        </div>
+    </div>
+
+</body>
+
+</html>
