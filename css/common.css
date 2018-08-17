@@ -109,7 +109,7 @@ h3.section-title {
 }
 /* Over 560px (540px) */
 
-@media (min-width: 560px) {
+@media screen and (min-width: 560px) {
     .container {
         max-width: 540px;
         transition: all 250ms cubic-bezier(.02, .01, .47, 1);
@@ -117,14 +117,14 @@ h3.section-title {
 }
 /* Over 760px (740px) */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     .container {
         max-width: 740px;
     }
 }
 /* Over 960px (940px) */
 
-@media (min-width: 960px) {
+@media screen and (min-width: 960px) {
     .container {
         max-width: 940px;
     }
@@ -209,7 +209,7 @@ h3.section-title {
 }
 /* Over 740px */
 
-@media (min-width: 740px) {
+@media screen and (min-width: 740px) {
     #intro-section {
         background-image: url("images/doodle-hero-bg.svg");
         background-position: center 70px;
@@ -247,7 +247,7 @@ h3.section-title {
     background-position: 5px 5px;
     transition: all 250ms cubic-bezier(.02, .01, .47, 1);
 }
-@media (hover: hover) {
+@media screen and (hover: hover) {
     .portfolio .image-wrapper img:hover {
         box-shadow: 0px 14px 32px rgba(0, 0, 0, 0.15), 0px 0px 0px 1px rgba(0, 0, 0, 0.03);
         transform: translate(0, -3px);
@@ -293,7 +293,7 @@ h3.section-title {
 }
 /* Over 760px */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     .portfolio a.article {
         display: flex;
     }
@@ -352,7 +352,7 @@ h3.section-title {
 }
 /* Over 760px */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     #hero-section .container {
         height: 500px;
     }
@@ -386,7 +386,7 @@ h3.section-title {
 #article a {
     color: #009bff;
 }
-@media (hover: hover) {
+@media screen and (hover: hover) {
     #article a:hover {
         color: #0079ff;
     }
@@ -416,7 +416,7 @@ h3.section-title {
 }
 /* Over 760px */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     #article p {
         font-size: 20px;
         line-height: 1.6em;
@@ -434,15 +434,23 @@ h3.section-title {
     flex-wrap: wrap;
     justify-content: center;
     overflow: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F2F2F2;
 }
 #article .principle {
-    background-color: #F2F2F2;
+    
     width: 100%;
     padding: 20px;
 }
+
+#article .principle p {
+    margin-bottom: 0px;
+}
+
 /* Over 760 */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     #article .principle {
         width: 50%;
     }
@@ -503,7 +511,7 @@ h3.section-title {
 }
 /* Over 940px */
 
-@media (min-width: 960px) {
+@media screen and (min-width: 960px) {
     .videos {
         display: flex;
         flex-wrap: wrap;
@@ -569,7 +577,7 @@ h3.section-title {
 }
 /* Over 760px (740px) */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     #skills-wrapper {
         display: flex;
     }
@@ -635,7 +643,7 @@ a#kayak-video-link:hover .video-text-wrapper {
     ------------------- */
 /* Over 760px (740px) */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     .column-wrapper {
         display: flex;
     }
@@ -651,7 +659,7 @@ a#kayak-video-link:hover .video-text-wrapper {
 }
 /* Over 960px (940px) */
 
-@media (min-width: 960px) {
+@media screen and (min-width: 960px) {
     .col-1 {
         padding-right: 50px;
     }
@@ -680,7 +688,7 @@ a#kayak-video-link:hover .video-text-wrapper {
     ------------------- */
 /* Over 760px (740px) */
 
-@media (min-width: 760px) {
+@media screen and (min-width: 760px) {
     #testimonials-section #testimonials-wrapper {
         display: flex;
     }
@@ -791,7 +799,7 @@ a#kayak-video-link:hover .video-text-wrapper {
     background-position: left center;
     background-repeat: no-repeat;
 }
-@media (min-width: 560px) {
+@media screen and (min-width: 560px) {
     #footer-section {
         background-image: url("images/doodle-footer-bg.svg");
         background-position: center -20px;

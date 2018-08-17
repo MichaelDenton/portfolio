@@ -21,7 +21,7 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="favicon-152.png">
 
- 
+
 </head>
 
 <body>
@@ -35,143 +35,130 @@
         </div>
     </div>
 
-    <div id='hero-section' style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url(images/hero-xero.jpg)">
+    <div id='hero-section' style="background-position: 50% 0%; background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/hero-geckoboard.jpg)">
         <div class='container'>
-                <h1 id='hero-title'>Live TV Dashboards</h1>
-                <p id='hero-subtitle'>Optimizing for first time users.</p>
+            <h1 id='hero-title'>Simplifying Set-up</h1>
+            <p id='hero-subtitle'>Geckoboard want to help their customers create useful data dashboards.</p>
         </div>
     </div>
 
     <div id='article'>
         <div class='container'>
 
-            <h2>Background</h2>
-            <p>As a product designer at Xero I was asked to redesign their financial reporting tools. With over 50 financial reports across a multitude of countries this was no simple task. The old reports didn’t allow much customisation and many customers found them too inflexible for their needs. The challenge was to allow greater flexibility while also improving ease of use. </p>
+            <h2>Project background</h2>
+            <p>At Geckoboard I'm involved with all things impacting the user experience. I work closely with software teams, conduct user research, inform product strategy, design prototypes, and help spread empathy for users. This project focuses on improving the set up experience for first time users and making it easier for new users to get started and create useful dashboards.</p>
 
             <figure>
-                <img src="images/xero-reporting-intro.png" alt="Reporting Goal">
-                <figcaption>Our goal was to make it easy to produce a range of financial reports.</figcaption>
+                <img src="images/gecko-illustration-wide.png" alt="Geckoboard illustration of team looking at dashboard">
+                <figcaption>Data dashboards help monitor performance, but getting one set up can be a hard task.</figcaption>
             </figure>
 
-            <h2>A Common Framework</h2>
-            <p>Rather than building countless one-off solutions, the new reports were built using a common framework. This approach helped enforce consistency. A single improvement could be updated across all reports, making ongoing development much easier. This also helped reports to look and behave in the same way. Actions such as changing the date, or editing text were the same regardless of the report. This consistency made things much easier for customers to learn and use.</p>
+            <h2>The challenge:<br>
+            Make it easier to set-up a data dashboard.</h2>
+
+            <p>Like many online software products Geckoboard offers a free 30 day trial. A small portion of trialists end up purchasing Geckoboard at the end of their trial, but most trialists don’t. This highlights a key opportunity to improve. New customers have a big impact on revenue. But if people aren't successful with a product they won’t buy it. So the first time setting up Geckoboard is an essential experience to get right.</p>
+
+
+            <h2>Mapping out the existing flow</h2>
 
             <figure>
-                <img src="images/xero-reporting-example-reports.png" alt="Example Reports">
-                <figcaption>An example of the various reports we needed to support.</figcaption>
+                <img src="images/gecko-userflow.png" alt="image">
+                <figcaption>Looking at usage statistics we saw many trialists stopped using the product shortly after sign up. They had failed to connect any data, failed to create a dashboard, and sadly never got to experience their own data displayed on a dashboard.</figcaption>
+            </figure>
+
+            <h2>Observing first-time users</h2>
+
+            <p>To better understand the problem I lead a series of user tests. Recruiting people that fit our target audience but had never used Geckoboard before. Participants were asked about their needs and then tasked with using Geckoboard to set up a dashboard. This was an open-ended task that highlighted the experience of people using Geckoboard for the first time.</p>
+
+            <figure>
+                <img src="images/gecko-usertesting.jpg" alt="image">
+                <figcaption>Everyone in the company was invited to observe user tests, discuss what they saw, and identify common themes. The process gave the team a much better understanding of what to improve by empathising with real world users and situations.</figcaption>
             </figure>
 
 
-            <h2>Content and Actions</h2>
-            <p>Given the document centric nature of the problem, the approach that proved the most productive was to firstly focus on the content required, and then the actions that could be performed it. For example, a grid is a type of content and the ability to position it relative to other content is just one way in which it can be manipulated. Before exploring specific interface solutions (such as dragging columns to reorder them) it helped to first clarify what content we should include and what actions users should be able to perform on it.</p>
+            <h2>Themes from user testing</h2>
 
-            <img src="images/xero-reporting-content-and-actions.png" alt="Content and Actions">
-            <figcaption>Documentation showing actions that can be performed on different types of content.</figcaption>
-            </figure>
-
-            <h2>Guiding Principles</h2>
-            <p>As the project developed I found myself referring to a common set of design principles to shape the framework and explain my design choices to the development team.</p>
 
             <div class="principles-wrapper">
 
                 <div class="principle">
-                    <h3>WYSIWYG </h3>
-                    <p>What You See Is What You Get. The editing interface should resemble the final output as closely as possible. The interface should always make allowances to achieve this goal, making a clear distinction between what is the document and what is the interface.</p>
+                    <h3>It takes too long to create a dashboard.</h3>
+                    <p>After half an hour of using the product most participants had connected data, added widgets. But no one had produced a dashboard that they were ready to share or display on a TV.</p>
                 </div>
 
                 <div class="principle">
-                    <h3>Direct Manipulation </h3>
-                    <p>In context / without needing to navigate to a different screen. V1 has far too much loss of context, and needless navigation to different screens.</p>
+                    <h3>It’s too easy to get distracted.</h3>
+                    <p>The current editing flow distracts users from getting set up quickly. Users get deep into advanced editing before experiencing the basic product. New users expected widgets to go to the dashboard, but we invite them to edit them which distracts from making progress.</p>
+                </div>
+
+
+                <div class="principle">
+                    <h3>People are concerned about data privacy.</h3>
+                    <p>Many users had worries about giving access to their data. They wanted some reassurance about data privacy when connecting to a data source.</p>
                 </div>
 
                 <div class="principle">
-                    <h3>Flexible Workflow </h3>
-                    <p>Natural / non-linear. Authoring a template should feel the same as editing a report. Same interface for the same actions.</p>
+                    <h3>Starting on the integrations page is confusing.</h3>
+                    <p>The current experience of dumping new users on the integrations page is confusing. People that navigated to the blank dashboard first had a much better context.</p>
                 </div>
 
                 <div class="principle">
-                    <h3>Reduce Effort</h3>
-                    <p>Don’t make people repeat themselves. Content should be reusable, preferences should be remembered, and information should not be forgotten.</p>
+                    <h3>Adding multiple widgets is tedious.</h3>
+                    <p>The widget-by-widget nature of building a dashboard makes the process of going from nothing to something feel tedious - especially if making lots of changes along the way. Just to add one widget the user has to go to the integrations page > then to the presets panel > then to the config screen > then to the dashboard.</p>
                 </div>
 
                 <div class="principle">
-                    <h3>Consistency </h3>
-                    <p>The framework should be universal… No hacks where possible. If a report has special needs we should consider how to holistically meet these needs across the framework.</p>
+                    <h3>Participants failed to share their dashboard.</h3>
+                    <p>The interface does not encourage users to display their dashboard on a TV. When participants were prompted to do this some end up confused by the language and the steps required. </p>
                 </div>
 
-                <div class="principle">
-                    <h3>In Control</h3>
-                    <p>Our customers know best.</p>
-                </div>
 
             </div>
 
-            <h2>Prototyping</h2>
-            <p>To quickly explore ideas I created a range of prototypes. From basic wireframes to highly interactive mockups, and HTML prototypes. </p>
+            <h2>Improvement 1:<br>Starting with a template</h2>
 
             <figure>
-                <img src="images/xero-reporting-dates-wireframe.png" alt="Date selector wireframe">
-                <figcaption>An early wireframe for selecting dates.</figcaption>
+                <img src="images/gecko-template.png" alt="image">
+                <figcaption>Caption</figcaption>
             </figure>
 
-
-            <img src="images/xero-reporting-concept-text-block.png" alt="Textblock concept">
-            <img src="images/xero-reporting-concept-text-bar.png" alt="Dropdowns concept">
-            <img src="images/xero-reporting-concept-footer.png" alt="Footer concept">
-            <figcaption>Early static mockups of how to edit content.</figcaption>
+            <h2>Improvement 2:<br>Reassuring users when they connecting data</h2>
 
             <figure>
-                <video width="100%" height="auto" autoplay loop>
-                    <source src="images/xero-reporting-sidebar.mp4" type="video/mp4">
-                </video>
-                <figcaption>An early prototype for editing report content.</figcaption>
+                <img src="images/gecko-connect.png" alt="image">
+                <figcaption>User testing highlighted concerns with data security at the point of connecting to third party services. Small wording changes were enough to reassure customers and remove another point of friction.</figcaption>
             </figure>
 
-            <h2>Selection Based Interface</h2>
-            <p>The most complicated bit of functionality was the ability to completely customise the layout of any financial statement. Every row and every column could be customised. This gave accountants unparalleled flexibility. After much experimentation we managed to radically simplify the editing interface by only showing editing options when content is selected. This allowed a greater amount of functionality to be surfaced without overwhelming users.</p>
+            <h2>Improvement 3:<br>Edit directly on the dashboard</h2>
 
             <figure>
-                <img src="images/xero-reporting-selection-based-ui.png" alt="Selection based interface">
-                <figcaption>Editing options change depending what is selected</figcaption>
+                <img src="images/gecko-edit.png" alt="image">
+                <figcaption>Caption</figcaption>
             </figure>
 
-
-            <h2>User Testing</h2>
-
-            <p>Prototypes and incomplete software were regularly tested with customers. Regular user testing helped to uncover issues early in the process and focus development efforts on the important stuff. Users were asked to complete high level goals such as preparing annual accounts, as well as smaller interactions like moving columns, editing text, or saving a report.</p>
-
+            <h2>Improvement 4:<br>Easily adding more data</h2>
 
             <figure>
-                <img src="images/xero-reporting-user-testing.png" alt="User Testing">
-                <figcaption>Regular testing with customers helped to quickly identify areas to improve.</figcaption>
+                <img src="images/gecko-insert.png" alt="image">
+                <figcaption>Caption</figcaption>
             </figure>
 
-            <p>As well as testing on customers I also asked programmers developing the software to perform the same tasks as our customers. This gave them a much better understanding of how it would be used, often changing their views of what should be the primary focus. After experiencing the pain of inadvertently losing work, or performing tedious tasks, developers often put in extra effort to fix issues they might have previously blamed on user error.</p>
+            <h2>Improvement 5:<br>More discoverable share and display options</h2>
 
             <figure>
-                <img src="images/xero-reporting-staff-testing.jpg" alt="User Testing">
-                <figcaption>Asking developers to perform user tasks helped them to develop a greater empathy for customers.</figcaption>
+                <img src="images/gecko-share.png" alt="image">
+                <figcaption>Need to write caption - plus link to prototype</figcaption>
             </figure>
 
-            <h2>Final Designs</h2>
-            <p>After months of testing and development a major release went public in late 2016. This included a brand new editing interface that allowed users to customize nearly any aspect of a financial report.</p>
+            <h2>Continuing to improve...</h2>
 
-            <figure>
-                <img class="drop-shadow" src="images/xero-reporting-report-center.png" alt="Report Center Screenshot">
-                <figcaption>Reports were made easier to find by putting them into logical groups.</figcaption>
-            </figure>
-
-            <figure>
-                <img class="drop-shadow" src="images/xero-reporting-final-screenshot-1.png" alt="Editing Screenshot">
-                <figcaption>Editing options are quick to access via a dynamic context panel. </figcaption>
-            </figure>
-
+            <p>Simplifying the set-up for new users helps to improve the entire product. The first-use experience is now a continual focus at Geckoboard. Reaping benefits for both new and loyal customers as we continue to make things easier. </p>
 
 
         </div>
     </div>
 
-<div id="footer-section">
+    <div id="footer-section">
         <h3>Get in touch</h3>
         <p>I’m currently working in London.</p>
         <div id="buttons">
