@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Timers</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+
+    <style>
+    #number {
+    	font-size: 120px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        text-align: center;
+        padding: 100px;
+    }
+    </style>
+
+    <script>
+    var count = 0;
+
+    function updateCount() {
+        count = count + 1;
+        document.getElementById("number").innerHTML = count;
+        setTimeout(updateCount, 100);
+    }
+    </script>
+
+</head>
+
+<body>
+    <div id="number">
+    </div>
+    <script>
+    updateCount();
+    </script>
+
+</body>
+
+</html>
