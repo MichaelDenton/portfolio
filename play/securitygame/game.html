@@ -1,82 +1,150 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Security Game</title>
-	<style>
-		#board{
-			background-color: grey;
-			height: 350px;
-			width: 650px;
-		}
-		.character{
-			background: url('guest.jpg');
-			background-size: cover;
-			width: 120px;
-			height: 120px;
-			padding: 10px;
-			margin:10px;
-			float:left;
-			display: none;
-		}
-		.thief{
-			background: url('thief.jpg');
-			background-size: cover;
-		}
-		.hidden{
-			display: none;
-		}
-		.visible{
-			display:block;
-		}
 
-	</style>
+<head>
+    <title>Security Game</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        height: 100%;
+        user-select: none;
+        -webkit-user-select: none;
+        box-sizing: border-box;
+    }
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+    #banner {
+        height: 60px;
+        overflow: hidden;
+        padding: 20px;
+    }
+    #title {
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 20px;
+        float: left;
+        padding-right: 20px;
+    }
+    #score {
+        font-size: 16px;
+        line-height: 20px;
+        float: right;
+    }
+    #board {
+        background-color: lightgrey;
+        width: 100%;
+        height: calc(100% - 60px);
+        padding: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+    @media screen and (orientation: landscape) {
+        #board {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+    }
+    .character {
+        background: url('guest.jpg');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        float: left;
+        border-radius: 10px;
+        display: none;
+    }
+    .character:hover {
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
+    }
+    .character:active {
+        outline: 10px solid rgba(50, 115, 220, 0.3);
+        ;
+    }
+    .thief {
+        background: url('thief.jpg');
+        background-size: cover;
+    }
+    .hidden {
+        display: none;
+    }
+    .visible {
+        display: block;
+    }
+    </style>
 </head>
+
 <body>
-	<input type="button" value="Play Game" onclick="startGame()";/>
-	<div id="board">
-		<div class="character"></div>
-		<div class="character"></div>
-		<div class="character"></div>
-		<div class="character"></div>
-		<div class="character"></div>
-		<div class="character"></div>
-	</div>
-	<script>
-		function startGame() {
-			gameLoop();
-		}
-		var loops = 0;
-		var peopleVisible = false;
-		var gameScore = 0;
-		function gameLoop(){
-			peopleVisible = !peopleVisible;
-			createCharacters();
-			loops++;
-			if (loops < 12){
-				setTimeout(gameLoop,peopleVisible ? 1000 : 2000);
-			}
-			else{
-				alert("You scored " + gameScore);
-			}
-			function createCharacters(){
-				var board = document.getElementById("board");
-				var classToSet = peopleVisible ? "character visible" : "character hidden";
-				for(var index = 0; index < 6; index++){
-					board.children[index].className = classToSet;
-					board.children[index].innerHTML = "";
-					board.children[index].onclick = function(){
-						gameScore += -2;
-					}
-				}
-				var randomNumber = Math.floor(Math.random()*6)+1;
-				board.children[randomNumber-1].innerHTML = "";
-				board.children[randomNumber-1].onclick = function(){
-					gameScore++;
-				}
-				board.children[randomNumber-1].className = classToSet + " thief"
-			}
-		}
-	</script>
+    <div id="banner">
+        <div id="title">Spot The Theif</div>
+        <input type="button" value="Play" onclick="startGame()" ;/>
+        <div id="score">Score: 0</div>
+    </div>
+    <div id="board">
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+    </div>
+    <script>
+    function startGame() {
+        gameLoop();
+    }
+
+    var loops = 0;
+    var peopleVisible = false;
+    var gameScore = 0;
+
+    function gameLoop() {
+        peopleVisible = !peopleVisible;
+        createCharacters();
+        loops++;
+        if (loops < 12) {
+            setTimeout(gameLoop, peopleVisible ? 1000 : 1000);
+        } else {
+            alert("You scored " + gameScore);
+        }
+
+        function updateScore() {
+            document.getElementById("score").innerHTML = gameScore;
+        }
+
+        function createCharacters() {
+            var board = document.getElementById("board");
+            var classToSet = peopleVisible ? "character visible" : "character hidden";
+            for (var index = 0; index < 6; index++) {
+                board.children[index].className = classToSet;
+                board.children[index].onclick = function() {
+                    gameScore += -2;
+                    updateScore();
+                }
+            }
+            var randomNumber = Math.floor(Math.random() * 6) + 1;
+            board.children[randomNumber - 1].onclick = function() {
+                gameScore++;
+                updateScore();
+            }
+            board.children[randomNumber - 1].className = classToSet + " thief"
+        }
+    }
+    </script>
 
 </body>
+
 </html>
