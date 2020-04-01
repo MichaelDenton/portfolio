@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Start Stop</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        user-select: none;
+        box-sizing: border-box;
+    }
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+    #wrapper {
+        padding: 10px;
+        display: grid;
+        grid-template-rows: auto 60px 60px;
+        grid-gap: 10px;
+        height: 100vh;
+    }
+    #number {
+        font-size: 120px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+    button {
+        display: inline-block;
+        border: none;
+        padding: 1rem 2rem;
+        margin: 0;
+        text-decoration: none;
+        background: lightgrey;
+        color: black;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 5px;
+    }
+    button.active{
+      background: #0069ed;
+      color: #ffffff;
+    }
+
+    #button-wrapper {
+        background-color: red;
+        height: 100px;
+    }
+    </style>
+
+    <script>
+    var count = 0;
+    var timer;
+
+    function startPlaying() {
+        clearInterval(timer);
+        timer = setInterval(updateCount, 50);
+        
+        document.getElementById("startbutton").className = "";
+        document.getElementById("stopbutton").className = "active";
+    }
+
+    function stopPlaying() {
+        clearInterval(timer);
+        document.getElementById("startbutton").className = "active";
+        document.getElementById("stopbutton").className = "";
+    }
+
+    function updateCount() {
+        count = count + 1;
+        document.getElementById("number").innerHTML = count;
+
+        var x = document.body;
+        x.style.backgroundColor = x.style.backgroundColor == "yellow" ? "pink" : "yellow";
+    }
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="number">0</div>
+        <button id="startbutton" class="active" onclick="startPlaying();">Start</button>
+        <button id="stopbutton" onclick="stopPlaying();">Stop</button>
+    </div>
+</body>
+
+
+</html>
