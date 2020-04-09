@@ -33,7 +33,7 @@
 
     #wrapper{
         display: grid;
-        grid-template-rows: 50px auto 80px;
+        grid-template-rows: 70px auto 80px;
         grid-row-gap: 10px;
         padding: 10px;
         height: 100vh;
@@ -74,7 +74,10 @@
         border-radius: 5px;
         /* display: none; */
     }
-
+    .character.thief {
+        background: url('thief.jpg');
+        background-size: cover;
+    }
     #scoreboard{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -121,6 +124,23 @@
         // Update what round it is
         round++;
         document.getElementById("round").innerHTML = round;
+
+        //Reset characters
+        for (var index = 0; index < 6; index++) {
+        canvas.children[index].classList.remove('thief');
+        canvas.children[index].onclick = function() {
+                    alert("Wrong!")
+                }
+        }
+
+        // Set the random theif
+        var randomNumber = Math.floor(Math.random() * 6) + 1;
+        canvas.children[randomNumber - 1].className = "character thief";
+        canvas.children[randomNumber - 1].onclick = function() {
+                    stopTimer();
+                    alert("Thats Correct! "+ lapScore + " points");
+                }
+
 
         // Set next action button to stop
         document.getElementById("action-button").innerHTML = "Stop";
@@ -176,12 +196,10 @@
 
 <body>
     <div id="wrapper">
-        <div id="top-bar">Spot the odd person</div>
+        <div id="top-bar">Spot the odd person <span id="action-button" onclick="startTimer();">Start</span></div>
         <div id="canvas-wrapper">
             <div id="canvas">
-            <div class="character">
-                <span id="action-button" onclick="startTimer();">Start</span>
-            </div>
+            <div class="character">1</div>
             <div class="character">2</div>
             <div class="character">3</div>
             <div class="character">4</div>
