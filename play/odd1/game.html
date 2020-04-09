@@ -187,16 +187,36 @@
 
         // Check if it's the final round
         if (round == maxRounds) {
-            document.getElementById("action-button").innerHTML = "Final score " + totalScore + " points! Total time " + totalTimeSec + " seconds";
-            document.getElementById("action-button").onclick = "";
+            document.getElementById("action-button").innerHTML = "Final score " + totalScore + " points! Total time " + totalTimeSec + " seconds  |  RESET";
+            document.getElementById("action-button").onclick = resetGame;
             document.getElementById("action-button").className = "game-over";
         }
+    }
+
+    function resetGame(){
+
+        // Reset rounds
+        round = 0;
+        document.getElementById("round").innerHTML = round;
+
+        // Reset lap time
+        lapTimeSec = 0;
+        document.getElementById("lap-time-sec").innerHTML = lapTimeSec;
+
+        // Reset total score
+        totalScore = 0;
+        document.getElementById("total-score").innerHTML = totalScore;
+
+        // Reset action button
+        document.getElementById("action-button").innerHTML = "Start";
+        document.getElementById("action-button").onclick = startTimer;
+        document.getElementById("action-button").className = "start";
     }
 
     </script>
 </head>
 
-<body onload=" setTimeout( function(){ window.scrollTo(0, 1) }, 0); ">
+<body>
     <div id="wrapper">
         <div id="top-bar">Spot the odd person <span id="action-button" onclick="startTimer();">Start</span></div>
         <div id="canvas-wrapper">
