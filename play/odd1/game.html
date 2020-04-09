@@ -142,6 +142,7 @@
         canvas.children[randomNumber - 1].onclick = function() {
                     stopTimer();
                     alert("Thats Correct! "+ lapScore + " points");
+                    startTimer();
                 }
 
 
@@ -187,7 +188,7 @@
         document.getElementById("action-button").className = "start";
 
         // Check if it's the final round
-        if (round == maxRounds) {
+        if (round >= maxRounds) {
             document.getElementById("action-button").innerHTML = "Final score " + totalScore + " points! Total time " + totalTimeSec + " seconds  |  RESET";
             document.getElementById("action-button").onclick = resetGame;
             document.getElementById("action-button").className = "game-over";
