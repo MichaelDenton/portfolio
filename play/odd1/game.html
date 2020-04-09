@@ -5,6 +5,8 @@
     <title>Reaction time score</title>
     <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
 
     <style>
 
@@ -194,7 +196,7 @@
     </script>
 </head>
 
-<body>
+<body onload=" setTimeout( function(){ window.scrollTo(0, 1) }, 0); ">
     <div id="wrapper">
         <div id="top-bar">Spot the odd person <span id="action-button" onclick="startTimer();">Start</span></div>
         <div id="canvas-wrapper">
