@@ -103,7 +103,7 @@
 
     <script>
     var round = 0;
-    var maxRounds = 5;
+    var maxRounds = 10;
     var lapTime = 0;
     var lapTimeSec = 0;
     var totalTime = 0;
@@ -142,7 +142,7 @@
             stopTimer();
             document.getElementById("description").innerHTML = "Thats Correct! " + lapScore + " points";
 
-            if (round <= maxRounds) {
+            if (round < maxRounds) {
                 startTimer();
             }
 
@@ -164,7 +164,11 @@
 
         // Caculate Lap time in seconds
         lapTimeSec = (lapTime / 100).toFixed(2);
-        document.getElementById("lap-time-sec").innerHTML = lapTimeSec;
+
+        // Update total time 
+        totalTime++;
+        totalTimeSec = (totalTime / 100).toFixed(2);
+        document.getElementById("total-time-sec").innerHTML = totalTimeSec;
 
         // Caculate lap score
         var maxScore = 50;
@@ -179,10 +183,6 @@
         // Update total score 
         totalScore = totalScore + lapScore;
         document.getElementById("total-score").innerHTML = totalScore;
-
-        // Update total time 
-        totalTime = totalTime + lapTime;
-        totalTimeSec = (totalTime / 100).toFixed(2);
 
         // Set next action to start
         document.getElementById("action-button").innerHTML = "Start";
@@ -234,7 +234,7 @@
             </div>
             <div>
                 <span class="label">Timer</span>
-                <span class="value" id="lap-time-sec">0.00</span>
+                <span class="value" id="total-time-sec">0.00</span>
             </div>
             <div>
                 <span class="label">Score</span>
