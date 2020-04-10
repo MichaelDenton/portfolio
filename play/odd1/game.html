@@ -10,18 +10,15 @@
     <meta name="mobile-web-app-capable" content="yes">
 
     <style>
-
-        @font-face {
-    font-family: 'digital';
-    src: url('digitalfont.woff') format('woff');
+    @font-face {
+        font-family: 'digital';
+        src: url('digitalfont.woff') format('woff');
     }
-
     *,
     *:before,
     *:after {
         box-sizing: inherit;
     }
-
     html,
     body {
         margin: 0;
@@ -33,24 +30,21 @@
         color: white;
         font-variant-numeric: tabular-nums;
     }
-
-    #wrapper{
+    #wrapper {
         display: grid;
         grid-template-rows: 70px auto 80px;
         grid-row-gap: 10px;
         padding: 10px;
         height: 100vh;
     }
-
-    #top-bar{
+    #top-bar {
         display: grid;
         text-align: center;
         align-items: center;
-        background-color: rgba(255,255,255,0.08);
+        background-color: rgba(255, 255, 255, 0.08);
         border-radius: 5px;
     }
-
-    #canvas{
+    #canvas {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
@@ -59,7 +53,7 @@
         height: 100%
     }
     @media screen and (orientation: landscape) {
-         #canvas-wrapper{
+        #canvas-wrapper {
             display: flex;
             justify-content: center;
         }
@@ -69,7 +63,6 @@
             width: 100vh;
         }
     }
-
     .character {
         background: url('guest.jpg');
         background-size: cover;
@@ -80,8 +73,9 @@
     .character.thief {
         background: url('thief.jpg');
         background-size: cover;
+        background-position: center;
     }
-    #scoreboard{
+    #scoreboard {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-column-gap: 1px;
@@ -89,24 +83,22 @@
         border-radius: 5px;
         overflow: hidden;
     }
-    #scoreboard div{
-        background-color: rgba(255,255,255,0.08);
+    #scoreboard div {
+        background-color: rgba(255, 255, 255, 0.08);
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
-    #scoreboard .label{
+    #scoreboard .label {
         font-size: 12px;
         text-transform: uppercase;
         display: block;
         padding-bottom: 3px;
     }
-
-    #scoreboard .value{
+    #scoreboard .value {
         font-size: 36px;
-        font-family: 'digital' , monospace;
+        font-family: 'digital', monospace;
     }
-
     </style>
 
     <script>
@@ -119,6 +111,7 @@
     var lapScore = 0;
     var totalScore = 0;
     var timer;
+    var lastRandomNumber = 0;
 
     function startTimer() {
         // Reset the lap timer
@@ -130,21 +123,30 @@
 
         //Reset characters
         for (var index = 0; index < 6; index++) {
-        canvas.children[index].classList.remove('thief');
-        canvas.children[index].onclick = function() {
-                    alert("Wrong!")
-                }
+            canvas.children[index].classList.remove('thief');
+            canvas.children[index].onclick = function() {
+                alert("Wrong!")
+            }
         }
 
         // Set the random theif
+
         var randomNumber = Math.floor(Math.random() * 6) + 1;
+        while (randomNumber === lastRandomNumber) {
+            randomNumber = Math.floor(Math.random() * 6) + 1;
+        }
+        lastRandomNumber = randomNumber;
+
         canvas.children[randomNumber - 1].className = "character thief";
         canvas.children[randomNumber - 1].onclick = function() {
-                    stopTimer();
-                    alert("Thats Correct! "+ lapScore + " points");
-                    startTimer();
-                }
+            stopTimer();
+            document.getElementById("description").innerHTML = "Thats Correct! " + lapScore + " points";
 
+            if (round <= maxRounds) {
+                startTimer();
+            }
+
+        }
 
         // Set next action button to stop
         document.getElementById("action-button").innerHTML = "Stop";
@@ -192,44 +194,37 @@
             document.getElementById("action-button").innerHTML = "Final score " + totalScore + " points! Total time " + totalTimeSec + " seconds  |  RESET";
             document.getElementById("action-button").onclick = resetGame;
             document.getElementById("action-button").className = "game-over";
+
+            // Disable charaters
+            for (var index = 0; index < 6; index++) {
+                canvas.children[index].classList.remove('thief');
+                canvas.children[index].onclick = function() {
+                    alert("Game Over!")
+                }
+            }
+
         }
     }
 
-    function resetGame(){
-
-        // Reset rounds
-        round = 0;
-        document.getElementById("round").innerHTML = round;
-
-        // Reset lap time
-        lapTimeSec = 0;
-        document.getElementById("lap-time-sec").innerHTML = lapTimeSec;
-
-        // Reset total score
-        totalScore = 0;
-        document.getElementById("total-score").innerHTML = totalScore;
-
-        // Reset action button
-        document.getElementById("action-button").innerHTML = "Start";
-        document.getElementById("action-button").onclick = startTimer;
-        document.getElementById("action-button").className = "start";
+    function resetGame() {
+        location.reload();
     }
-
     </script>
 </head>
 
 <body>
     <div id="wrapper">
-        <div id="top-bar">Spot the odd person <span id="action-button" onclick="startTimer();">Start</span></div>
+        <div id="top-bar"><span id="description">Spot the odd person</span><span id="action-button" onclick="startTimer();">Start</span>
+        </div>
         <div id="canvas-wrapper">
             <div id="canvas">
-            <div class="character">1</div>
-            <div class="character">2</div>
-            <div class="character">3</div>
-            <div class="character">4</div>
-            <div class="character">5</div>
-            <div class="character">6</div>
-        </div>
+                <div class="character">1</div>
+                <div class="character">2</div>
+                <div class="character">3</div>
+                <div class="character">4</div>
+                <div class="character">5</div>
+                <div class="character">6</div>
+            </div>
         </div>
 
         <div id="scoreboard">
