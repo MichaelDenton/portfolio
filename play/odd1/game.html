@@ -70,7 +70,7 @@
         border-radius: 5px;
         /* display: none; */
     }
-    .character.thief {
+    .character.target {
         background: url('thief.jpg');
         background-size: cover;
         background-position: center;
@@ -80,8 +80,26 @@
     }
 
     .character.right{
-        border: 5px solid green;
+        border: 5px solid blue;
     }
+
+    .character:not(.target).hide {
+      background-color: grey;
+      animation-name: fade;
+      animation-duration: 1s;
+    }
+
+    .character.hidden{
+        opacity: 0.2;
+    }
+
+@keyframes fade {
+  0%   {background-color: lightblue; opacity: 0.8;}
+
+  80%  {background-color: lightblue; opacity: 0.2;transform: scale(1);}
+
+  100% {background-color: lightblue; opacity: 0.0; transform: scale(0.1);}
+}
 
     #scoreboard {
         display: grid;
@@ -122,12 +140,57 @@
     var lastRandomNumber = 0;
 
 
-    // Event Listener - To see if a character is clicked (outline it blue)
+
+    function loadGame(){
+        // Add 'on click' event
+        var characters = document.getElementsByClassName("character");
+        for (var i = 0; i < characters.length; i++) {
+            characters[i].addEventListener("click", characterClicked);
+        }
+
+        function characterClicked(){
+            // Clicked the target 
+            if (this.classList.contains("target")){
+                this.classList.add ("right");
+                document.getElementById("description").innerHTML = "Thats Correct! " + lapScore + " points";
+
+                stopTimer();
+                endRound();
+            
+                // Start another round after 1 sec 
+                if (round < maxRounds) {
+                    setTimeout (startRound, 1000);
+                }
+
+            // Clicked NOT target
+            } else {
+                this.classList.add ("wrong");
+            }
+        }
+    }
+
+    function endRound(){
+        // Hide characters
+        var characters = document.getElementsByClassName("character");
+        for (var i = 0; i < characters.length; i++) {
+            characters[i].classList.add("hide");
+        }
+
+          // Show characters after 1 sec  
+          setTimeout (show, 1000)
+          function show(){
+                for (var i = 0; i < characters.length; i++) {
+                    characters[i].classList.remove("hide");
 
 
 
 
-    function startTimer() {
+                }
+          }
+    }
+
+
+    function startRound() {
         // Reset the lap timer
         lapTime = 0;
 
@@ -137,13 +200,9 @@
 
         //Reset characters
         for (var index = 0; index < 6; index++) {
-            canvas.children[index].classList.remove('thief');
+            canvas.children[index].classList.remove('target');
             canvas.children[index].classList.remove('wrong');
-
-            canvas.children[index].onclick = function() {
-              //  alert("Wrong!");
-
-            }
+            canvas.children[index].classList.remove('right');
         }
 
         // Set the random theif
@@ -154,21 +213,7 @@
         }
         lastRandomNumber = randomNumber;
 
-        canvas.children[randomNumber - 1].className = "character thief";
-        canvas.children[randomNumber - 1].onclick = function() {
-            stopTimer();
-            document.getElementById("description").innerHTML = "Thats Correct! " + lapScore + " points";
-
-            if (round < maxRounds) {
-                startTimer();
-            }
-
-        }
-
-        // Set next action button to stop
-        document.getElementById("action-button").innerHTML = "Stop";
-        document.getElementById("action-button").onclick = stopTimer;
-        document.getElementById("action-button").className = "stop";
+        canvas.children[randomNumber - 1].className = "character target";
 
         // Set the timer going (every 10 milliseconds)
         timer = setInterval(runTimer, 10);
@@ -203,7 +248,7 @@
 
         // Set next action to start
         document.getElementById("action-button").innerHTML = "Start";
-        document.getElementById("action-button").onclick = startTimer;
+        document.getElementById("action-button").onclick = startRound;
         document.getElementById("action-button").className = "start";
 
         // Check if it's the final round
@@ -214,9 +259,10 @@
 
             // Disable charaters
             for (var index = 0; index < 6; index++) {
-                //canvas.children[index].classList.remove('thief');
+                canvas.children[index].classList.remove('target', 'right');
+                canvas.children[index].classList.add("hidden");
                 canvas.children[index].onclick = function() {
-                    alert("Game Over!")
+                    alert("Game Over!");
                 }
             }
 
@@ -231,7 +277,7 @@
 
 <body>
     <div id="wrapper">
-        <div id="top-bar"><span id="description">Spot the odd person</span><span id="action-button" onclick="startTimer();">Start</span>
+        <div id="top-bar"><span id="description">Spot the odd person</span><span id="action-button" onclick="startRound();">Start</span>
         </div>
         <div id="canvas-wrapper">
             <div id="canvas">
@@ -261,24 +307,7 @@
     </div>
 
 
-<script>
-// Event Listener - To see if a character is clicked (outline it blue)
-
-var characters = document.getElementsByClassName("character");
-
-// Loop through the buttons and add the active class to the current/clicked button
-for (var i = 0; i < characters.length; i++) {
-    characters[i].addEventListener("click", function() {
-
-        if (this.classList.contains("theif")){
-            this.classList.add ("right");
-        } else {
-            this.classList.add ("wrong");
-        }
-        
-    });
-}
-</script>
+<script>loadGame();</script>
 
 
 </body>

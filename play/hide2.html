@@ -9,6 +9,22 @@
   background-color: lightblue;
   border-radius: 5px;
 }
+
+
+#tile.hide {
+  background-color: grey;
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+@keyframes fade {
+  0%   {background-color: lightblue; opacity: 0.8;}
+
+  50%  {background-color: lightblue; opacity: 0.2;transform: scale(1);}
+
+  100% {background-color: lightblue; opacity: 0.0; transform: scale(0.1);}
+}
+
 </style>
 
 </head>
@@ -24,12 +40,12 @@ function hideShow() {
   var x = document.getElementById("tile");
 
   // Hide it
-  x.style.display = "none";
+  x.classList.add("hide");
 
   // Show it after 1 sec
-  setTimeout (show, 1000)
+  setTimeout (show, 1000);
   function show(){
-    x.style.display = "block";
+  x.classList.remove("hide");
   }
 
 }
