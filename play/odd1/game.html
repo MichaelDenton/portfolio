@@ -75,6 +75,14 @@
         background-size: cover;
         background-position: center;
     }
+    .character.wrong{
+        border: 5px solid red;
+    }
+
+    .character.right{
+        border: 5px solid green;
+    }
+
     #scoreboard {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -113,6 +121,12 @@
     var timer;
     var lastRandomNumber = 0;
 
+
+    // Event Listener - To see if a character is clicked (outline it blue)
+
+
+
+
     function startTimer() {
         // Reset the lap timer
         lapTime = 0;
@@ -124,8 +138,11 @@
         //Reset characters
         for (var index = 0; index < 6; index++) {
             canvas.children[index].classList.remove('thief');
+            canvas.children[index].classList.remove('wrong');
+
             canvas.children[index].onclick = function() {
-                alert("Wrong!")
+              //  alert("Wrong!");
+
             }
         }
 
@@ -197,7 +214,7 @@
 
             // Disable charaters
             for (var index = 0; index < 6; index++) {
-                canvas.children[index].classList.remove('thief');
+                //canvas.children[index].classList.remove('thief');
                 canvas.children[index].onclick = function() {
                     alert("Game Over!")
                 }
@@ -242,6 +259,28 @@
             </div>
         </div>
     </div>
+
+
+<script>
+// Event Listener - To see if a character is clicked (outline it blue)
+
+var characters = document.getElementsByClassName("character");
+
+// Loop through the buttons and add the active class to the current/clicked button
+for (var i = 0; i < characters.length; i++) {
+    characters[i].addEventListener("click", function() {
+
+        if (this.classList.contains("theif")){
+            this.classList.add ("right");
+        } else {
+            this.classList.add ("wrong");
+        }
+        
+    });
+}
+</script>
+
+
 </body>
 
 
