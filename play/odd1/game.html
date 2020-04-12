@@ -37,7 +37,7 @@
         padding: 10px;
         height: 100vh;
     }
-    #top-bar {
+    #action-bar {
         display: grid;
         text-align: center;
         align-items: center;
@@ -68,6 +68,11 @@
         background-size: cover;
         background-position: center;
         border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        position: relative;
         /* display: none; */
     }
     .character.target {
@@ -76,30 +81,61 @@
         background-position: center;
     }
     .character.wrong{
-        border: 5px solid red;
+        box-shadow: inset 0px 0px 0px 5px rgba(208,2,26,1);
+    }
+
+    .character.wrong:before{
+        content : "";
+        display: block;
+        background-color: #D0021B;
+        opacity : 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    .character.wrong .text,
+    .character.right .text{
+        z-index: 1;
     }
 
     .character.right{
-        border: 5px solid blue;
+        box-shadow: inset 0px 0px 0px 5px #1DB955;
+    }
+
+    .character.right:before{
+        content : "";
+        display: block;
+        background-color: #1DB955;
+        opacity : 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
     }
 
     .character:not(.target).hide {
-      background-color: grey;
       animation-name: fade;
       animation-duration: 1s;
     }
 
     .character.hidden{
-        opacity: 0.2;
+        background-color: rgba(255, 255, 255, 0.08);
+        background-image: none;
     }
 
-@keyframes fade {
-  0%   {background-color: lightblue; opacity: 0.8;}
+    @keyframes fade {
+      0%   {background-color: lightblue; opacity: 0.8;}
 
-  80%  {background-color: lightblue; opacity: 0.2;transform: scale(1);}
+      80%  {background-color: lightblue; opacity: 0.2;transform: scale(1);}
 
-  100% {background-color: lightblue; opacity: 0.0; transform: scale(0.1);}
-}
+      100% {background-color: lightblue; opacity: 0.0; transform: scale(0.1);}
+    }
 
     #scoreboard {
         display: grid;
@@ -127,81 +163,92 @@
     }
     </style>
 
-    <script>
-    var round = 0;
-    var maxRounds = 2;
-    var lapTime = 0;
-    var lapTimeSec = 0;
-    var totalTime = 0;
-    var totalTimeSec = 0;
-    var lapScore = 0;
-    var totalScore = 0;
-    var penalty = -10;
-    var timer;
+<script>
+var round = 0;
+var maxRounds = 4;
+var lapTime = 0;
+var lapTimeSec = 0;
+var totalTime = 0;
+var totalTimeSec = 0;
+var lapScore = 0;
+var totalScore = 0;
+var penalty = -10;
+var timer;
+var gameActive = false;
 
-    var characters = document.getElementsByClassName("character");
+var characters = document.getElementsByClassName("character");
 
-    function loadGame(){
-        // Add 'on click' event
-        for (var i = 0; i < characters.length; i++) {
-            characters[i].addEventListener("click", characterClicked);
-        }
-
-        function characterClicked(){
-            // Clicked the target 
-            if (this.classList.contains("target")){
-                this.classList.add ("right");
-
-                // Update score
-                totalScore = totalScore +lapScore;
-                document.getElementById("total-score").innerHTML = totalScore;
-
-                // End the round
-                endRound();
-            
-                // Start another round after 1 sec 
-                if (round < maxRounds) {
-                    setTimeout (startRound, 1000);
-                }
-
-            // Clicked NOT target
-            } else {
-                this.classList.add ("wrong");
-                 // Apply penalty
-                totalScore = totalScore - penalty;
-                document.getElementById("total-score").innerHTML = totalScore;
-            }
-        }
+function loadGame(){
+    // Add 'on click' event to characters
+    for (var i = 0; i < characters.length; i++) {
+        characters[i].addEventListener("click", characterClicked);
     }
+}
 
-    function endRound(){
-        clearInterval(timer);
 
-        for (var i = 0; i < characters.length; i++) {
-            characters[i].classList.add("hide");
+function startGame(){
+    startRound();
+    document.getElementById("action-button").innerHTML = "";
+    document.getElementById("action-button").onclick = function() { location.reload(); }
+}
+
+
+function characterClicked(){
+
+    // If game is active
+    if (gameActive) {
+
+        // Player clicked target 
+        if (this.classList.contains("target")){
+            this.classList.add ("right");
+
+            // Show speed score
+            this.getElementsByClassName("text")[0].innerHTML = "+" + lapScore;
+
+            // Update total score
+            totalScore = totalScore +lapScore;
+            document.getElementById("total-score").innerHTML = totalScore;
+
+            // End the round
+            endRound();
+        
+            // Start another round after 1 sec 
+            setTimeout (startRound, 1000);
         }
 
-        // Check if it's the final round
-        if (round >= maxRounds) {
-            document.getElementById("action-button").innerHTML = "Final score " + totalScore;
-            document.getElementById("action-button").onclick = function() {
-                    location.reload();
-                }
-
-            // Disable charaters
-            for (var i = 0; i < characters.length; i++) {
-                characters[i].classList.remove('target', 'right');
-                characters[i].classList.add("hidden");
-            }
+        // Click was NOT target
+        else {
+            this.classList.add ("wrong");
+             // Apply penalty
+            totalScore = totalScore + penalty;
+            document.getElementById("total-score").innerHTML = totalScore;
+            this.getElementsByClassName("text")[0].innerHTML = penalty;
         }
+    } 
+}
+
+function endRound(){
+    clearInterval(timer);
+    gameActive = false;
+
+    for (var i = 0; i < characters.length; i++) {
+        characters[i].classList.add("hide");
     }
+}
 
 
-    function startRound() {
+function startRound() {
+
+    // IF the game is active
+    if (round < maxRounds) {
+
+        //Set game to active
+        gameActive = true;
 
         //Reset characters
         for (var i = 0; i < characters.length; i++) {
             characters[i].classList.remove('hide', 'hidden', 'target','wrong','right' );
+            characters[i].getElementsByClassName("text")[0].innerHTML = "";
         }
 
         // Reset the lap timer
@@ -211,7 +258,6 @@
         round++;
         document.getElementById("round").innerHTML = round;
 
-
         // Set the random theif
         var randomNumber = Math.floor(Math.random() * 6) + 1;
         canvas.children[randomNumber - 1].className = "character target";
@@ -220,45 +266,43 @@
         timer = setInterval(runTimer, 10);
     }
 
-    function runTimer() {
-        // Update lap time
-        lapTime++;
-        lapTimeSec = (lapTime / 100).toFixed(2);
+    // Game over
+    else {
+        document.getElementById("action-button").innerHTML = "GAME OVER! Final score " + totalScore;
+        document.getElementById("action-button").onclick = function() { location.reload(); }
 
-        // Update total time 
-        totalTime++;
-        totalTimeSec = (totalTime / 100).toFixed(2);
-        document.getElementById("total-time-sec").innerHTML = totalTimeSec;
-
-        // Caculate lap score
-        var maxScore = 50;
-        var baseline = 80;
-        lapScore = Math.round((maxScore * baseline) / (lapTime + baseline));
+        // Disable charaters
+        for (var i = 0; i < characters.length; i++) {
+            characters[i].classList.remove('hide', 'hidden', 'target','wrong','right' );
+            characters[i].getElementsByClassName("text")[0].innerHTML = "";
+            characters[i].classList.add("hidden");
+        }
     }
+}
 
-    </script>
+function runTimer() {
+    // Update lap time
+    lapTime++;
+
+    // Update total time 
+    totalTime++;
+    totalTimeSec = (totalTime / 100).toFixed(2);
+    document.getElementById("total-time-sec").innerHTML = totalTimeSec;
+
+    // Caculate lap score
+    var maxScore = 50;
+    var baseline = 80;
+    lapScore = Math.round((maxScore * baseline) / (lapTime + baseline));
+}
+
+</script>
 </head>
 
 <body>
     <div id="wrapper">
-        <div id="top-bar"><span id="description">Spot the odd person</span><span id="action-button" onclick="startRound();">Start</span>
-        </div>
-        <div id="canvas-wrapper">
-            <div id="canvas">
-                <div class="character hidden">1</div>
-                <div class="character hidden">2</div>
-                <div class="character hidden">3</div>
-                <div class="character hidden">4</div>
-                <div class="character hidden">5</div>
-                <div class="character hidden">6</div>
-            </div>
-        </div>
+
 
         <div id="scoreboard">
-            <div>
-                <span class="label">Round</span>
-                <span class="value" id="round">0</span>
-            </div>
             <div>
                 <span class="label">Timer</span>
                 <span class="value" id="total-time-sec">0.00</span>
@@ -267,7 +311,26 @@
                 <span class="label">Score</span>
                 <span class="value" id="total-score">0</span>
             </div>
+            <div>
+                <span class="label">Round</span>
+                <span class="value" id="round">0</span>
+            </div>
         </div>
+
+        <div id="canvas-wrapper">
+            <div id="canvas">
+                <div class="character hidden"><span class="text"></span></div>
+                <div class="character hidden"><span class="text"></span></div>
+                <div class="character hidden"><span class="text"></span></div>
+                <div class="character hidden"><span class="text"></span></div>
+                <div class="character hidden"><span class="text"></span></div>
+                <div class="character hidden"><span class="text"></span></div>
+            </div>
+        </div>
+
+        <div id="action-bar"><span id="action-button" onclick="startGame();">Start Game</span>
+        </div>
+
     </div>
 
 
