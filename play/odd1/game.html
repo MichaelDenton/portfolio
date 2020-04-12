@@ -139,11 +139,10 @@
     var timer;
     var lastRandomNumber = 0;
 
-
+    var characters = document.getElementsByClassName("character");
 
     function loadGame(){
         // Add 'on click' event
-        var characters = document.getElementsByClassName("character");
         for (var i = 0; i < characters.length; i++) {
             characters[i].addEventListener("click", characterClicked);
         }
@@ -171,26 +170,21 @@
 
     function endRound(){
         // Hide characters
-        var characters = document.getElementsByClassName("character");
+        
         for (var i = 0; i < characters.length; i++) {
             characters[i].classList.add("hide");
         }
 
-          // Show characters after 1 sec  
-          setTimeout (show, 1000)
-          function show(){
-                for (var i = 0; i < characters.length; i++) {
-                    characters[i].classList.remove("hide");
-
-
-
-
-                }
-          }
     }
 
 
     function startRound() {
+
+        //Reset characters
+        for (var i = 0; i < characters.length; i++) {
+            characters[i].classList.remove('hide', 'hidden', 'target','wrong','right' );
+        }
+
         // Reset the lap timer
         lapTime = 0;
 
@@ -198,16 +192,11 @@
         round++;
         document.getElementById("round").innerHTML = round;
 
-        //Reset characters
-        for (var index = 0; index < 6; index++) {
-            canvas.children[index].classList.remove('target');
-            canvas.children[index].classList.remove('wrong');
-            canvas.children[index].classList.remove('right');
-        }
 
         // Set the random theif
 
         var randomNumber = Math.floor(Math.random() * 6) + 1;
+        
         while (randomNumber === lastRandomNumber) {
             randomNumber = Math.floor(Math.random() * 6) + 1;
         }
@@ -281,12 +270,12 @@
         </div>
         <div id="canvas-wrapper">
             <div id="canvas">
-                <div class="character">1</div>
-                <div class="character">2</div>
-                <div class="character">3</div>
-                <div class="character">4</div>
-                <div class="character">5</div>
-                <div class="character">6</div>
+                <div class="character hidden">1</div>
+                <div class="character hidden">2</div>
+                <div class="character hidden">3</div>
+                <div class="character hidden">4</div>
+                <div class="character hidden">5</div>
+                <div class="character hidden">6</div>
             </div>
         </div>
 
