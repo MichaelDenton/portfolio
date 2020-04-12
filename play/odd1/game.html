@@ -30,6 +30,39 @@
         color: white;
         font-variant-numeric: tabular-nums;
     }
+
+    #start-screen{
+        position: absolute;
+        background-color: #1DB955;
+        opacity: 90%;
+        left: 20px;
+        right: 20px;
+        top: 20px;
+        bottom: 20px;
+        border-radius: 5px;
+        z-index: 2;
+        display: grid;
+        text-align: center;
+        align-items: center;
+    }
+
+    #end-screen{
+        position: absolute;
+        background-color: #D0021B;
+        opacity: 90%;
+        left: 20px;
+        right: 20px;
+        top: 20px;
+        bottom: 20px;
+        border-radius: 5px;
+        z-index: 2;
+        display: flex;
+        display: none;
+        flex-direction: column;
+        text-align: center;
+        justify-content:center;
+    }
+
     #wrapper {
         display: grid;
         grid-template-rows: 70px auto 80px;
@@ -81,7 +114,7 @@
         background-position: center;
     }
     .character.wrong{
-        box-shadow: inset 0px 0px 0px 5px rgba(208,2,26,1);
+        box-shadow: inset 0px 0px 0px 5px #D0021B;
     }
 
     .character.wrong:before{
@@ -187,8 +220,22 @@ function loadGame(){
 
 
 function startGame(){
+    //Hide the start screen
+    document.getElementById("start-screen").style.display = "none";
+
+    //Hide the end screen (incase playing again)
+    document.getElementById("end-screen").style.display = "none";
+
+    // Reset game values
+    round = 0;
+
+    totalTime = 0;
+
+    totalScore = 0;
+    document.getElementById("total-score").innerHTML = totalScore;
+
     startRound();
-    document.getElementById("action-button").innerHTML = "";
+ 
     document.getElementById("action-button").onclick = function() { location.reload(); }
 }
 
@@ -268,8 +315,10 @@ function startRound() {
 
     // Game over
     else {
-        document.getElementById("action-button").innerHTML = "GAME OVER! Final score " + totalScore;
-        document.getElementById("action-button").onclick = function() { location.reload(); }
+
+        //Show the end screen
+        document.getElementById("end-screen").style.display = "flex";
+        document.getElementById("end-score").innerHTML = "Final score " + totalScore;
 
         // Disable charaters
         for (var i = 0; i < characters.length; i++) {
@@ -299,8 +348,15 @@ function runTimer() {
 </head>
 
 <body>
-    <div id="wrapper">
 
+    <div id="start-screen"><span id="start-button" onclick="startGame()">Start Game</span></div>
+    <div id="end-screen">
+        <span>Game over</span>
+        <span id="end-score"></span>
+        <span onClick="startGame()">Play Again</span>
+    </div>
+
+    <div id="wrapper">
 
         <div id="scoreboard">
             <div>
@@ -328,8 +384,7 @@ function runTimer() {
             </div>
         </div>
 
-        <div id="action-bar"><span id="action-button" onclick="startGame();">Start Game</span>
-        </div>
+        <div></div>
 
     </div>
 
