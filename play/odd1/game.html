@@ -129,15 +129,15 @@
 
     <script>
     var round = 0;
-    var maxRounds = 10;
+    var maxRounds = 2;
     var lapTime = 0;
     var lapTimeSec = 0;
     var totalTime = 0;
     var totalTimeSec = 0;
     var lapScore = 0;
     var totalScore = 0;
+    var penalty = -10;
     var timer;
-    var lastRandomNumber = 0;
 
     var characters = document.getElementsByClassName("character");
 
@@ -151,9 +151,12 @@
             // Clicked the target 
             if (this.classList.contains("target")){
                 this.classList.add ("right");
-                document.getElementById("description").innerHTML = "Thats Correct! " + lapScore + " points";
 
-                stopTimer();
+                // Update score
+                totalScore = totalScore +lapScore;
+                document.getElementById("total-score").innerHTML = totalScore;
+
+                // End the round
                 endRound();
             
                 // Start another round after 1 sec 
@@ -164,17 +167,33 @@
             // Clicked NOT target
             } else {
                 this.classList.add ("wrong");
+                 // Apply penalty
+                totalScore = totalScore - penalty;
+                document.getElementById("total-score").innerHTML = totalScore;
             }
         }
     }
 
     function endRound(){
-        // Hide characters
-        
+        clearInterval(timer);
+
         for (var i = 0; i < characters.length; i++) {
             characters[i].classList.add("hide");
         }
 
+        // Check if it's the final round
+        if (round >= maxRounds) {
+            document.getElementById("action-button").innerHTML = "Final score " + totalScore;
+            document.getElementById("action-button").onclick = function() {
+                    location.reload();
+                }
+
+            // Disable charaters
+            for (var i = 0; i < characters.length; i++) {
+                characters[i].classList.remove('target', 'right');
+                characters[i].classList.add("hidden");
+            }
+        }
     }
 
 
@@ -194,26 +213,16 @@
 
 
         // Set the random theif
-
         var randomNumber = Math.floor(Math.random() * 6) + 1;
-        
-        while (randomNumber === lastRandomNumber) {
-            randomNumber = Math.floor(Math.random() * 6) + 1;
-        }
-        lastRandomNumber = randomNumber;
-
         canvas.children[randomNumber - 1].className = "character target";
 
         // Set the timer going (every 10 milliseconds)
         timer = setInterval(runTimer, 10);
     }
 
-
     function runTimer() {
-        // Update the lap time
+        // Update lap time
         lapTime++;
-
-        // Caculate Lap time in seconds
         lapTimeSec = (lapTime / 100).toFixed(2);
 
         // Update total time 
@@ -227,40 +236,6 @@
         lapScore = Math.round((maxScore * baseline) / (lapTime + baseline));
     }
 
-
-    function stopTimer() {
-        clearInterval(timer);
-
-        // Update total score 
-        totalScore = totalScore + lapScore;
-        document.getElementById("total-score").innerHTML = totalScore;
-
-        // Set next action to start
-        document.getElementById("action-button").innerHTML = "Start";
-        document.getElementById("action-button").onclick = startRound;
-        document.getElementById("action-button").className = "start";
-
-        // Check if it's the final round
-        if (round >= maxRounds) {
-            document.getElementById("action-button").innerHTML = "Final score " + totalScore + " points! Total time " + totalTimeSec + " seconds  |  RESET";
-            document.getElementById("action-button").onclick = resetGame;
-            document.getElementById("action-button").className = "game-over";
-
-            // Disable charaters
-            for (var index = 0; index < 6; index++) {
-                canvas.children[index].classList.remove('target', 'right');
-                canvas.children[index].classList.add("hidden");
-                canvas.children[index].onclick = function() {
-                    alert("Game Over!");
-                }
-            }
-
-        }
-    }
-
-    function resetGame() {
-        location.reload();
-    }
     </script>
 </head>
 
