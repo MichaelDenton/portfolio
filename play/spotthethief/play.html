@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Spot the theif</title>
+    <title>Spot the thief</title>
     <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -384,7 +384,7 @@ function startRound() {
         round++;
         document.getElementById("round").innerHTML = round;
 
-        // Set the random theif
+        // Set the random thief
         var randomNumber = Math.floor(Math.random() * 6) + 1;
         canvas.children[randomNumber - 1].className = "character target";
 
