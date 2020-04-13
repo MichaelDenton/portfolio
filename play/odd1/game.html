@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Odd Game</title>
+    <title>Spot the theif</title>
     <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,42 +34,104 @@
     #start-screen{
         position: absolute;
         background-color: #1DB955;
-        opacity: 90%;
-        left: 20px;
-        right: 20px;
-        top: 20px;
-        bottom: 20px;
-        border-radius: 5px;
+
+        background: linear-gradient(310deg, #f5af19, #0076FF, #f12711 ); 
+        background-size: 600% 600%;
+        animation: BackgroundAnimation 30s ease infinite;
+
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
         z-index: 2;
         display: flex;
         flex-direction: column;
         text-align: center;
         justify-content:center;
+        align-items: center;
+        padding: 20px;
     }
 
     #end-screen{
         position: absolute;
-        background-color: #D0021B;
-        opacity: 90%;
-        left: 20px;
-        right: 20px;
-        top: 20px;
-        bottom: 20px;
-        border-radius: 5px;
+        background: linear-gradient(310deg, #f5af19, #0076FF, #f12711 ); 
+        background-size: 600% 600%;
+        animation: BackgroundAnimation 30s ease infinite;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
         z-index: 2;
         display: flex;
-        display: none;
         flex-direction: column;
         text-align: center;
         justify-content:center;
+        align-items: center;
+        padding: 20px;
+
+        display: none;
     }
+
+@keyframes BackgroundAnimation { 
+    0%{background-position:0% 14%}
+    50%{background-position:100% 87%}
+    100%{background-position:0% 14%}
+}
+
+.sparkle{
+    position: absolute;
+    background-image: url(sparkle.svg);
+    width: 100%;
+    height: 100%;
+    background-position: 50% calc(50% - 50px);
+    background-repeat: no-repeat;
+    opacity: 0.1;
+}
+
+.screen-title{
+    font-size: 34px;
+    margin-bottom: 60px;
+}
+#end-score{
+    font-size: 100px;
+    line-height: 100px;
+}
+#end-score-sub{
+    font-size: 24px;
+}
+#end-description{
+    font-size: 18px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    max-width: 270px;
+}
+
+button.screen-play-button{
+  background-color: white;
+  border: none;
+  color: black;
+  mix-blend-mode: screen;
+  font-family: 'McLaren', sans-serif;
+  font-size: 18px;
+  padding: 15px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
     #wrapper {
         display: grid;
-        grid-template-rows: 70px auto 80px;
+        grid-template-rows: 70px auto 20px;
         grid-row-gap: 10px;
         padding: 10px;
         height: 100vh;
+
+        background: linear-gradient(310deg, #f5af19, #0076FF, #f12711 ); 
+        background-size: 600% 600%;
+        animation: BackgroundAnimation 30s ease infinite;
     }
     #action-bar {
         display: grid;
@@ -105,7 +167,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 40px;
         position: relative;
         /* display: none; */
     }
@@ -134,6 +195,18 @@
     .character.wrong .text,
     .character.right .text{
         z-index: 1;
+        text-align: center;
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .character.wrong .text::after,
+    .character.right .text::after{
+        content: "POINTS";
+        font-size: 12px;
+        line-height: 12px;
+        display: block;
+        margin-top: 5px;
     }
 
     .character.right{
@@ -199,7 +272,8 @@
 
 <script>
 var round = 0;
-var maxRounds = 4;
+var mistakes = 0;
+var maxRounds = 10;
 var lapTime = 0;
 var lapTimeSec = 0;
 var totalTime = 0;
@@ -231,13 +305,14 @@ function startGame(){
     round = 0;
 
     totalTime = 0;
+    mistakes = 0;
 
     totalScore = 0;
     document.getElementById("total-score").innerHTML = totalScore;
 
     startRound();
  
-    document.getElementById("action-button").onclick = function() { location.reload(); }
+
 }
 
 
@@ -267,6 +342,9 @@ function characterClicked(){
         // Click was NOT target
         else {
             this.classList.add ("wrong");
+
+            mistakes = mistakes +1;
+
              // Apply penalty
             totalScore = totalScore + penalty;
             document.getElementById("total-score").innerHTML = totalScore;
@@ -319,7 +397,8 @@ function startRound() {
 
         //Show the end screen
         document.getElementById("end-screen").style.display = "flex";
-        document.getElementById("end-score").innerHTML = "Final score " + totalScore;
+        document.getElementById("end-score").innerHTML = totalScore;
+        document.getElementById("end-description").innerHTML = "You completed " + maxRounds +  " rounds in " + totalTimeSec + "  seconds with " + mistakes + " mistakes.";
 
         // Disable charaters
         for (var i = 0; i < characters.length; i++) {
@@ -349,12 +428,18 @@ function runTimer() {
 </head>
 
 <body>
+    <div id="start-screen">
+        <span class="screen-title">Spot the theif</span>
+        <button class="screen-play-button" onclick="startGame()">Start Game</button>
+    </div>
 
-    <div id="start-screen"><span id="start-button" onclick="startGame()">Start Game</span></div>
     <div id="end-screen">
-        <span>Game over</span>
-        <span id="end-score"></span>
-        <span onClick="startGame()">Play Again</span>
+        <div class="sparkle"></div>
+        <span class="screen-title">FINAL SCORE</span>
+        <span id="end-score">-</span>
+        <span id="end-score-sub" >POINTS</span>
+        <div id="end-description"> - </div>
+        <button class="screen-play-button" onClick="startGame()">Play Again</button>
     </div>
 
     <div id="wrapper">
