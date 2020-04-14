@@ -1,6 +1,6 @@
 
 //  Adjustable Variables 
-var maxRounds = 6;
+var maxRounds = 2;
 var penalty = -10;
 var alexCount = 50;
 var notCount = 50;
@@ -100,6 +100,13 @@ function startRound() {
 
         //Set game to active
         gameActive = true;
+
+
+        // Generate random array (6 digets between 1 and 52)
+
+
+
+
 
         //Reset characters
         for (var i = 0; i < characters.length; i++) {

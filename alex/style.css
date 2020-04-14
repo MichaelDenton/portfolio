@@ -155,7 +155,16 @@ html, body {
 #end-score {
     font-size: 100px;
     line-height: 100px;
+    animation: endscore 1s infinite;
 }
+
+
+@keyframes endscore {
+    0%,100% { transform: scale(1);}
+    50% {transform: scale(1.1);}
+}
+
+
 #end-score-sub {
     font-size: 24px;
 }
@@ -234,10 +243,15 @@ button.screen-play-button {
     align-items: center;
     justify-content: center;
     position: relative;
-    /* display: none; */
-    animation: zoom 0.2s ease infinite;
+    animation: zoom 0.2s ease infinite; 
 }
 
+@keyframes zoom {
+    0% {transform: rotate(-1);}
+    50% {transform: rotate(1deg);}
+}
+
+/*
 .character:nth-child(1){
     animation-delay: 0.25s, 0s;
 }
@@ -259,11 +273,9 @@ button.screen-play-button {
 .character:nth-child(6){
     animation-delay: 1.5s, 0s;
 }
+*/
 
-@keyframes zoom {
-    0% { transform: scale(1); transform: rotate(-2);}
-    50% {transform: scale(0.9); transform: rotate(2deg);}
-}
+
 
 
 .character.target {
@@ -286,12 +298,19 @@ button.screen-play-button {
     height: 100%;
     border-radius: 5px;
 }
-.character.wrong .text, .character.right .text {
+.character.wrong .text,
+.character.right .text {
     z-index: 1;
     text-align: center;
     font-size: 40px;
     line-height: 40px;
+    animation: scorepoints 1s ;
 }
+@keyframes scorepoints {
+    0%,100% { transform: scale(1);}
+    50% {transform: scale(2);}
+}
+
 .character.wrong .text::after, .character.right .text::after {
     content: "POINTS";
     font-size: 12px;
