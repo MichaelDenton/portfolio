@@ -96,8 +96,8 @@ html, body {
 }
 #cutout-face {
     position: absolute;
-    top: calc(50vh - 210px);
-    left: calc(50vw - 45px);
+    top: calc(50% - 210px);
+    left: calc(50% - 45px);
     width: 100px;
     animation: nod .3s linear infinite;
     animation-direction: alternate;
