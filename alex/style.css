@@ -59,11 +59,20 @@ html, body {
     }
 }
 #start-title {
-    font-size: 100px;
-    line-height: 100px;
+    font-size: 80px;
+    line-height: 80px;
     margin-bottom: 0px;
-    max-width: 270px;
+    max-width: 340px;
 }
+
+#start-title .smaller{
+    font-size: 80%;
+}
+
+#start-title .bigger{
+    font-size: 140%;
+}
+
 #start-description {
     font-size: 18px;
     margin-top: 40px;
@@ -96,7 +105,7 @@ html, body {
 }
 #cutout-face {
     position: absolute;
-    top: calc(50% - 210px);
+    top: calc(50% - 150px);
     left: calc(50% - 45px);
     width: 100px;
     animation: nod .3s linear infinite;

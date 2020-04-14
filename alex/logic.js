@@ -1,9 +1,9 @@
 
 //  Adjustable Variables 
-var maxRounds = 2;
+var maxRounds = 6;
 var penalty = -10;
-var alexCount = 50;
-var notCount = 50;
+var alexCount = 52;
+var notCount = 66;
 
 //  Game Variables
 var round = 0;
@@ -101,21 +101,6 @@ function startRound() {
         //Set game to active
         gameActive = true;
 
-
-        // Generate random array (6 digets between 1 and 52)
-
-
-
-
-
-        //Reset characters
-        for (var i = 0; i < characters.length; i++) {
-            characters[i].classList.remove('hide', 'hidden', 'target', 'wrong', 'right');
-            characters[i].getElementsByClassName("text")[0].innerHTML = "";
-            var randomAlex = Math.floor(Math.random() * 52) + 1;
-            characters[i].style.backgroundImage = "url('alex/alex" + randomAlex + ".jpg')";
-        }
-
         // Reset lap timer
         lapTime = 0;
 
@@ -123,11 +108,30 @@ function startRound() {
         round++;
         document.getElementById("round").innerHTML = round;
 
+        // Shuffle the Alex Count
+        let alexCountShuffled =[]
+        while( alexCountShuffled.length < characters.length ){
+            let rnd = Math.floor(Math.random()* alexCount) + 1;
+            if(!alexCountShuffled.includes(rnd)){
+                alexCountShuffled.push(rnd);
+            }
+        }
+
+        //Reset characters
+        for (var i = 0; i < characters.length; i++) {
+            characters[i].classList.remove('hide', 'hidden', 'target', 'wrong', 'right');
+            characters[i].getElementsByClassName("text")[0].innerHTML = "";
+
+            // Assign the shuffled Alex count to the tiles 
+            characters[i].style.backgroundImage = "url('alex/alex" + alexCountShuffled[i] + ".jpg')";
+        }
+
         // Set the random target
-        var randomNumber = Math.floor(Math.random() * 6) + 1;
-        characters[randomNumber - 1].className = "character target";
-        var randomNotAlex = Math.floor(Math.random() * 66) + 1;
-        characters[randomNumber - 1].style.backgroundImage = "url('not/not" + randomNotAlex + ".jpg')";
+        var randomCharacter = Math.floor(Math.random() * characters.length );
+        characters[randomCharacter].className = "character target";
+
+        var randomNotAlex = Math.floor(Math.random() * notCount) + 1;
+        characters[randomCharacter].style.backgroundImage = "url('not/not" + randomNotAlex + ".jpg')";
 
         // Set the timer going (every 10 milliseconds)
         timer = setInterval(runTimer, 10);
