@@ -15,6 +15,17 @@ html, body {
     color: white;
     font-variant-numeric: tabular-nums;
 }
+
+
+html,
+body {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+
 #all-tiles {
     position: absolute;
     background-color: red;
