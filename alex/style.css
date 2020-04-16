@@ -332,11 +332,11 @@ button.screen-play-button {
 }
 
 .character.wrong .text::after {
-    content: "WRONG";
+    content: "FAIL";
 }
 
 .character.right .text::after {
-    content: "IMPOSTER";
+    content: "TIME BONUS";
 }
 .character.wrong .text::after, .character.right .text::after {
     font-size: 12px;
