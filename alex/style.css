@@ -331,8 +331,14 @@ button.screen-play-button {
     50% {transform: scale(2);}
 }
 
+.character.wrong .text::after {
+    content: "WRONG";
+}
+
+.character.right .text::after {
+    content: "IMPOSTER";
+}
 .character.wrong .text::after, .character.right .text::after {
-    content: "POINTS";
     font-size: 12px;
     line-height: 12px;
     display: block;
@@ -379,7 +385,7 @@ button.screen-play-button {
 }
 #scoreboard {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: 1px;
     text-align: center;
     border-radius: 5px;

@@ -1,18 +1,23 @@
 
 //  Adjustable Variables 
-var maxRounds = 6;
-var penalty = -10;
+
+var penalty = -50;
 var alexCount = 52;
 var notCount = 66;
+var setCountDown = 1000; // 100 = 1 sec
+var decayRate = 0.9;
 
 //  Game Variables
+var decayRateThisRound = 1;
+var countDown = 0;
+var countDownSec = 0;
 var round = 0;
 var mistakes = 0;
 var lapTime = 0;
-var lapTimeSec = 0;
 var totalTime = 0;
 var totalTimeSec = 0;
-var lapScore = 0;
+var speedBonus = 0;
+var speedBonusSec = 0;
 var totalScore = 0;
 var timer;
 var gameActive = false;
@@ -48,7 +53,8 @@ function startGame() {
     totalTime = 0;
     mistakes = 0;
     totalScore = 0;
-    document.getElementById("total-score").innerHTML = totalScore;
+    countDown = setCountDown;
+
     // Start a new round
     startRound();
 }
@@ -61,11 +67,17 @@ function characterClicked() {
         // If the player clicked the target 
         if (this.classList.contains("target")) {
             this.classList.add("right");
-            // Show speed score
-            this.getElementsByClassName("text")[0].innerHTML = "+" + lapScore;
-            // Update total score
-            totalScore = totalScore + lapScore;
-            document.getElementById("total-score").innerHTML = totalScore;
+            
+            // Update what round it is
+            round++;
+            document.getElementById("round").innerHTML = round;
+
+            // Show speed bonus
+            this.getElementsByClassName("text")[0].innerHTML = "+" + speedBonusSec;
+
+            // Add speed bonus to countdown
+            countDown = countDown + speedBonus;
+
             // End the round
             endRound();
             // Start another round after 1 sec 
@@ -76,10 +88,11 @@ function characterClicked() {
         else {
             this.classList.add("wrong");
             mistakes = mistakes + 1;
+
             // Apply penalty
-            totalScore = totalScore + penalty;
-            document.getElementById("total-score").innerHTML = totalScore;
-            this.getElementsByClassName("text")[0].innerHTML = penalty;
+
+            countDown = countDown + penalty;
+            this.getElementsByClassName("text")[0].innerHTML = penalty/100;
         }
     }
 }
@@ -95,18 +108,14 @@ function endRound() {
 
 
 function startRound() {
-    // IF the current round is valid
-    if (round < maxRounds) {
+    // Check the countdown clock
+    if (countDown > 0) {
 
         //Set game to active
         gameActive = true;
 
         // Reset lap timer
         lapTime = 0;
-
-        // Update what round it is
-        round++;
-        document.getElementById("round").innerHTML = round;
 
         // Shuffle the Alex Count
         let alexCountShuffled =[]
@@ -137,13 +146,47 @@ function startRound() {
         timer = setInterval(runTimer, 10);
     }
 
-    // Game over
-    else {
+}
+
+
+function runTimer() {
+    // Update time
+    countDown--;
+    countDownSec = (countDown / 100).toFixed(2);
+    console.log(countDownSec);
+    document.getElementById("time-remaining").innerHTML = countDownSec;
+
+    lapTime++;
+    totalTime++;
+    totalTimeSec = (totalTime / 100).toFixed(2);
+
+    // Caculate speed bonus
+    var maxScore = 200; // 100 = 1 sec
+    var baseline = 100;
+
+    decayRateThisRound = Math.pow(decayRate, round);
+    console.log("decayRateThisRound:" + decayRateThisRound);
+
+    speedBonus = Math.round(((maxScore * baseline) / (lapTime + baseline)) * decayRateThisRound );
+    speedBonusSec  = (speedBonus / 100).toFixed(2);
+
+    console.log("speedBonusSec:" + speedBonusSec);
+
+    // Check the countdown clock
+    if (countDown > 0) {
+        gameActive = true;
+        console.log("gameActive:" + gameActive)
+    }
+    else{
+        console.log("Time's up!")
+
+        // Stop Timer
+        endRound();
 
         //Show the end screen
         document.getElementById("end-screen").style.display = "flex";
-        document.getElementById("end-score").innerHTML = totalScore;
-        document.getElementById("end-description").innerHTML = "You completed " + maxRounds + " rounds in " + totalTimeSec + "  seconds with " + mistakes + " mistakes.";
+        document.getElementById("end-score").innerHTML = round;
+        document.getElementById("end-description").innerHTML = "You spotted " + round + " imposters. <br/> And made " + mistakes + " mistakes.";
 
         // Disable charaters
         for (var i = 0; i < characters.length; i++) {
@@ -152,17 +195,5 @@ function startRound() {
             characters[i].classList.add("hidden");
         }
     }
-}
 
-function runTimer() {
-    // Update time
-    lapTime++;
-    totalTime++;
-    totalTimeSec = (totalTime / 100).toFixed(2);
-    document.getElementById("total-time-sec").innerHTML = totalTimeSec;
-
-    // Caculate lap score
-    var maxScore = 50;
-    var baseline = 80;
-    lapScore = Math.round((maxScore * baseline) / (lapTime + baseline));
 }
