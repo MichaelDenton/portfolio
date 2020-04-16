@@ -4,11 +4,12 @@
 var penalty = -50;
 var alexCount = 52;
 var notCount = 66;
-var setCountDown = 1000; // 100 = 1 sec
-var decayRate = 0.9;
+var setCountDown = 600; // 100 = 1 sec
+
+var bonus = 200; // 100 = 1 sec
+var decayRate = 0.8;
 
 //  Game Variables
-var decayRateThisRound = 1;
 var countDown = 0;
 var countDownSec = 0;
 var round = 0;
@@ -73,10 +74,13 @@ function characterClicked() {
             document.getElementById("round").innerHTML = round;
 
             // Show speed bonus
-            this.getElementsByClassName("text")[0].innerHTML = "+" + speedBonusSec;
+            var decayRateThisRound = Math.pow(decayRate, round);
+            var bonusThisRound = bonus * decayRateThisRound;
+            var bonusThisRoundSec = (bonusThisRound / 100).toFixed(2);
+            this.getElementsByClassName("text")[0].innerHTML = "+" + bonusThisRoundSec;
 
-            // Add speed bonus to countdown
-            countDown = countDown + speedBonus;
+            // Add bonus to countdown
+            countDown = countDown + bonusThisRound;
 
             // End the round
             endRound();
@@ -159,18 +163,6 @@ function runTimer() {
     lapTime++;
     totalTime++;
     totalTimeSec = (totalTime / 100).toFixed(2);
-
-    // Caculate speed bonus
-    var maxScore = 200; // 100 = 1 sec
-    var baseline = 100;
-
-    decayRateThisRound = Math.pow(decayRate, round);
-    console.log("decayRateThisRound:" + decayRateThisRound);
-
-    speedBonus = Math.round(((maxScore * baseline) / (lapTime + baseline)) * decayRateThisRound );
-    speedBonusSec  = (speedBonus / 100).toFixed(2);
-
-    console.log("speedBonusSec:" + speedBonusSec);
 
     // Check the countdown clock
     if (countDown > 0) {
