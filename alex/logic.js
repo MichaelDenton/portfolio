@@ -6,17 +6,27 @@ var firstRoundSpeed = 500;      // How long is the first round? (500 = 5 sec)
 var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
 var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
+var winEmoji = ["👏","👍","🤘","💪","🙌","💥"]
+var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", "Fake Alex Alert!", "Bloody imposter",  "Begone fraud", "That's no Alex", "You're not Alex", "Fraud" , "Charlatan!", "Phony", "Con-Alex"]
+
+var failEmoji = ["⛔️","🚫","😵","😡","🤬","💩","👎","🙈"]
+var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again","Nah","Nope", "Try harder"]
+
 //  Global Game Variables
 var countDown = undefined;
 var countDownSec = undefined;
 var round = undefined;
 var timeThisRound = undefined;
-var mistakes = undefined;
 var timer = undefined;
 var gameActive = undefined;
+var mistakes = undefined;
+
+var imagesHitWin = undefined;
+var imagesHitFail = undefined;
 
 //  Shorthand Variables
 var characters = document.getElementsByClassName("character");
+var notAlexCountShuffled =[]
 
 function loadGame() {
     // Preload Alex tiles on the start screen
@@ -32,6 +42,17 @@ function loadGame() {
     img.src = "not/not"+i+".jpg";
     document.getElementById("preload-images").appendChild(img);
     }
+
+    // Shuffle the target count (so the same target won't appear twice in a game)
+    while( notAlexCountShuffled.length < notCount ){
+        let rnd = Math.floor(Math.random()* notCount) + 1;
+        if(!notAlexCountShuffled.includes(rnd)){
+            notAlexCountShuffled.push(rnd);
+        }
+    }
+
+    console.log("notAlexCountShuffled: " + notAlexCountShuffled);
+
 
     // Add 'click' event to the character tiles
     for (var i = 0; i < characters.length; i++) {
@@ -50,6 +71,9 @@ function startGame() {
     round = 0;
     document.getElementById("round").innerHTML = round;
 
+    imagesHitWin = [];
+    imagesHitFail = [];
+
     // Start a new round
     startRound();
 }
@@ -64,8 +88,15 @@ function characterClicked() {
             // Update what round it is
             round++;
             document.getElementById("round").innerHTML = round;
-            // Text when tapped
-            this.getElementsByClassName("text")[0].innerHTML = "boom";
+
+            // Record what image they hit (just the URL)
+             imagesHitWin.push(this.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
+             console.log("imagesHitWin: " + imagesHitWin);
+
+
+            // WIN text when tapped
+            this.getElementsByClassName("emoji")[0].innerHTML = winEmoji[Math.floor(Math.random() * winEmoji.length)];
+            this.getElementsByClassName("text")[0].innerHTML = winWords[Math.floor(Math.random() * winWords.length)];
             // End the round
             endRound();
             // Start another round after 1 sec 
@@ -76,9 +107,16 @@ function characterClicked() {
         else {
             this.classList.add("wrong");
             mistakes = mistakes + 1;
+
+            // Record what image they hit
+             imagesHitFail.push(this.style.backgroundImage);
+             console.log("imagesHitFail: " +imagesHitFail);
+
             // Apply penalty (80% of time)
             countDown = countDown * penaltyRate;
-            this.getElementsByClassName("text")[0].innerHTML = "NO!";
+            // FAIL text when tapped
+            this.getElementsByClassName("emoji")[0].innerHTML = failEmoji[Math.floor(Math.random() * failEmoji.length)];
+            this.getElementsByClassName("text")[0].innerHTML = failWords[Math.floor(Math.random() * failWords.length)];
         }
     }
 }
@@ -117,17 +155,19 @@ function startRound() {
         for (var i = 0; i < characters.length; i++) {
             characters[i].classList.remove('hide', 'hidden', 'target', 'wrong', 'right');
             characters[i].getElementsByClassName("text")[0].innerHTML = "";
+            characters[i].getElementsByClassName("emoji")[0].innerHTML = "";
 
             // Assign the shuffled Alex count to the tiles 
             characters[i].style.backgroundImage = "url('alex/alex" + alexCountShuffled[i] + ".jpg')";
         }
 
-        // Set the random target
+        // Set the random target (Not Alex)
         var randomCharacter = Math.floor(Math.random() * characters.length );
         characters[randomCharacter].className = "character target";
 
         var randomNotAlex = Math.floor(Math.random() * notCount) + 1;
-        characters[randomCharacter].style.backgroundImage = "url('not/not" + randomNotAlex + ".jpg')";
+        characters[randomCharacter].style.backgroundImage = "url('not/not" + notAlexCountShuffled[round] + ".jpg')";
+
 
         // Set the timer going (every 10 milliseconds)
         timer = setInterval(runTimer, 10);
@@ -158,8 +198,24 @@ function runTimer() {
 
         //Show the end screen
         document.getElementById("end-screen").style.display = "flex";
-        document.getElementById("end-score").innerHTML = round;
-        document.getElementById("end-description").innerHTML = "You spotted " + round + " imposters. <br/> And made " + mistakes + " mistakes.";
+
+        // Display number of fakes found
+        document.getElementById("endtext2").innerHTML = round;
+
+        // Load the winning images
+        for (var i = 0; i < imagesHitWin.length; i++) {
+            var y = document.createElement('img');
+            y.src = imagesHitWin[i];
+
+            y.style.width = 50/imagesHitWin.length +'%'; // Need to fix this up so it rounds down
+            document.getElementById("win-images").appendChild(y);
+        }
+
+        // Let them know if they made any mistakes
+        if (mistakes > 0) {
+            console.log("You fucked up");
+            document.getElementById("endtext4").innerHTML = "but you screwed up " + mistakes;
+        }
 
         // Disable charaters
         for (var i = 0; i < characters.length; i++) {

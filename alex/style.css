@@ -189,15 +189,37 @@ html, body {
 }
 
 
-#end-score-sub {
-    font-size: 24px;
+#endtext1 {
+    font-size: 14px;
 }
-#end-description {
-    font-size: 18px;
-    margin-top: 60px;
-    margin-bottom: 40px;
-    max-width: 270px;
+
+#endtext2{
+    font-size: 80px;
 }
+
+#endtext3{
+    font-size: 34px;
+}
+
+#endtext4 {
+    font-size: 16px;
+}
+
+#win-images{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#win-images img{
+    width: 30%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+}
+
 button.screen-play-button {
     background-color: white;
     border: none;
@@ -262,6 +284,7 @@ button.screen-play-button {
     background-position: center;
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -278,13 +301,33 @@ button.screen-play-button {
     background-size: cover;
     background-position: center;
 }
+
+
+
+/* -- STYLE TILE WHEN TAP IS RIGHT OR WRONG  -- */
+
 .character.wrong {
-    box-shadow: inset 0px 0px 0px 5px #D0021B;
+    box-shadow: inset 0px 0px 0px 5px #D0021B /* red */;
 }
+
 .character.wrong::before {
+    background-color: #D0021B /* red */;
+}
+
+.character.right {
+    box-shadow: inset 0px 0px 0px 5px #1DB955 /* green */;
+}
+
+.character.right::before {
+    background-color: #1DB955 /* green */;
+}
+
+/* Overlay Colour */
+
+.character.wrong::before,
+.character.right::before {
     content: "";
     display: block;
-    background-color: #D0021B;
     opacity: 0.6;
     position: absolute;
     top: 0;
@@ -293,47 +336,33 @@ button.screen-play-button {
     height: 100%;
     border-radius: 5px;
 }
-.character.wrong .text,
-.character.right .text {
+
+
+.character .text {
+    font-size: 16px;
+    line-height: 12px;
+    display: block;
+    margin-top: 5px;
+    z-index: 1;
+}
+
+.character .emoji{
     z-index: 1;
     text-align: center;
     font-size: 40px;
     line-height: 40px;
-    animation: scorepoints 1s ;
+    animation: scorepoints 1s;
+    font-size: 60px;
+    line-height: 60px;
 }
+
 @keyframes scorepoints {
     0%,100% { transform: scale(1);}
     50% {transform: scale(2);}
 }
 
-.character.wrong .text::after {
-    content: "FAIL";
-}
 
-.character.right .text::after {
-    content: "GOOD JOB";
-}
-.character.wrong .text::after, .character.right .text::after {
-    font-size: 12px;
-    line-height: 12px;
-    display: block;
-    margin-top: 5px;
-}
-.character.right {
-    box-shadow: inset 0px 0px 0px 5px #1DB955;
-}
-.character.right:before {
-    content: "";
-    display: block;
-    background-color: #1DB955;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-}
+
 .character:not(.target).hide {
     animation-name: fade;
     animation-duration: 1s;
