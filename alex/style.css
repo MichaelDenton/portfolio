@@ -14,19 +14,20 @@ html, body {
     background-color: #2D2D2D;
     color: white;
     font-variant-numeric: tabular-nums;
+
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
 }
 
+/* -- START SCREEN -- */
 
-html,
-body {
-  position: fixed;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-
-
-#all-tiles {
+#preload-images {
     position: absolute;
     background-color: red;
     left: 0px;
@@ -37,7 +38,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     opacity: 0.1;
 }
-#all-tiles img {
+#preload-images img {
     width: 100%;
 }
 #start-screen {
@@ -128,6 +129,9 @@ body {
         transform: rotate(15deg);
     }
 }
+
+/* -- END SCREEN -- */
+
 #end-screen {
     position: absolute;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -209,6 +213,10 @@ button.screen-play-button {
     text-transform: uppercase;
     cursor: pointer;
 }
+
+
+/* -- MAIN -- */
+
 #wrapper {
     display: grid;
     grid-template-rows: 70px auto 20px;
@@ -219,17 +227,9 @@ button.screen-play-button {
     right: 0px;
     top: 0px;
     bottom: 0px;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+
 }
-#action-bar {
-    display: grid;
-    text-align: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 5px;
-}
+
 #canvas {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -239,6 +239,7 @@ button.screen-play-button {
     width: 100%;
     max-width: 120vh;
 }
+
 #canvas-wrapper {
     display: flex;
     justify-content: center;
@@ -248,6 +249,7 @@ button.screen-play-button {
     left: 10px;
     right: 10px;
 }
+
 @media screen and (orientation: landscape) {
     #canvas {
         grid-template-columns: 1fr 1fr 1fr;
@@ -270,33 +272,6 @@ button.screen-play-button {
     0% {transform: rotate(-1);}
     50% {transform: rotate(1deg);}
 }
-
-/*
-.character:nth-child(1){
-    animation-delay: 0.25s, 0s;
-}
-
-.character:nth-child(2){
-    animation-delay: 0.5s, 0s;
-}
-
-.character:nth-child(3){
-    animation-delay: 0.75s, 0s;
-}
-
-.character:nth-child(4){
-    animation-delay: 1s, 0s;
-}
-.character:nth-child(5){
-    animation-delay: 1.25s, 0s;
-}
-.character:nth-child(6){
-    animation-delay: 1.5s, 0s;
-}
-*/
-
-
-
 
 .character.target {
     background: url('not/not1.jpg');
@@ -336,7 +311,7 @@ button.screen-play-button {
 }
 
 .character.right .text::after {
-    content: "TIME BONUS";
+    content: "GOOD JOB";
 }
 .character.wrong .text::after, .character.right .text::after {
     font-size: 12px;
@@ -383,6 +358,9 @@ button.screen-play-button {
         transform: scale(0.1);
     }
 }
+
+/* -- SCORE BOARD -- */
+
 #scoreboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -392,7 +370,7 @@ button.screen-play-button {
     overflow: hidden;
 }
 #scoreboard div {
-    background-color: rgba(255, 255, 255, 0.08);
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -406,4 +384,25 @@ button.screen-play-button {
 #scoreboard .value {
     font-size: 36px;
     font-family: 'digital', monospace;
+}
+
+
+/* -- PROGRESS BAR -- */
+
+#progress-bar-container{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#progress-bar{
+    height: 100%;
+    background-color: Black /* #D0021B  Red */;
+    opacity: 0.3;
+    /* js updates width */
 }

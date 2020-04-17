@@ -1,65 +1,58 @@
 
 //  Adjustable Variables 
+var alexCount = 52;             // How many alex images are there?
+var notCount = 66;              // How many not-alex images are there?
+var firstRoundSpeed = 500;      // How long is the first round? (500 = 5 sec)
+var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
+var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
-var penalty = -50;
-var alexCount = 52;
-var notCount = 66;
-var setCountDown = 600; // 100 = 1 sec
+//  Global Game Variables
+var countDown = undefined;
+var countDownSec = undefined;
+var round = undefined;
+var timeThisRound = undefined;
+var mistakes = undefined;
+var timer = undefined;
+var gameActive = undefined;
 
-var bonus = 200; // 100 = 1 sec
-var decayRate = 0.8;
-
-//  Game Variables
-var countDown = 0;
-var countDownSec = 0;
-var round = 0;
-var mistakes = 0;
-var lapTime = 0;
-var totalTime = 0;
-var totalTimeSec = 0;
-var speedBonus = 0;
-var speedBonusSec = 0;
-var totalScore = 0;
-var timer;
-var gameActive = false;
+//  Shorthand Variables
 var characters = document.getElementsByClassName("character");
 
 function loadGame() {
-    // Add 'on click' event to characters
-    for (var i = 0; i < characters.length; i++) {
-        characters[i].addEventListener("click", characterClicked);
-    }
-
-    // Load all the Alex tiles
+    // Preload Alex tiles on the start screen
     for (var i = 1; i < alexCount + 1; i++) {
     var img = document.createElement("img");
     img.src = "alex/alex"+i+".jpg";
-    document.getElementById("all-tiles").appendChild(img);
+    document.getElementById("preload-images").appendChild(img);
     }
 
-    // Load all the Not tiles
+    // Preload Not-Alex tiles on the start screen
     for (var i = 1; i < notCount + 1; i++) {
     var img = document.createElement("img");
     img.src = "not/not"+i+".jpg";
-    document.getElementById("all-tiles").appendChild(img);
+    document.getElementById("preload-images").appendChild(img);
+    }
+
+    // Add 'click' event to the character tiles
+    for (var i = 0; i < characters.length; i++) {
+        characters[i].addEventListener("click", characterClicked);
     }
 }
 
 function startGame() {
-    // Hide the start/end screen
+    // Hide the Start and End screens
     document.getElementById("start-screen").style.display = "none";
     document.getElementById("end-screen").style.display = "none";
+
     // Reset game values
-    round = 0;
-    totalTime = 0;
+    countDown = firstRoundSpeed;
     mistakes = 0;
-    totalScore = 0;
-    countDown = setCountDown;
+    round = 0;
+    document.getElementById("round").innerHTML = round;
 
     // Start a new round
     startRound();
 }
-
 
 function characterClicked() {
     // If game is active
@@ -68,20 +61,11 @@ function characterClicked() {
         // If the player clicked the target 
         if (this.classList.contains("target")) {
             this.classList.add("right");
-            
             // Update what round it is
             round++;
             document.getElementById("round").innerHTML = round;
-
-            // Show speed bonus
-            var decayRateThisRound = Math.pow(decayRate, round);
-            var bonusThisRound = bonus * decayRateThisRound;
-            var bonusThisRoundSec = (bonusThisRound / 100).toFixed(2);
-            this.getElementsByClassName("text")[0].innerHTML = "+" + bonusThisRoundSec;
-
-            // Add bonus to countdown
-            countDown = countDown + bonusThisRound;
-
+            // Text when tapped
+            this.getElementsByClassName("text")[0].innerHTML = "boom";
             // End the round
             endRound();
             // Start another round after 1 sec 
@@ -92,11 +76,9 @@ function characterClicked() {
         else {
             this.classList.add("wrong");
             mistakes = mistakes + 1;
-
-            // Apply penalty
-
-            countDown = countDown + penalty;
-            this.getElementsByClassName("text")[0].innerHTML = penalty/100;
+            // Apply penalty (80% of time)
+            countDown = countDown * penaltyRate;
+            this.getElementsByClassName("text")[0].innerHTML = "NO!";
         }
     }
 }
@@ -104,7 +86,6 @@ function characterClicked() {
 function endRound() {
     clearInterval(timer);
     gameActive = false;
-
     for (var i = 0; i < characters.length; i++) {
         characters[i].classList.add("hide");
     }
@@ -118,8 +99,10 @@ function startRound() {
         //Set game to active
         gameActive = true;
 
-        // Reset lap timer
-        lapTime = 0;
+        //Reset countdown clock
+        var decayRateThisRound = Math.pow(decayRate, round);
+        timeThisRound = firstRoundSpeed * decayRateThisRound;
+        countDown = timeThisRound;
 
         // Shuffle the Alex Count
         let alexCountShuffled =[]
@@ -152,25 +135,23 @@ function startRound() {
 
 }
 
-
 function runTimer() {
     // Update time
     countDown--;
     countDownSec = (countDown / 100).toFixed(2);
-    console.log(countDownSec);
     document.getElementById("time-remaining").innerHTML = countDownSec;
 
-    lapTime++;
-    totalTime++;
-    totalTimeSec = (totalTime / 100).toFixed(2);
+    // Update the countdown bar
+    var percentOfRound = (100-((countDown / timeThisRound) * 100)).toFixed(0);
+    document.getElementById("progress-bar").style.width =  percentOfRound + "%";
 
     // Check the countdown clock
     if (countDown > 0) {
         gameActive = true;
-        console.log("gameActive:" + gameActive)
     }
     else{
-        console.log("Time's up!")
+        console.log("Time's up!");
+        alert("Time's up!");
 
         // Stop Timer
         endRound();
