@@ -438,6 +438,40 @@ button.screen-play-button {
     }
 }
 
+/* -- TIME UP SCREEN -- */
+
+#timeup-screen{
+    position: absolute;
+    background-color: black;
+    color: white;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    text-align: center;
+    font-size: 70px;
+    opacity: 0.8;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    animation-name: timeout;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+
+    display: none;
+}
+
+@keyframes timeout {
+    0% {
+        opacity: 0;
+    }
+}
+
 /* -- SCORE BOARD -- */
 
 #scoreboard {

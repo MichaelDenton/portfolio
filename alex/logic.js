@@ -170,28 +170,12 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min) ) + min;
 }
 
-function runTimer() {
-    // Update time
-    countDown--;
-    countDownSec = (countDown / 100).toFixed(2);
-    document.getElementById("time-remaining").innerHTML = countDownSec;
+function showEndScreen(){
 
-    // Update the countdown bar
-    var percentOfRound = (100-((countDown / timeThisRound) * 100)).toFixed(0);
-    document.getElementById("progress-bar").style.width =  percentOfRound + "%";
+    // Hide the time out screen
+    document.getElementById("timeup-screen").style.display = "none";
 
-    // Check the countdown clock
-    if (countDown > 0) {
-        gameActive = true;
-    }
-    else{
-        console.log("Time's up!");
-        alert("Time's up!");
-
-        // Stop Timer
-        endRound();
-
-        //Show the end screen
+     //Show the end screen
         document.getElementById("end-screen").style.display = "table";
 
         // Display number of fakes found
@@ -237,13 +221,41 @@ function runTimer() {
             document.getElementById("endtext4").appendChild(a);
             }
         }
+}
+
+function runTimer() {
+    // Update time
+    countDown--;
+    countDownSec = (countDown / 100).toFixed(2);
+    document.getElementById("time-remaining").innerHTML = countDownSec;
+
+    // Update the countdown bar
+    var percentOfRound = (100-((countDown / timeThisRound) * 100)).toFixed(0);
+    document.getElementById("progress-bar").style.width =  percentOfRound + "%";
+
+    // Check the countdown clock
+    if (countDown > 0) {
+        gameActive = true;
+    }
+    else{
+
+        // Stop Timer
+        endRound();
 
         // Disable charaters
         for (var i = 0; i < characters.length; i++) {
-            characters[i].classList.remove('hide', 'hidden', 'target', 'wrong', 'right');
-            characters[i].getElementsByClassName("text")[0].innerHTML = "";
-            characters[i].classList.add("hidden");
+            characters[i].classList.remove('hide');
         }
+
+        // Show time up screen
+        showTimeUpScreen();
+
+        // Show end screen after 3 secs
+        setTimeout(showEndScreen, 2000);
     }
 
+}
+
+function showTimeUpScreen(){
+    document.getElementById("timeup-screen").style.display = "flex";
 }
