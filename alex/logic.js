@@ -15,14 +15,15 @@ var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again",
 //  Global Game Variables
 var countDown = undefined;
 var countDownSec = undefined;
-var round = undefined;
 var timeThisRound = undefined;
 var timer = undefined;
 var gameActive = undefined;
-var mistakes = undefined;
 
-var imagesHitWin = undefined;
-var imagesHitFail = undefined;
+var mistakes = 0;
+var round = 0;
+
+var imagesHitWin = [];
+var imagesHitFail = [];
 
 //  Shorthand Variables
 var characters = document.getElementsByClassName("character");
@@ -43,6 +44,18 @@ function loadGame() {
     document.getElementById("preload-images").appendChild(img);
     }
 
+    // Add 'click' event to the character tiles
+    for (var i = 0; i < characters.length; i++) {
+        characters[i].addEventListener("click", characterClicked);
+    }
+}
+
+function startGame() {
+
+    // Hide the Start and End screens
+    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("end-screen").style.display = "none";
+
     // Shuffle the target count (so the same target won't appear twice in a game)
     while( notAlexCountShuffled.length < notCount ){
         let rnd = Math.floor(Math.random()* notCount) + 1;
@@ -51,28 +64,8 @@ function loadGame() {
         }
     }
 
-    console.log("notAlexCountShuffled: " + notAlexCountShuffled);
-
-
-    // Add 'click' event to the character tiles
-    for (var i = 0; i < characters.length; i++) {
-        characters[i].addEventListener("click", characterClicked);
-    }
-}
-
-function startGame() {
-    // Hide the Start and End screens
-    document.getElementById("start-screen").style.display = "none";
-    document.getElementById("end-screen").style.display = "none";
-
-    // Reset game values
     countDown = firstRoundSpeed;
-    mistakes = 0;
-    round = 0;
     document.getElementById("round").innerHTML = round;
-
-    imagesHitWin = [];
-    imagesHitFail = [];
 
     // Start a new round
     startRound();
@@ -91,8 +84,6 @@ function characterClicked() {
 
             // Record what image they hit (just the URL)
              imagesHitWin.push(this.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
-             console.log("imagesHitWin: " + imagesHitWin);
-
 
             // WIN text when tapped
             this.getElementsByClassName("emoji")[0].innerHTML = winEmoji[Math.floor(Math.random() * winEmoji.length)];
@@ -109,8 +100,7 @@ function characterClicked() {
             mistakes = mistakes + 1;
 
             // Record what image they hit
-             imagesHitFail.push(this.style.backgroundImage);
-             console.log("imagesHitFail: " +imagesHitFail);
+             imagesHitFail.push(this.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
 
             // Apply penalty (80% of time)
             countDown = countDown * penaltyRate;
@@ -175,6 +165,11 @@ function startRound() {
 
 }
 
+// Get random number
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
 function runTimer() {
     // Update time
     countDown--;
@@ -197,24 +192,41 @@ function runTimer() {
         endRound();
 
         //Show the end screen
-        document.getElementById("end-screen").style.display = "flex";
+        document.getElementById("end-screen").style.display = "table";
 
         // Display number of fakes found
         document.getElementById("endtext2").innerHTML = round;
+
 
         // Load the winning images
         for (var i = 0; i < imagesHitWin.length; i++) {
             var y = document.createElement('img');
             y.src = imagesHitWin[i];
+            // Set width based on the number of images | Image width: 100% / RoundUp:(numberOfImages / Rows)
+            y.style.maxWidth = (100 / Math.ceil(imagesHitWin.length / 2)) +'%';
 
-            y.style.width = 50/imagesHitWin.length +'%'; // Need to fix this up so it rounds down
+            // Randomly rotate image
+            y.style.transform = "rotate(" + getRndInteger(-10, 10) + "deg)";
             document.getElementById("win-images").appendChild(y);
         }
 
         // Let them know if they made any mistakes
         if (mistakes > 0) {
-            console.log("You fucked up");
-            document.getElementById("endtext4").innerHTML = "but you screwed up " + mistakes;
+            document.getElementById("endtext4").innerHTML = "* but you did screw up " + mistakes;
+
+            // Load the fail images
+            for (var i = 0; i < imagesHitFail.length; i++) {
+            var y = document.createElement('img');
+            y.src = imagesHitFail[i];
+            // Set width based on the number of images | Image width: 100% / RoundUp:(numberOfImages / Rows)
+            y.style.maxWidth = (100 / Math.ceil(imagesHitFail.length / 2)) +'%';
+
+            // Randomly rotate image
+            y.style.transform = "rotate(" + getRndInteger(-10, 10) + "deg)";
+            document.getElementById("fail-images").appendChild(y);
+        }
+
+
         }
 
         // Disable charaters

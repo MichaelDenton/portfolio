@@ -44,16 +44,22 @@
 
     <!-- End Screen -->
     <div id="end-screen">
-        <div class="sparkle"></div>
-        <span id="endtext1">FINAL SCORE</span>
-        <span id="endtext2">-</span>
-        <span id="endtext3">fakes<br/>found</span>
-        <div id="win-images"></div>
-        <div id="endtext4"></div>
-        <div id="fail-images"></div>
-        
-        <button class="screen-play-button" onClick="startGame()">Play Again</button>
+        <div class="content-wrapper">
+            <span id="endtext1">FINAL SCORE</span>
+            <div id="fakecount">
+                <span id="endtext2">#</span>
+                <span id="endtext3">fakes<br/>found</span>
+            </div>
+            <div id="win-images"></div>
+
+            <div id="endtext4"></div>
+            <div id="fail-images"></div>
+            
+            <button class="screen-play-button" onClick="location.reload();">Play Again</button>
+        </div>
     </div>
+
+
 
     <div id="progress-bar-container"><div id="progress-bar"></div></div>
 
