@@ -224,9 +224,18 @@ function runTimer() {
             // Randomly rotate image
             y.style.transform = "rotate(" + getRndInteger(-10, 10) + "deg)";
             document.getElementById("fail-images").appendChild(y);
+        } 
+
         }
-
-
+        else{
+            if (round > 5) {
+            //No mistakes "Click here to claim your prize"
+            var a = document.createElement('a');
+            var linkText = document.createTextNode("Click here to claim your prize");
+            a.appendChild(linkText);
+            a.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            document.getElementById("endtext4").appendChild(a);
+            }
         }
 
         // Disable charaters

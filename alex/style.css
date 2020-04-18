@@ -155,6 +155,11 @@ html, body {
     vertical-align: middle;
 }
 
+#end-screen a {
+    color: white;
+    font-size: 12px;
+}
+
 @keyframes BackgroundAnimation {
     0% {
         background-position: 0% 14%
