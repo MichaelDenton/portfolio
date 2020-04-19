@@ -63,7 +63,10 @@ function loadGame() {
 
     // Once images are laoded
     window.addEventListener('load', function () {
-    document.getElementById("startbutton").innerHTML = "Start Game"
+    document.getElementById("startbutton").innerHTML = "Start Game";
+    document.getElementById("startbutton").onclick = function() { 
+            startGame();
+        };
     })
 
 }
