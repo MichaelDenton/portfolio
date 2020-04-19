@@ -1,8 +1,8 @@
 
 //  Adjustable Variables 
-var alexCount = 52;             // How many alex images are there?
-var notCount = 66;              // How many not-alex images are there?
-var firstRoundSpeed = 500;      // How long is the first round? (500 = 5 sec)
+var alexCount = 72;             // How many alex images are there?
+var notCount = 126;              // How many not-alex images are there?
+var firstRoundSpeed = 800;      // How long is the first round? (500 = 5 sec)
 var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
 var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
@@ -250,8 +250,8 @@ function runTimer() {
         // Show time up screen
         showTimeUpScreen();
 
-        // Show end screen after 3 secs
-        setTimeout(showEndScreen, 2000);
+        // Show end screen after 1.5 secs
+        setTimeout(showEndScreen, 1500);
     }
 
 }
