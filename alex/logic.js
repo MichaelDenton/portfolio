@@ -7,12 +7,22 @@ var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
 var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
 var winEmoji = ["👏","👍","🤘","💪","🙌","💥"]
-var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", "Fake Alex Alert!", "Bloody imposter",  "Begone fraud", "That's no Alex", "You're not Alex", "Fraud" , "Charlatan!", "Phony", "Con-Alex"]
+var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", "Fake Alex Alert!", "Bloody imposter",  "Begone fraud", "That's no Alex", "Fraud" , "Charlatan!", "Phony", "Con-Alex"]
 
 var failEmoji = ["⛔️","🚫","😵","😡","🤬","💩","👎","🙈"]
 var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again","Nah","Nope", "Try harder"]
 
-var prizeLink = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ","https://youtu.be/oavMtUWDBTM","https://youtu.be/MFmr_TZLpS0","https://youtu.be/6i2l-LQ-dXI", "https://youtu.be/W7JyjZI3LUM","https://youtu.be/90X5NJleYJQ","https://youtu.be/0uuCNAwXGaQ","https://youtu.be/vZw35VUBdzo","https://youtu.be/ohDB5gbtaEQ"]
+var prizeLink = [   "https://www.youtube.com/watch?v=dQw4w9WgXcQ" /* Rick Astley - Never Gonna Give You Up */ ,
+                    "https://youtu.be/oavMtUWDBTM" /* Mr. Trololo */,
+                    "https://youtu.be/MFmr_TZLpS0" /* Dr. Jean's Banana Dance */,
+                    "https://youtu.be/6i2l-LQ-dXI" /* Don Hertzfeldt Couch Gag */, 
+                    "https://youtu.be/W7JyjZI3LUM" /* REJECTED by DON HERTZFELDT */,
+                    "https://youtu.be/90X5NJleYJQ" /* Strong Bad Email #58 - Dragon */,
+                    "https://youtu.be/0uuCNAwXGaQ?t=180" /* BULBOUS BOUFFANT - The Vestibules (start at 3 min)*/,
+                    "https://youtu.be/zP6RLvg4exQ" /* SPONGEBOB CAVE EATEN ALIVE */,
+                    "https://youtu.be/aiwxiiZ01L8" /* Puddle Of Mudd - About A Girl */,
+                    "https://youtu.be/Osqf4oIK0E8" /* IGORRR - VERY NOISE */,
+                    "https://youtu.be/uDrdZM1iGrc" /* Bohemian Rhapsody - Mr.Chicken (cover) */]
 
 //  Global Game Variables
 var countDown = undefined;
@@ -50,6 +60,12 @@ function loadGame() {
     for (var i = 0; i < characters.length; i++) {
         characters[i].addEventListener("click", characterClicked);
     }
+
+    // Once images are laoded
+    window.addEventListener('load', function () {
+    document.getElementById("startbutton").innerHTML = "Start Game"
+    })
+
 }
 
 function startGame() {
