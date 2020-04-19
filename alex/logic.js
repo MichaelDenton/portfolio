@@ -12,6 +12,8 @@ var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", 
 var failEmoji = ["⛔️","🚫","😵","😡","🤬","💩","👎","🙈"]
 var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again","Nah","Nope", "Try harder"]
 
+var prizeLink = ["https://www.youtube.com/watch?v=dQw4w9WgXcQ","https://youtu.be/oavMtUWDBTM","https://youtu.be/MFmr_TZLpS0","https://youtu.be/6i2l-LQ-dXI", "https://youtu.be/W7JyjZI3LUM","https://youtu.be/90X5NJleYJQ","https://youtu.be/0uuCNAwXGaQ","https://youtu.be/vZw35VUBdzo","https://youtu.be/ohDB5gbtaEQ"]
+
 //  Global Game Variables
 var countDown = undefined;
 var countDownSec = undefined;
@@ -223,7 +225,8 @@ function showEndScreen(){
             var a = document.createElement('a');
             var linkText = document.createTextNode("Click here to claim your prize");
             a.appendChild(linkText);
-            a.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            a.href = prizeLink[Math.floor(Math.random() * prizeLink.length)];
+            a.target = "_blank"
             document.getElementById("endtext4").appendChild(a);
             }
         }
