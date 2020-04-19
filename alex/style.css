@@ -56,6 +56,8 @@ html, body {
     align-items: center;
     padding: 20px;
     overflow: hidden;
+
+
 }
 @keyframes gradient {
     0% {
@@ -287,19 +289,45 @@ button.screen-play-button {
     margin-top: 10px;
 }
 
+
+
+
 /* -- MAIN -- */
 
-#wrapper {
-    display: grid;
-    grid-template-rows: 70px auto 20px;
-    grid-row-gap: 10px;
-    padding: 10px;
+#mainscreen {
     position: absolute;
     left: 0px;
     right: 0px;
     top: 0px;
     bottom: 0px;
+}
 
+#main-wrapper{
+    display: grid;
+    grid-template-rows: 5% auto;
+    grid-row-gap: 10px;
+    padding: 10px;
+    height: 100%;
+    max-width: 120vh;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#progress-bar-container{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.2);
+    
+}
+
+#progress-bar{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* js updates width */
+    width: 20%;
 }
 
 #canvas {
@@ -309,18 +337,10 @@ button.screen-play-button {
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     width: 100%;
-    max-width: 120vh;
+    height: 100%;
 }
 
-#canvas-wrapper {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    top: 90px;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-}
+
 
 @media screen and (orientation: landscape) {
     #canvas {
@@ -329,20 +349,20 @@ button.screen-play-button {
     }
 }
 .character {
-    background: url('alex/alex1.jpg');
+    background: url('alex/alex3.jpg');
     background-size: cover;
     background-position: center;
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    animation: zoom 0.2s ease infinite; 
+    animation: zoom 0.2s ease infinite;
+    box-shadow: inset 0px 0px 0px 5px white, 0px 2px 20px 0px rgba(0,0,0,0.3);
 }
 
 @keyframes zoom {
-    0% {transform: rotate(-1);}
+    0%,100%{transform: rotate(-1deg);}
     50% {transform: rotate(1deg);}
 }
 
@@ -357,7 +377,7 @@ button.screen-play-button {
 /* -- STYLE TILE WHEN TAP IS RIGHT OR WRONG  -- */
 
 .character.wrong {
-    box-shadow: inset 0px 0px 0px 5px #D0021B /* red */;
+    box-shadow: inset 0px 0px 0px 5px #D0021B, 0px 2px 25px 0px #D0021B /* red */;
 }
 
 .character.wrong::before {
@@ -365,7 +385,7 @@ button.screen-play-button {
 }
 
 .character.right {
-    box-shadow: inset 0px 0px 0px 5px #1DB955 /* green */;
+    box-shadow: inset 0px 0px 0px 5px #1DB955, 0px 2px 25px 0px #1DB955 /* green */;
 }
 
 .character.right::before {
@@ -401,38 +421,49 @@ button.screen-play-button {
     text-align: center;
     font-size: 40px;
     line-height: 40px;
-    animation: scorepoints 1s;
     font-size: 60px;
     line-height: 60px;
 }
 
-@keyframes scorepoints {
-    0%,100% { transform: scale(1);}
-    50% {transform: scale(2);}
+.right .emoji{
+    animation: scorepoints 1s;
 }
 
+@keyframes scorepoints {
+    0% { transform: scale(1);}
+    50% { transform: scale(2);}
+    100% { transform: scale(1);}
+}
 
+.wrong .emoji,
+.wrong .text{
+    animation: fail 0.2s;
+}
+
+@keyframes fail {
+    0% { transform: scale(10); opacity: 0;}
+    100% { transform: scale(1); opacity: 1;}
+}
+
+.character.hidden {
+    background-color: rgba(255, 255, 255, 0.08);
+    background-image: none;
+}
 
 .character:not(.target).hide {
     animation-name: fade;
     animation-duration: 1s;
 }
-.character.hidden {
-    background-color: rgba(255, 255, 255, 0.08);
-    background-image: none;
-}
+
 @keyframes fade {
     0% {
-        background-color: lightblue;
         opacity: 0.8;
     }
     80% {
-        background-color: lightblue;
         opacity: 0.2;
         transform: scale(1);
     }
     100% {
-        background-color: lightblue;
         opacity: 0.0;
         transform: scale(0.1);
     }
@@ -476,50 +507,4 @@ button.screen-play-button {
     }
 }
 
-/* -- SCORE BOARD -- */
 
-#scoreboard {
-    display: none;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1px;
-    text-align: center;
-    border-radius: 5px;
-    overflow: hidden;
-}
-#scoreboard div {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-#scoreboard .label {
-    font-size: 12px;
-    text-transform: uppercase;
-    display: block;
-    padding-bottom: 3px;
-}
-#scoreboard .value {
-    font-size: 36px;
-    font-family: 'digital', monospace;
-}
-
-
-/* -- PROGRESS BAR -- */
-
-#progress-bar-container{
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    height: 70px;
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-#progress-bar{
-    height: 100%;
-    background-color: Black /* #D0021B  Red */;
-    opacity: 0.3;
-    /* js updates width */
-}

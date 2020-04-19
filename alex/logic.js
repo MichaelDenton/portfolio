@@ -65,7 +65,6 @@ function startGame() {
     }
 
     countDown = firstRoundSpeed;
-    document.getElementById("round").innerHTML = round;
 
     // Start a new round
     startRound();
@@ -80,7 +79,6 @@ function characterClicked() {
             this.classList.add("right");
             // Update what round it is
             round++;
-            document.getElementById("round").innerHTML = round;
 
             // Record what image they hit (just the URL)
              imagesHitWin.push(this.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
@@ -227,7 +225,6 @@ function runTimer() {
     // Update time
     countDown--;
     countDownSec = (countDown / 100).toFixed(2);
-    document.getElementById("time-remaining").innerHTML = countDownSec;
 
     // Update the countdown bar
     var percentOfRound = (100-((countDown / timeThisRound) * 100)).toFixed(0);

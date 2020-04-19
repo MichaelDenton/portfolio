@@ -59,39 +59,30 @@
 
             <div id="endtext4"></div>
             <div id="fail-images"></div>
-            
+
             <button class="screen-play-button" onClick="location.reload();">Play Again</button>
         </div>
     </div>
 
 
+    <div id="mainscreen">
 
-    <div id="progress-bar-container"><div id="progress-bar"></div></div>
+        <div id="main-wrapper">
 
-    <div id="wrapper">
-        <div id="scoreboard">
-            <div>
-                <span class="label">Time Remaining</span>
-                <span class="value" id="time-remaining">0.00</span>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
             </div>
 
-            <div>
-                <span class="label">Imposters</span>
-                <span class="value" id="round">0</span>
-            </div>
-        </div>
-
-        <div id="canvas-wrapper">
             <div id="canvas">
-                <div class="character ">
+                <div class="character right">
                     <span class="emoji"></span>
                     <span class="text"></span>
                 </div>
-                <div class="character ">
+                <div class="character wrong">
                     <span class="emoji"></span>
                     <span class="text"></span>
                 </div>
-                <div class="character ">
+                <div class="character target">
                     <span class="emoji"></span>
                     <span class="text"></span>
                 </div>
@@ -108,10 +99,8 @@
                     <span class="text"></span>
                 </div>
             </div>
+
         </div>
-
-        <div></div>
-
     </div>
 
     <script>
