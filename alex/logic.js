@@ -2,7 +2,7 @@
 //  Adjustable Variables 
 var alexCount = 72;             // How many alex images are there?
 var notCount = 126;              // How many not-alex images are there?
-var firstRoundSpeed = 800;      // How long is the first round? (500 = 5 sec)
+var firstRoundSpeed = 500;      // How long is the first round? (500 = 5 sec)
 var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
 var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
