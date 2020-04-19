@@ -83,9 +83,13 @@ function characterClicked() {
             // Record what image they hit (just the URL)
              imagesHitWin.push(this.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
 
-            // WIN text when tapped
-            this.getElementsByClassName("emoji")[0].innerHTML = winEmoji[Math.floor(Math.random() * winEmoji.length)];
-            this.getElementsByClassName("text")[0].innerHTML = winWords[Math.floor(Math.random() * winWords.length)];
+            // WIN text Overlay (when tapped)
+            document.getElementById("goodhit-screen").getElementsByClassName("emoji")[0].innerHTML = winEmoji[Math.floor(Math.random() * winEmoji.length)];
+            document.getElementById("goodhit-screen").getElementsByClassName("text")[0].innerHTML = winWords[Math.floor(Math.random() * winWords.length)];
+            document.getElementById("goodhit-screen").getElementsByClassName("count")[0].innerHTML = round;
+            document.getElementById("goodhit-screen").style.display = "flex";
+
+
             // End the round
             endRound();
             // Start another round after 1 sec 
@@ -112,6 +116,7 @@ function characterClicked() {
 function endRound() {
     clearInterval(timer);
     gameActive = false;
+    document.getElementById("mainscreen").classList.remove('flashing');
     for (var i = 0; i < characters.length; i++) {
         characters[i].classList.add("hide");
     }
@@ -124,6 +129,9 @@ function startRound() {
 
         //Set game to active
         gameActive = true;
+
+        // Hide the good hit screen
+        document.getElementById("goodhit-screen").style.display = "none";
 
         //Reset countdown clock
         var decayRateThisRound = Math.pow(decayRate, round);
@@ -229,6 +237,10 @@ function runTimer() {
     // Update the countdown bar
     var percentOfRound = (100-((countDown / timeThisRound) * 100)).toFixed(0);
     document.getElementById("progress-bar").style.width =  percentOfRound + "%";
+
+    if(percentOfRound>70){
+    document.getElementById("mainscreen").classList.add('flashing');
+    }
 
     // Check the countdown clock
     if (countDown > 0) {
