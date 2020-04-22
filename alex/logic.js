@@ -1,35 +1,35 @@
 
-//  Adjustable Variables 
+//  Adjustable Variables
 var alexCount = 73;             // How many alex images are there?
 var notCount = 129;              // How many not-alex images are there?
 var firstRoundSpeed = 500;      // How long is the first round? (500 = 5 sec)
 var decayRate = 0.9;            // Rate of time reduction per round (0.9 = 90%)
 var penaltyRate = 0.8;          // Time reduction per mistake (0.8 = 80%)
 
-var winEmoji = ["👏","👍","🤘","💪","🙌","💥"]
-var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", "Fake Alex Alert!", "Bloody imposter",  "Begone fraud", "That's no Alex", "Fraud" , "Charlatan!", "Phony", "Con-Alex"]
+var winEmoji = ["👏","👍","🤘","💪","🙌","💥"];
+var winWords = ["Nice","Yeah boy", "Got Em", "Damn straight", "Boom", "Ka-pow", "Fake Alex Alert!", "Bloody imposter",  "Begone fraud", "That's no Alex", "Fraud" , "Charlatan!", "Phony", "Con-Alex"];
 
-var failEmoji = ["⛔️","🚫","😵","😡","🤬","💩","👎","🙈"]
-var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again","Nah","Nope", "Try harder"]
+var failEmoji = ["⛔️","🚫","😵","😡","🤬","💩","👎","🙈"];
+var failWords = ["Fuck sticks", "Bugger","Shit","Crap balls","Fail","Try Again","Nah","Nope", "Try harder"];
 
 var prizeLink = [   "https://www.youtube.com/watch?v=dQw4w9WgXcQ" /* Rick Astley - Never Gonna Give You Up */ ,
                     "https://youtu.be/oavMtUWDBTM" /* Mr. Trololo */,
                     "https://youtu.be/MFmr_TZLpS0" /* Dr. Jean's Banana Dance */,
-                    "https://youtu.be/6i2l-LQ-dXI" /* Don Hertzfeldt Couch Gag */, 
+                    "https://youtu.be/6i2l-LQ-dXI" /* Don Hertzfeldt Couch Gag */,
                     "https://youtu.be/W7JyjZI3LUM" /* REJECTED by DON HERTZFELDT */,
                     "https://youtu.be/90X5NJleYJQ" /* Strong Bad Email #58 - Dragon */,
                     "https://youtu.be/0uuCNAwXGaQ?t=180" /* BULBOUS BOUFFANT - The Vestibules (start at 3 min)*/,
                     "https://youtu.be/zP6RLvg4exQ" /* SPONGEBOB CAVE EATEN ALIVE */,
                     "https://youtu.be/aiwxiiZ01L8" /* Puddle Of Mudd - About A Girl */,
                     "https://youtu.be/Osqf4oIK0E8" /* IGORRR - VERY NOISE */,
-                    "https://youtu.be/uDrdZM1iGrc" /* Bohemian Rhapsody - Mr.Chicken (cover) */]
+                    "https://youtu.be/uDrdZM1iGrc" /* Bohemian Rhapsody - Mr.Chicken (cover) */];
 
 //  Global Game Variables
-var countDown = undefined;
-var countDownSec = undefined;
-var timeThisRound = undefined;
-var timer = undefined;
-var gameActive = undefined;
+var countDown;
+var countDownSec;
+var timeThisRound;
+var timer;
+var gameActive;
 
 var mistakes = 0;
 var round = 0;
@@ -39,7 +39,7 @@ var imagesHitFail = [];
 
 //  Shorthand Variables
 var characters = document.getElementsByClassName("character");
-var notAlexCountShuffled =[]
+var notAlexCountShuffled =[];
 
 function loadGame() {
     // Preload Alex tiles on the start screen
@@ -64,10 +64,10 @@ function loadGame() {
     // Once images are laoded
     window.addEventListener('load', function () {
     document.getElementById("startbutton").innerHTML = "Start Game";
-    document.getElementById("startbutton").onclick = function() { 
+    document.getElementById("startbutton").onclick = function() {
             startGame();
         };
-    })
+    });
 
 }
 
@@ -95,7 +95,7 @@ function characterClicked() {
     // If game is active
     if (gameActive) {
 
-        // If the player clicked the target 
+        // If the player clicked the target
         if (this.classList.contains("target")) {
             this.classList.add("right");
             // Update what round it is
@@ -113,7 +113,7 @@ function characterClicked() {
 
             // End the round
             endRound();
-            // Start another round after 1 sec 
+            // Start another round after 1 sec
             setTimeout(startRound, 1000);
         }
 
@@ -174,7 +174,7 @@ function startRound() {
             characters[i].getElementsByClassName("text")[0].innerHTML = "";
             characters[i].getElementsByClassName("emoji")[0].innerHTML = "";
 
-            // Assign the shuffled Alex count to the tiles 
+            // Assign the shuffled Alex count to the tiles
             characters[i].style.backgroundImage = "url('alex/alex" + alexCountShuffled[i] + ".jpg')";
         }
 
@@ -235,7 +235,7 @@ function showEndScreen(){
             // Randomly rotate image
             y.style.transform = "rotate(" + getRndInteger(-10, 10) + "deg)";
             document.getElementById("fail-images").appendChild(y);
-        } 
+        }
 
         }
         else{
@@ -245,7 +245,7 @@ function showEndScreen(){
             var linkText = document.createTextNode("Click here to claim your prize");
             a.appendChild(linkText);
             a.href = prizeLink[Math.floor(Math.random() * prizeLink.length)];
-            a.target = "_blank"
+            a.target = "_blank";
             document.getElementById("endtext4").appendChild(a);
             }
         }
