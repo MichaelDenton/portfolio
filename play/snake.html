@@ -3,10 +3,42 @@
 
 <head>
 	<title>Canvas</title>
+
+	<style media="screen">
+		html, body {
+			margin: 0;
+			padding: 0;
+		}
+		canvas{
+			width: 100%;
+		}
+		.buttonwrapper{
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			column-gap: 10px;
+		}
+		.button {
+		  background-color: snow;
+		  border: none;
+		  color: black;
+		  padding: 15px 32px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 20px;
+		}
+	</style>
 </head>
 
 <body>
-	<canvas id="canvas" width="1024" height="1024"></canvas> <br />
+	<canvas id="canvas" width="900" height="600"></canvas>
+
+	<div class="buttonwrapper">
+		<input type="button" class="button" id="left" value="←">
+		<input type="button" class="button" id="up" value="↑">
+		<input type="button" class="button" id="down" value="↓">
+		<input type="button" class="button" id="right" value="→">
+	</div>
 
 	<script type="text/javascript">
 
@@ -41,7 +73,7 @@
 					return;
 				}
 				graphics.drawGame();
-				game.timer = window.setTimeout("game.tick()", 500);
+				game.timer = window.setTimeout("game.tick()", 300);
 			},
 			addRandomFruit: function(){
 				var randomY = Math.floor(Math.random() * game.board.length) + 0;
@@ -116,7 +148,7 @@
 
 		var graphics = {
 			canvas: document.getElementById("canvas"),
-			squareSize: 30,
+			squareSize: 60,
 			drawBoard: function(ctx) {
 				var currentYoffset = 0;
 				game.board.forEach(function checkLine(line) {
@@ -160,8 +192,20 @@
 				snake.facing = targetDirection;
 				game.tick();
 			},
+			clickButton: function(){
+				if(this.id == "up" && snake.facing != "S") targetDirection = "N";
+				if(this.id == "left" && snake.facing != "E") targetDirection = "W";
+				if(this.id == "down" && snake.facing != "N") targetDirection = "S";
+				if(this.id == "right" && snake.facing != "W") targetDirection = "E";
+				snake.facing = targetDirection;
+			},
 			startGame: function(){
 				window.addEventListener("keypress", gameControl.processInput, false);
+
+				document.getElementById("left").addEventListener("click", gameControl.clickButton, false);
+				document.getElementById("up").addEventListener("click", gameControl.clickButton, false);
+				document.getElementById("down").addEventListener("click", gameControl.clickButton, false);
+				document.getElementById("right").addEventListener("click", gameControl.clickButton, false);
 				game.tick();
 			}
 		}
