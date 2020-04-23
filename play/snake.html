@@ -18,27 +18,50 @@
 			column-gap: 10px;
 		}
 		.button {
-		  background-color: #bdc0c0;
+		  background-color: rgba(0,0,0,0.1);
 		  border: none;
-		  color: black;
-		  padding: 30px 32px;
+		  color: white;
 		  text-align: center;
-		  text-decoration: none;
-		  display: inline-block;
 		  font-size: 20px;
+		}
+
+		#left{
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 80px;
+		}
+		#right{
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 80px;
+		}
+		#down{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 80px;
+		}
+		#up{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 80px;
 		}
 	</style>
 </head>
 
 <body>
 	<canvas id="canvas" width="900" height="600"></canvas>
-
-	<div class="buttonwrapper">
-		<input type="button" class="button" id="left" value="←">
-		<input type="button" class="button" id="up" value="↑">
-		<input type="button" class="button" id="down" value="↓">
-		<input type="button" class="button" id="right" value="→">
-	</div>
+		<div class="button" id="left">←</div>
+		<div class="button" id="up">↑</div>
+		<div class="button" id="down">↓</div>
+		<div class="button" id="right">→</div>
 
 	<script type="text/javascript">
 
@@ -198,6 +221,7 @@
 				if(this.id == "down" && snake.facing != "N") targetDirection = "S";
 				if(this.id == "right" && snake.facing != "W") targetDirection = "E";
 				snake.facing = targetDirection;
+				game.tick();
 			},
 			startGame: function(){
 				window.addEventListener("keypress", gameControl.processInput, false);
