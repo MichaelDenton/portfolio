@@ -199,7 +199,8 @@ var gameControl = {
     },
     startGame: function() {
         window.addEventListener("keypress", gameControl.processInput, false);
-        window.addEventListener("click", gameControl.clickButton, false);
+        // window.addEventListener("click", gameControl.clickButton, false);
+        window.addEventListener("touchstart", gameControl.clickButton, false);
         game.tick();
     }
 }
