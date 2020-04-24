@@ -2,6 +2,11 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
+
 canvas{
   position: absolute;
   width: 100%;
