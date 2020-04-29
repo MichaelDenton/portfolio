@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<head>
+
+<!-- Meta Info -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    border: 0;
+    overflow: hidden;
+    display: block;
+}
+#mycanvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+#log {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-family: monospace;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 22px;
+    opacity: 0.4;
+    color: blue;
+}
+</style>
+
+</head>
+
+<body>
+    <canvas id='mycanvas'></canvas>
+    <div id="log">Click and drag on the screen</div>
+
+<script>
+
+var ctx = sizeCanvas('mycanvas');
+
+function sizeCanvas(canvasId) {
+    //Find canvas by it's ID name
+    let canvas = document.getElementById(canvasId);
+    // Get the size of the canvas in CSS pixels
+    let rect = canvas.getBoundingClientRect();
+    // Get pixel ratio (default is 1)
+    let dpr = window.devicePixelRatio || 1;
+    // Scale the canvas
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    let ctx = canvas.getContext('2d');
+    // Scale all drawing operations
+    ctx.scale(dpr, dpr);
+    return ctx;
+}
+
+function resizeCanvas() {
+    ctx = sizeCanvas('mycanvas');
+    log('Window resized: ' + ctx.canvas.width + 'px by ' + ctx.canvas.height + 'px');
+};
+
+initialize();
+
+function initialize() {
+    document.addEventListener("click", drawLoop, false);
+    window.addEventListener('resize', resizeCanvas, false);
+
+    document.addEventListener("mousedown", mouseStart, false);
+    document.addEventListener("mouseup", mouseEnd, false);
+
+    document.addEventListener("touchstart", tapStart, false);
+    document.addEventListener("touchend", tapEnd, false);
+
+};
+
+var downX;
+var downY;
+var upX;
+var upY;
+var diffX;
+var diffY;
+
+function mouseStart(event){
+    downX = event.clientX;
+    downY = event.clientY;
+    drawDot(downX,downY);
+
+    log('Start point: ' + downX + ' by ' + downY);
+}
+
+function tapStart(event){
+    downX = event.touches[0].clientX;
+    downY = event.touches[0].clientY;
+    drawDot(downX,downY);
+
+    log('Start point: ' + downX + ' by ' + downY);
+}
+
+function mouseEnd(event){
+    upX = event.clientX;
+    upY = event.clientY;
+    drawDot(upX,upY);
+
+    diffX = upX - downX;
+    diffY = upY - downY;
+
+    log('Start point: ' + downX + ' by ' + downY + 
+        '<br>\End point: ' + upX + ' by ' + upY + 
+        '<br>\Difference: ' + diffX + ' by ' + diffY );
+}
+
+function tapEnd(event){
+    upX = event.changedTouches[0].clientX;
+    upY = event.changedTouches[0].clientY;
+    drawDot(upX,upY);
+
+    diffX = upX - downX;
+    diffY = upY - downY;
+
+    log('Start point: ' + downX + ' by ' + downY + 
+        '<br>\End point: ' + upX + ' by ' + upY + 
+        '<br>\Difference: ' + diffX + ' by ' + diffY );
+
+    drawLoop();
+}
+
+function drawLoop(event) {
+
+    // Overlay
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    // Variables
+    let loopCount = 80;
+    let loopTime = 10;
+
+    let opacity = 0.9;
+    let colors = ['hsl(120,60%,70%)', 'hsl(120,100%,50%)'];
+
+    let xOffset = diffX / 10;
+    let yOffset = diffY / 10;
+    let chaos = 10;
+
+    let startX = downX;
+    let startY = downY;
+    let thisX = startX;
+    let thisY = startY;
+
+    let size = 30;
+    let thisSize = size;
+
+    for (let i = 0; i < loopCount; i++) {
+        (function(i) {
+            setTimeout(function() {
+
+                thisSize = randomInt(0, size);
+
+                // Draw circle
+                let randomNumber = Math.floor(Math.random() * colors.length);
+                var randomColor = colors[randomNumber];
+                ctx.beginPath();
+                ctx.globalAlpha = opacity;
+                ctx.arc(thisX, thisY, thisSize, 0, 2 * Math.PI);
+                ctx.fillStyle = randomHueColour();
+                ctx.fill();
+                thisX = thisX + xOffset + randomInt(-chaos, chaos);
+                thisY = thisY + yOffset + randomInt(-chaos, chaos);
+
+            }, loopTime * i);
+        })(i);
+    };
+
+};
+
+
+//Helper functions
+function randomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+function log(text){
+    document.getElementById("log").innerHTML = text ;
+    // console.log(text);
+}
+
+function randomHueColour(){
+    let hue = randomInt(0, 360);
+    let lightness = 50;
+    let saturation = 100;
+    let hsl = 'hsl(' + hue + ',' + saturation + '%,' + lightness + '%)';
+    return hsl;
+}
+
+function drawDot(x,y){
+    ctx.beginPath();
+    ctx.globalAlpha = 1;
+    ctx.arc(x, y, 2, 0, 2 * Math.PI);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+}
+
+</script>
+
+</body>
+
+</html>
