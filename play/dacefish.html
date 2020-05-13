@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<style type="text/css">
+body{
+    background:#eee;
+}
+
+</style>
+
+</head>
+<body onload="mainLoop();">
+    <canvas id='canvas' width="800" height="600" ></canvas>
+</body>
+
+<script type="text/javascript">
+
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+
+
+function mainLoop(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //Clear canvas
+    drawObject(ctx, autoPath(randomTentacle(500,100)));
+    fillObject(autoPath(randomTentacle(50,100)),"rgba(255,0,0,0.2)");
+    fillObject(autoPath(randomTentacle(150,150)),"rgba(0,255,0,0.2)");
+    fillObject(autoPath(randomTentacle(250,100)),"rgba(0,0,255,0.2)");
+    window.setTimeout("mainLoop()", 1000 / 6);
+}
+
+// Random Tentacle
+function randomTentacle(x,y){
+    var arr = [];
+    var basePosition = {x:x, y:y};
+    var baseWidth = 80;
+    var height = 400;
+    var sections = 3;
+    var sway = 50;
+
+    // Generate the first half
+    for (var i=0; i<sections+1; i++) {
+        var randomSway = randomIntBetween(-sway,sway);
+        var sectionHeight = Math.round(height / sections);
+
+        arr.push({
+            distanceFromBase: i * sectionHeight,
+            sWidth: (sections - i) * (baseWidth / sections),
+            randomSway: randomSway,
+            x: basePosition.x + i * (baseWidth / sections / 2) + randomSway, 
+            y: basePosition.y + i * sectionHeight, 
+        });
+    }
+    // Mirror the second half
+    for (var i=0; i<sections; i++) {
+        arr.push({
+            distanceFromBase: arr[sections-(i+1)].distanceFromBase,
+            sWidth: arr[sections-(i+1)].sWidth,
+            randomSway: arr[sections-(i+1)].randomSway,
+            x:arr[sections-(i+1)].x + arr[sections-(i+1)].sWidth, 
+            y:arr[sections-(i+1)].y, 
+        });
+    }
+    return arr ;
+}
+
+function randomIntBetween(min, max) { 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function autoPath(pts){
+    var tension = 0.5;
+    var newValues = [];
+    for (var i=0; i<pts.length; i++) {
+        var x = pts[0].x;
+        var y = pts[0].y;
+        var preX = pts[pts.length-1].x;
+        var preY = pts[pts.length-1].y;
+        var nextX = pts[1].x;
+        var nextY = pts[1].y;
+        var preDistance = Math.sqrt(Math.pow(x-preX,2)+Math.pow(y-preY,2));
+        var postDistance = Math.sqrt(Math.pow(nextX-x,2)+Math.pow(nextY-y,2));
+        var preScaleFactor=tension*preDistance/(preDistance+postDistance);
+        var postScaleFactor=tension-preScaleFactor;
+
+        newValues.push({
+            x:x, 
+            y:y,
+            c1x: x + preScaleFactor * (preX-nextX), 
+            c1y: y + preScaleFactor * (preY-nextY), 
+            c2x: x - postScaleFactor * (preX-nextX),
+            c2y: y - postScaleFactor * (preY-nextY) 
+        });
+        pts.push(pts.shift());  // Rotate the Array
+    }
+    return newValues ;
+ }
+
+// Draw the object
+function drawObject(ctx, pts){
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (var i=0; i<pts.length; i++) {                      
+        ctx.bezierCurveTo(pts[0].c2x, pts[0].c2y, pts[1].c1x, pts[1].c1y, pts[1].x, pts[1].y);
+        pts.push(pts.shift()); 
+    }
+    ctx.strokeStyle = "blue";
+    ctx.stroke();
+    ctx.fillStyle = "rgba(0,0,255,0.2)";
+    ctx.fill();
+
+    // Draw control points (for trouble shooting)
+     for (var i=0; i<pts.length; i++) {
+        // Lines
+        ctx.beginPath();
+        ctx.moveTo(pts[i].x, pts[i].y);
+        ctx.lineTo(pts[i].c1x, pts[i].c1y);
+        ctx.moveTo(pts[i].x, pts[i].y);
+        ctx.lineTo(pts[i].c2x, pts[i].c2y);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+        // Control Points                    
+        drawDot(ctx, pts[i].c1x, pts[i].c1y, 3, 'red');
+        drawDot(ctx, pts[i].c2x, pts[i].c2y, 3, 'red');
+        // Main Coordinates                   
+        drawDot(ctx, pts[i].x, pts[i].y, 5, 'blue');
+    }   
+
+}
+
+// Fill the object
+function fillObject(pts,color){
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (var i=0; i<pts.length; i++) {                      
+        ctx.bezierCurveTo(pts[0].c2x, pts[0].c2y, pts[1].c1x, pts[1].c1y, pts[1].x, pts[1].y);
+        pts.push(pts.shift()); 
+    }
+    ctx.fillStyle=color;
+    ctx.fill();
+}
+
+
+function drawDot(ctx,x,y,r,color){
+    ctx.beginPath();
+    ctx.arc(x,y,r,0.0,2*Math.PI,false);
+    ctx.closePath();
+    ctx.fillStyle=color;
+    ctx.fill();
+}
+
+</script>
+
+
+</html>
