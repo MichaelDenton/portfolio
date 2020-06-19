@@ -21,13 +21,17 @@ window.addEventListener("resize", scaleMainContainer);
 function scaleMainContainer(){
   // Set fixed pixel size for main container
   var container = document.getElementById("main-container");
-  container.style.width = screenMax + "px";
-  container.style.height = screenMin + "px";
+  var rawWidth = 600; // Fixed design
+  var rawHeight = screenMin * (rawWidth / screenMax);
+
+  container.style.width = rawWidth + "px";
+  container.style.height = rawHeight + "px";
+
   // Scale and position to fit inside browser window
-  var scale = Math.min( (window.innerWidth/screenMax), (window.innerHeight/screenMin) );
+  var scale = Math.min( (window.innerWidth/rawWidth), (window.innerHeight/rawHeight) );
   container.style.transform = 'scale(' + scale + ')';
-  container.style.marginLeft = screenMax * -0.5 + "px";
-  container.style.marginTop =  screenMin * -0.5 + "px";
+  container.style.marginLeft = rawWidth * -0.5 + "px";
+  container.style.marginTop =  rawHeight * -0.5 + "px";
   container.style.transformOrigin = "center center";
   container.style.left = "50%";
   container.style.top = "50%";

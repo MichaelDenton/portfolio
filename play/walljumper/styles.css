@@ -4,6 +4,8 @@
   /* Variables */
   --color-bg: blue;
   --color-primary: yellow;
+
+  --vh: ;
 }
 
 html, body {
@@ -16,6 +18,7 @@ html, body {
 
   font-family: sans-serif;
   color: white;
+  font-size: 20px;
 }
 
 #main{
@@ -30,30 +33,37 @@ html, body {
 
 #main-container{
   position: absolute;
-  width: 100%;
+  width: 1200px;
   height: 100%;
 }
 
 #canvas {
   width: 100%;
   height: 100%;
+  image-rendering: pixelated;
 }
 
 #btn-fullscreen{
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 10px;
+  right: 10px;
   background-color: transparent;
   border: none;
   text-decoration: none;
   display: inline-block;
   z-index: 1;
+  width: 44px;
+  height: 44px;
+}
+
+#btn-fullscreen:hover{
+ transform: scale(2);
 }
 
 .fullscreen-icon{
   fill: var(--color-primary);
-  width: 44px;
-  height: 44px;
+  width: 100%;
+  height: 100%;
 }
 
 #speed{
