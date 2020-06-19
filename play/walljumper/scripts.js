@@ -1,4 +1,50 @@
 
+// ------------- SET CANVAS SIZE -------------
+// Based on the full screen size of the device  
+// in landsape and pixel resolution
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var screenMax = Math.max(window.screen.width, window.screen.height);
+var screenMin = Math.min(window.screen.width, window.screen.height);
+
+canvas.dpr = window.devicePixelRatio || 1;
+canvas.width = screenMax * canvas.dpr;
+canvas.height = screenMin * canvas.dpr;
+
+// ------------- SCALE MAIN CONTAINER -------------
+// Run on load and whenever the window is resized
+
+scaleMainContainer();
+window.addEventListener("resize", scaleMainContainer);
+
+function scaleMainContainer(){
+  // Set fixed pixel size for main container
+  var container = document.getElementById("main-container");
+  container.style.width = screenMax + "px";
+  container.style.height = screenMin + "px";
+  // Scale and position to fit inside browser window
+  var scale = Math.min( (window.innerWidth/screenMax), (window.innerHeight/screenMin) );
+  container.style.transform = 'scale(' + scale + ')';
+  container.style.marginLeft = screenMax * -0.5 + "px";
+  container.style.marginTop =  screenMin * -0.5 + "px";
+  container.style.transformOrigin = "center center";
+  container.style.left = "50%";
+  container.style.top = "50%";
+}
+
+// ------------- CANVAS PERCENT UNITS -------------
+// Functions to return a pixel value when given a percent 
+// value for the height and width of the canvas
+
+canvas.h = function(percent){
+  return percent * (canvas.height * 0.01)
+}
+
+canvas.w = function(percent) {
+  return percent * (canvas.width * 0.01)
+}
+
 // ------------- START GAME -------------
 
 function startGame(){
@@ -30,55 +76,6 @@ function restartGame(){
   // Start Game
   window.gameIntervalId = setInterval(runGame, 1000 / 60);
 }
-
-// ------------- SET CANVAS SIZE -------------
-// Based on the full screen size of the device  
-// in landsape and pixel resolution
-
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
-var screenMax = Math.max(window.screen.width, window.screen.height);
-var screenMin = Math.min(window.screen.width, window.screen.height);
-
-canvas.dpr = window.devicePixelRatio || 1;
-canvas.width = screenMax * canvas.dpr;
-canvas.height = screenMin * canvas.dpr;
-
-
-// ------------- SCALE MAIN CONTAINER -------------
-// Run on load and whenever the window is resized
-
-scaleMainContainer();
-window.addEventListener("resize", scaleMainContainer);
-
-function scaleMainContainer(){
-  // Fixed size container
-  var mainContainer = document.getElementById("main-container");
-  mainContainer.style.width = screenMax + "px";
-  mainContainer.style.height = screenMin + "px";
-
-  // Scale to fit browser window
-  var scale = Math.min( (window.innerWidth/screenMax), (window.innerHeight/screenMin) );
-  
-  mainContainer.style.transform = 'scale(' + scale + ')';
-  mainContainer.style.marginLeft = screenMax * -0.5 + "px";
-  mainContainer.style.marginTop =  screenMin * -0.5 + "px";
-
-}
-
-// ------------- CANVAS PERCENT UNITS -------------
-// Functions to return a pixel value when given a percent 
-// value for the height and width of the canvas
-
-canvas.h = function(percent){
-  return percent * (canvas.height * 0.01)
-}
-
-canvas.w = function(percent) {
-  return percent * (canvas.width * 0.01)
-}
-
 
 // ------------- DETECT CLICKS & TAPS -------------
 
@@ -119,8 +116,10 @@ function randomWithGap(min, max, gap, gapRadius){
   } 
 }
 
+// ------------- CONVERT CSS VARIABLES TO JS -------------
 
-// ------------- COLOURS (From CSS) -------------
+var colorPrimary = getCssVal('--color-primary');
+var colorBg = getCssVal('--color-bg');
 
 function getCssVal(property){
   let style = getComputedStyle(document.documentElement);
@@ -128,9 +127,6 @@ function getCssVal(property){
   let cleanValue = value.replace(/\s+/g, '');
   return cleanValue
 }
-
-var colorPrimary = getCssVal('--color-primary');
-var colorBg = getCssVal('--color-bg');
 
 // ------------- GAME WORLD OBJECT -------------
 
@@ -289,7 +285,7 @@ var player = {
 }
 
 
-// ------------- Main loop -------------
+// ------------- MAIN GAME LOOP -------------
 
 var runGame = function() {
   player.tick();
