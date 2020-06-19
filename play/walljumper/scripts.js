@@ -1,7 +1,4 @@
 
-
-
-
 // ------------- START GAME -------------
 
 function startGame(){
@@ -34,138 +31,52 @@ function restartGame(){
   window.gameIntervalId = setInterval(runGame, 1000 / 60);
 }
 
-// ------------- CANVAS SIZE -------------
+// ------------- SET CANVAS SIZE -------------
+// Based on the full screen size of the device  
+// in landsape and pixel resolution
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+
+var screenMax = Math.max(window.screen.width, window.screen.height);
+var screenMin = Math.min(window.screen.width, window.screen.height);
+
 canvas.dpr = window.devicePixelRatio || 1;
-canvas.height = Math.min(window.screen.width, window.screen.height) * canvas.dpr;
-canvas.width = Math.max(window.screen.width, window.screen.height) * canvas.dpr;
-
-canvas.h = function(percent){return percent* (canvas.height * 0.01)}
-canvas.w = function(percent){return percent* (canvas.width * 0.01)}
+canvas.width = screenMax * canvas.dpr;
+canvas.height = screenMin * canvas.dpr;
 
 
-// ------------- SCALE OVERLAY SCREENS -------------
+// ------------- SCALE MAIN CONTAINER -------------
+// Run on load and whenever the window is resized
 
-scaleOverlay();
+scaleMainContainer();
+window.addEventListener("resize", scaleMainContainer);
 
-window.addEventListener("resize", scaleOverlay);
+function scaleMainContainer(){
+  // Fixed size container
+  var mainContainer = document.getElementById("main-container");
+  mainContainer.style.width = screenMax + "px";
+  mainContainer.style.height = screenMin + "px";
 
-function scaleOverlay(){
-
-  var scale = Math.min( 
-    canvas.getBoundingClientRect().width / 667, 
-    canvas.getBoundingClientRect().height / 375 
-  );
-
-  var startScreen = document.getElementById("start-screen");
-  var endScreen = document.getElementById("end-screen");
-
-  if(startScreen){
-    startScreen.style.transform = 'scale(' + scale + ')';
-  } else {console.log('no start screen')}
-
-  if(endScreen){
-    endScreen.style.transform = 'scale(' + scale + ')';
-  }
-
-  var scaleToFullscreen = Math.min( 
-    canvas.getBoundingClientRect().width / Math.max(window.screen.width, window.screen.height), 
-    canvas.getBoundingClientRect().height / Math.min(window.screen.width, window.screen.height) 
-  );
-
-  var testWrapper = document.getElementById("main-wrapper");
-  testWrapper.style.height = Math.min(window.screen.width, window.screen.height)+"px";
-  testWrapper.style.width = Math.max(window.screen.width, window.screen.height)+"px";
-  testWrapper.style.transform = 'scale(' + scaleToFullscreen + ')';
-  testWrapper.style.marginLeft = -(Math.max(window.screen.width, window.screen.height)/2)+"px";
-  testWrapper.style.marginTop =  -(Math.min(window.screen.width, window.screen.height)/2)+"px";
+  // Scale to fit browser window
+  var scale = Math.min( (window.innerWidth/screenMax), (window.innerHeight/screenMin) );
+  
+  mainContainer.style.transform = 'scale(' + scale + ')';
+  mainContainer.style.marginLeft = screenMax * -0.5 + "px";
+  mainContainer.style.marginTop =  screenMin * -0.5 + "px";
 
 }
 
-// ------------- HIDE INACTIVE CURSOR -------------  
+// ------------- CANVAS PERCENT UNITS -------------
+// Functions to return a pixel value when given a percent 
+// value for the height and width of the canvas
 
-document.addEventListener("mousemove", resetTimer);
-
-var timerHandle;
-
-function resetTimer() {
-    // Show cursor
-    document.body.style.cursor = "";
-    // Show controls
-    document.getElementById('btn-fullscreen').style.visibility = "visible";
-    window.clearTimeout(timerHandle);
-    timerHandle = setTimeout(function(){ 
-      // Hide cursor
-      document.body.style.cursor = "none"; 
-      // Hide controls
-    //  document.getElementById('btn-fullscreen').style.visibility = "hidden";
-
-    },1000); // Millisecond delay
+canvas.h = function(percent){
+  return percent * (canvas.height * 0.01)
 }
 
-// ------------- FULLSCREEN ------------- 
-// Note: Fullscreen is not supported by ios for iphone 
-// And most browsers currently require vendor prefixes
-
-var fsElement = document.getElementById('main');
-var fsBtn = document.getElementById('btn-fullscreen');
-
-// Is fullscreen supported? 
-if( fsElement.requestFullscreen       || 
-    fsElement.mozRequestFullScreen    || 
-    fsElement.webkitRequestFullscreen || 
-    fsElement.msRequestFullscreen     ){
-    // Supported
-  } else {
-    // Not supported
-    fsBtn.remove();
-  }
-
-
-function toggleFullscreen(){
-  // Toggle to fullscreen
-  if(fsElement.dataset.state === 'minimised'){
-    if      (fsElement.requestFullscreen)       { fsElement.requestFullscreen() } 
-    else if (fsElement.mozRequestFullScreen)    { fsElement.mozRequestFullScreen() }
-    else if (fsElement.webkitRequestFullscreen) { fsElement.webkitRequestFullscreen() }
-    else if (fsElement.msRequestFullscreen)     { fsElement.msRequestFullscreen() }
-  } 
-  // Toggle to minimised
-  else if(fsElement.dataset.state === 'fullscreen'){ 
-    if      (document.exitFullscreen)       {document.exitFullscreen() } 
-    else if (document.mozCancelFullScreen)  {document.mozCancelFullScreen() }
-    else if (document.webkitExitFullscreen) {document.webkitExitFullscreen() } 
-    else if (document.msExitFullscreen)     {document.msExitFullscreen()}
-  }
-  fsBtn.blur();
-}
-
-fullscreenChanged();
-
-// Listen for any changes to fullscreen 
-document.addEventListener('fullscreenchange', fullscreenChanged);
-document.addEventListener('mozfullscreenchange', fullscreenChanged);
-document.addEventListener('webkitfullscreenchange', fullscreenChanged);
-document.addEventListener('msfullscreenchange', fullscreenChanged);
-
-function fullscreenChanged(){
-  if (  document.fullscreenElement ||
-        document.mozFullScreenElement ||
-        document.webkitFullscreenElement ||
-        document.msFullscreenElement
-  ){
-    // Now fullscreen
-    fsElement.dataset.state = 'fullscreen';
-    fsBtn.getElementsByTagName("svg")[0].innerHTML = `<use href="#shrink-icon"/>`;
-    console.log('fullscreen');
-  } 
-  else {
-    // Now minimised
-    fsElement.dataset.state = 'minimised';
-    fsBtn.getElementsByTagName("svg")[0].innerHTML = `<use href="#fullscreen-icon"/>`;
-  }
+canvas.w = function(percent) {
+  return percent * (canvas.width * 0.01)
 }
 
 
