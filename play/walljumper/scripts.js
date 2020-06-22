@@ -21,7 +21,7 @@ window.addEventListener("resize", scaleMainContainer);
 function scaleMainContainer(){
   // Set fixed pixel size for main container
   var container = document.getElementById("main-container");
-  var rawWidth = 600; // Fixed design
+  var rawWidth = 1200; // Fixed design
   var rawHeight = screenMin * (rawWidth / screenMax);
 
   container.style.width = rawWidth + "px";
@@ -62,7 +62,7 @@ function endGame(){
   clearInterval(gameIntervalId);
   document.getElementById("end-screen").style.display = "block";
   var speedReading = Math.round(world.speed * 100);
-  document.getElementById("end-description").innerHTML = "Top speed: " + speedReading;
+  document.getElementById("guage-reading").innerHTML = speedReading;
 }
 
 // ------------- RESTART GAME -------------
