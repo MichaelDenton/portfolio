@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Youtube video inside SVG</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+
+body.main { 
+	margin:0; 
+	padding:0;
+	background-color: #333;
+}
+
+svg.main{
+	height: 100vh;
+	width: 100vw;
+	margin:0; 
+	padding:0;
+}
+
+</style>
+</head>
+<body class="main">
+
+	<svg class="main" viewBox="0 0 580 335" xmlns="http://www.w3.org/2000/svg">
+
+		<foreignObject x="10" y="10" width="560" height="315" filter="url(#paper)" xmlns="http://www.w3.org/1999/xhtml">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/3b9KCG75QiQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</foreignObject>
+
+		<defs>
+		    <filter id="paper" style="color-interpolation-filters:sRGB;" inkscape:label="Rough Paper" inkscape:menu="Textures" inkscape:menu-tooltip="Aquarelle paper effect which can be used for pictures as for objects" width="1.3" x="-0.15" height="1.3" y="-0.15">
+		        <feTurbulence id="feTurbulence2592" result="result4" seed="0" numOctaves="5" baseFrequency="0.04" type="fractalNoise" />
+		        <feDisplacementMap id="feDisplacementMap2594" result="result3" scale="10" xChannelSelector="R" yChannelSelector="G" in2="result4" in="SourceGraphic" />
+		        <feDiffuseLighting id="feDiffuseLighting2598" in="result4" result="result1" surfaceScale="2" diffuseConstant="1" lighting-color="rgb(233,230,215)">
+		            <feDistantLight id="feDistantLight2596" elevation="40" azimuth="235" />
+		        </feDiffuseLighting>
+		        <feComposite id="feComposite2600" result="result2" in2="result1" in="result3" operator="in" />
+		        <feComposite id="feComposite2602" k1="1.7" operator="arithmetic" result="result5" in2="result1" />
+		        <feBlend id="feBlend2604" mode="normal" in2="result3" in="result5" />
+		    </filter>
+		</defs>
+
+	</svg>
+
+</body>
+</html>
