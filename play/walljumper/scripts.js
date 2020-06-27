@@ -98,7 +98,6 @@ function endGame(){
 }
 
 function animateValue(end) {
-    var obj = document.getElementById("guage-reading");
     var start = 100;
     var duration = 500;
     var range = end - start;
@@ -107,7 +106,7 @@ function animateValue(end) {
     var stepTime = Math.abs(Math.floor(duration / range));
     var timer = setInterval(function() {
         current += increment;
-        obj.innerHTML = current;
+        document.getElementById("guage-reading").innerHTML = current;
         if (current >= end) {
             clearInterval(timer);
         }
@@ -115,7 +114,6 @@ function animateValue(end) {
 }
 
 function animateGuage(end) {
-    var obj = document.getElementById("svg-guage-circle");
     var start = 0;
     var duration = 500;
     var range = end - start;
@@ -124,7 +122,7 @@ function animateGuage(end) {
     var stepTime = Math.abs(Math.floor(duration / range));
     var timer = setInterval(function() {
         current += increment;
-        obj.setAttribute("stroke-dasharray", current + " 999");
+        document.getElementById("svg-guage-circle").setAttribute("stroke-dasharray", current + " 999");
         if (current >= end) {
             clearInterval(timer);
         }
