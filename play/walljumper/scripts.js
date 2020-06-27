@@ -1,4 +1,5 @@
 
+
 // ------------- SET CANVAS SIZE -------------
 // Based on the full screen size of the device  
 // in landsape and pixel resolution
@@ -49,26 +50,91 @@ canvas.w = function(percent) {
   return percent * (canvas.width * 0.01)
 }
 
+// ------------- MAIN GAME LOOP -------------
+
+var animationLoopId;
+var lastDrawTime;
+
+function runGameLoop(){
+  //Recursive request
+  animationLoopId = requestAnimationFrame(runGameLoop);
+  //Calculate time passed since last draw
+  frameDuration = (Date.now() - (lastDrawTime || Date.now()));
+  lastDrawTime = Date.now();
+
+  console.log(frameDuration);
+
+  // Do stuff
+  player.tick();
+  world.tick();
+  world.draw();
+  player.draw();
+}
+
+
 // ------------- START GAME -------------
 
 function startGame(){
-  window.gameIntervalId = setInterval(runGame, 1000 / 60);
+  animationLoopId = requestAnimationFrame(runGameLoop);
   document.getElementById("start-screen").style.display = "none";
 }
+
 
 // ------------- END GAME -------------
 
 function endGame(){
-  clearInterval(gameIntervalId);
+  cancelAnimationFrame(animationLoopId);
   document.getElementById("end-screen").style.display = "block";
+
+
+  // Calculate values
   var speedReading = Math.round(world.speed * 100);
-  document.getElementById("guage-reading").innerHTML = speedReading;
+  var guagePercent = (speedReading - 100) / 2; // 100~300 = 0~100
+  if (guagePercent >= 100) { guagePercent = 100 }
+
+  // Update the Guage
+  animateValue(speedReading);
+  animateGuage(guagePercent);
+}
+
+function animateValue(end) {
+    var obj = document.getElementById("guage-reading");
+    var start = 100;
+    var duration = 500;
+    var range = end - start;
+    var current = start;
+    var increment = end > start? 1 : -1;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var timer = setInterval(function() {
+        current += increment;
+        obj.innerHTML = current;
+        if (current >= end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
+function animateGuage(end) {
+    var obj = document.getElementById("svg-guage-circle");
+    var start = 0;
+    var duration = 500;
+    var range = end - start;
+    var current = start;
+    var increment = end > start? 1 : -1;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var timer = setInterval(function() {
+        current += increment;
+        obj.setAttribute("stroke-dasharray", current + " 999");
+        if (current >= end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
 }
 
 // ------------- RESTART GAME -------------
 
 function restartGame(){
-
+  animationLoopId = requestAnimationFrame(runGameLoop);
   document.getElementById("end-screen").style.display = "none";
   // Reset values
   world.speed = 1;
@@ -77,8 +143,8 @@ function restartGame(){
   player.x = canvas.w(5);
   player.y = canvas.h(20);
 
-  // Start Game
-  window.gameIntervalId = setInterval(runGame, 1000 / 60);
+  // Start Game Loop
+  
 }
 
 // ------------- DETECT CLICKS & TAPS -------------
@@ -289,11 +355,4 @@ var player = {
 }
 
 
-// ------------- MAIN GAME LOOP -------------
 
-var runGame = function() {
-  player.tick();
-  world.tick();
-  world.draw();
-  player.draw();
-};
