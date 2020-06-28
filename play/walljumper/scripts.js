@@ -1,4 +1,32 @@
 
+// ------------- SET RANDOM THEME -------------
+
+var theme = randomInteger(2, 5);
+console.log(theme);
+
+// Matrix: Green Black
+if(theme === 2){
+  document.documentElement.style.setProperty('--color-primary', '#00D200');
+  document.documentElement.style.setProperty('--color-bg', '#000300');
+}
+
+// Blue Black
+if(theme === 3){
+  document.documentElement.style.setProperty('--color-primary', '#4D38DB');
+  document.documentElement.style.setProperty('--color-bg', '#07140B');
+}
+
+// White Blue
+if(theme === 4){
+  document.documentElement.style.setProperty('--color-primary', '#ECFFFF');
+  document.documentElement.style.setProperty('--color-bg', '#0100FF');
+}
+
+// Red Dark
+if(theme === 5){
+  document.documentElement.style.setProperty('--color-primary', '#F40909');
+  document.documentElement.style.setProperty('--color-bg', '#240E00');
+}
 
 // ------------- SET CANVAS SIZE -------------
 // Based on the full screen size of the device  

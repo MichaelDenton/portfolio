@@ -35,12 +35,22 @@ html, body {
   height: 100%;
   display: grid;
   background-color: var(--color-off-canvas);
+
 }
 
 #main-container{
   position: absolute;
   width: 100%; /* JS will scale to 1200px */
   height: 100%;
+}
+
+#main-container:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  box-shadow: inset 0px 0px 200px black;
+
+  pointer-events: none;
 }
 
 #canvas {
@@ -110,10 +120,18 @@ html, body {
 
 #start-screen{
   background-color: var(--color-bg);
-  background-image: url('gridfade.svg');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: bottom;
+}
+
+#grid-contain{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#grid-3d{
+  width: 100%;
+  height: 100%;
+  transform: perspective(400px) rotateX(82deg);
 }
 
 #start-title{
