@@ -28,6 +28,9 @@ function setTheme(){
     document.documentElement.style.setProperty('--color-primary', '#F40909');
     document.documentElement.style.setProperty('--color-bg', '#240E00');
   }
+
+  colorPrimary = getCssVal('--color-primary');
+  colorBg = getCssVal('--color-bg');
 }
 
 
@@ -173,7 +176,8 @@ function restartGame(){
   player.y = canvas.h(20);
   world.floorTiles = [
     new floor(0, canvas.h(60), canvas.width)
-  ]
+  ];
+  setTheme();
   // Start Game Loop
   
 }
