@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Firestore Test</title>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+</head>
+<body>
+
+	<textarea id="inputText" rows="8" cols="50"/></textarea> <br/>
+	<button id="saveButton">Update text</button>
+	<h1 id="output">Loading...</h1>
+
+<script>
+
+	// Test page taken from video tutorial
+	// https://www.youtube.com/watch?v=2Vf1D-rUMwE&feature=emb_rel_end
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBURJtNuWX_RQMUi5y1aHJ3n391Iq3uHFU",
+    authDomain: "sample-27599.firebaseapp.com",
+    databaseURL: "https://sample-27599.firebaseio.com",
+    projectId: "sample-27599",
+    storageBucket: "sample-27599.appspot.com",
+    messagingSenderId: "577128876564",
+    appId: "1:577128876564:web:be0e9efc149f0c3850b501"
+  };
+
+	firebase.initializeApp(firebaseConfig);
+	var firestore = firebase.firestore();
+
+
+	const docRef = firestore.doc("samples/sandwichData");
+	const outputHeader = document.querySelector("#output");
+	const inputTextField = document.querySelector("#inputText");
+	const saveButton = document.querySelector("#saveButton");
+
+  saveButton.addEventListener("click", function(){
+  	const textToSave = inputTextField.value;
+  	console.log("I'm going to save " + textToSave + " to FireStore");
+  	docRef.set({
+  		hotDogStatus: textToSave
+  	}).then(function(){
+  		console.log("status saved!");
+  	}).catch(function(error){
+  		console.log("Got an error: " , error);
+  	});
+  });
+
+  getRealTimeUpdates = function(){
+  	docRef.onSnapshot(function (doc) {
+  		if (doc && doc.exists ){
+  			const myData = doc.data();
+  			outputHeader.innerText = myData.hotDogStatus;
+  		}
+  	});
+  }
+
+  getRealTimeUpdates();
+
+</script>
+
+</body>
+</html>
