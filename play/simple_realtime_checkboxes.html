@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Realtime Database Test</title>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+</head>
+<body>
+
+<input type="checkbox" id="cb1">
+<input type="checkbox" id="cb2">
+
+<script>
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBYEBoNT746i-0mBsKp-WI9ntRY7vtjM-k",
+    authDomain: "sample-realtime-database-f9dc4.firebaseapp.com",
+    databaseURL: "https://sample-realtime-database-f9dc4.firebaseio.com",
+    projectId: "sample-realtime-database-f9dc4",
+    storageBucket: "sample-realtime-database-f9dc4.appspot.com",
+    messagingSenderId: "1012279435691",
+    appId: "1:1012279435691:web:2d68f73d40661aad5232ee"
+  };
+
+	firebase.initializeApp(firebaseConfig);
+
+  //Create References
+
+  var cb1Ref = firebase.database().ref('checkboxes/cb1');
+  var cb2Ref = firebase.database().ref('checkboxes/cb2');
+
+  var cb1 = document.getElementById('cb1');
+  var cb2 = document.getElementById('cb2');
+
+  cb1Ref.on('value', function(snapshot) {
+    if(snapshot.val() === 'on'){
+      cb1.checked = true;
+    }
+    if(snapshot.val() === 'off'){
+      cb1.checked = false;
+    }
+  });
+
+  cb2Ref.on('value', function(snapshot) {
+    if(snapshot.val() === 'on'){
+      cb2.checked = true;
+    }
+    if(snapshot.val() === 'off'){
+      cb2.checked = false;
+    }
+  });
+
+  
+  cb1.addEventListener('click', function(){ 
+    if(cb1.checked){ 
+      // console.log('checked');
+      firebase.database().ref('checkboxes/cb1').set('on');
+    } 
+    if(!cb1.checked){
+      // console.log('not checked');
+      firebase.database().ref('checkboxes/cb1').set('off');
+    }
+  });
+
+  cb2.addEventListener('click', function(){ 
+    if(cb2.checked){ 
+      // console.log('checked');
+      firebase.database().ref('checkboxes/cb2').set('on');
+    } 
+    if(!cb2.checked){
+      // console.log('not checked');
+      firebase.database().ref('checkboxes/cb2').set('off');
+    }
+  });
+
+
+</script>
+
+</body>
+</html>
