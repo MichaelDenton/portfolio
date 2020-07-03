@@ -2,34 +2,115 @@
 <html>
 <head>
   <meta charset="utf-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Realtime Database Test</title>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+<style>
+body{
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version */
+}
+
+#boxes{}
+
+.row{
+  overflow: auto;
+  width: 600px;
+}
+
+.box {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  float: left;
+}
+
+.box[data-state="on"] {
+  border: 1px solid blue;
+  background-color: blue;
+}
+
+.box[data-state="off"] {
+  background-color: #eee;
+}
+
+br{
+  margin: 0px;
+  line-height: 0px;
+}
+
+</style>
+
 </head>
 <body>
 
+<div id="boxes"></div>
+
 <div id="matrix"></div>
+
+
 
 <script>
 
-// Create a matrix of checkboxes
-
-createMatrix(50,50);
-
-function createMatrix(width, height){
+// Create a box matrix
+createBoxMatrix(50,50);
+function createBoxMatrix(width, height){
   for(indexHeight = 0; indexHeight < width; indexHeight++) {
+    var row = document.createElement('div');
+    row.className = "row";
+    row.id = "row-"+ indexHeight;
     for(indexWidth = 0; indexWidth < width; indexWidth++) {
-      var checkbox = document.createElement('input');
-      checkbox.type = "checkbox";
-      checkbox.className = "cb";
-      checkbox.id = indexHeight + "-"+ indexWidth;
-      document.getElementById('matrix').appendChild(checkbox);
-    } 
-    var br = document.createElement('br');
-    document.getElementById('matrix').appendChild(br);
+      var box = document.createElement('div');
+      box.className = "box";
+      box.id = indexHeight + "-"+ indexWidth;
+      row.appendChild(box);
+    }
+    document.getElementById('boxes').appendChild(row);
   } 
 }
+
+// ON MOUSE DOWN & DRAG
+var applyState;
+document.querySelectorAll('.box').forEach(item => {
+  //On Mouse Down
+  item.addEventListener('mousedown', function(event){
+    var element = event.target;
+    var state = element.getAttribute("data-state");
+    var dbPath = firebase.database().ref('checkList/' + event.target.id);
+    // Update state
+    if (state === 'on'){
+        element.setAttribute("data-state", "off");
+        applyState = "off";
+        //Update DB
+        dbPath.set(false);
+    }
+    if (state === 'off' || state === null ){
+        element.setAttribute("data-state", "on");
+        applyState = "on";
+        //Update DB
+        dbPath.set(true);
+    }
+  });
+  //On Mouse Drag
+  item.addEventListener('mouseover', function(event){
+      if(event.buttons == 1){
+        // Apply same state
+        event.target.setAttribute("data-state", applyState);
+        // updateDatabase
+        var dbPath = firebase.database().ref('checkList/' + event.target.id);
+        if(applyState === 'on'){dbPath.set(true)};
+        if(applyState === 'off'){dbPath.set(false)};
+    }
+  });
+});
+
 
 // DATABASE DETAILS
 var firebaseConfig = {
@@ -44,24 +125,16 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// If checkboxes are clicked... Update the database
-document.querySelectorAll('.cb').forEach(item => {
-  item.addEventListener('click', event => {
-    var dbPath = firebase.database().ref('checkList/' + event.target.id);
-    if(event.target.checked === true){ dbPath.set(true) };
-    if(event.target.checked === false){ dbPath.set(false) };
-  });
-});
 
 // If database changes... Update interface
 firebase.database().ref('checkList').on('value', function(snapshot) {
   var obj = snapshot.val();
   for (let [key, value] of Object.entries(obj)) {
     if(value === true){
-      document.getElementById(key).checked = true;
+      document.getElementById(key).setAttribute("data-state", "on");
     };
     if(value === false){
-      document.getElementById(key).checked = false;
+      document.getElementById(key).setAttribute("data-state", "off");
     };
   }
 });
