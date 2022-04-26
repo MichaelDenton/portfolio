@@ -169,8 +169,11 @@ h3.section-title {
 }
 #nav-section #site-logo {
     margin-right: auto;
-    display: flex;
+    height: 20px;
+    padding-top: 20px;
 }
+
+
 /*  --------------  
     INTRO SECTION
     -------------- */
